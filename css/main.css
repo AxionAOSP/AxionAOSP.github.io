@@ -62,47 +62,31 @@
     margin-right: 20px;
 }
 
-#scroll-container {
-    display: flex;
+.user_feedbacks {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    justify-items: center;
     gap: 16px;
-    overflow-x: auto;
-    padding: 10px;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    justify-content: flex-start;
-    margin-top: 20px;
-    max-width: 100%;
-    box-sizing: border-box;
-}
-
-#scroll-container::-webkit-scrollbar {
-    display: none;
+    margin-top: 50px;
 }
 
 .user_feedback {
-    flex: 0 0 auto;
-    max-width: 250px;
     background: #333030;
     color: #fff;
     padding: 16px;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     font-family: "Space Grotesk", sans-serif;
-    scroll-snap-align: start;
     transition: transform 0.3s ease;
     white-space: normal;
     word-wrap: break-word;
     overflow-wrap: break-word;
     text-align: left;
-    flex-shrink: 0;
     box-sizing: border-box;
-}
-
-.user_feedback:hover {
-    transform: scale(1.05);
-}
+  }
 
 #feedbackContainer{
+    margin-bottom: 0px;
     background: none;
     box-shadow: none;
 }

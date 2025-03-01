@@ -43,8 +43,7 @@ a:hover {
 }
 
 .header {
-  position: relative;
-  height: 100vh;
+  padding-top: 100px;
   overflow: hidden;
   display: flex;
   justify-content: center;

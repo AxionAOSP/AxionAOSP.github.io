@@ -58,12 +58,12 @@
 }
 
 @media (max-width: 600px) {
-  #scroll-container {
+  .user_feedbacks {
       justify-content: flex-start;
   }
 
   .user_feedback {
-      min-width: 90%;
+      width: 100%;
   }
 
   #joinTelegram {
