@@ -1,6 +1,6 @@
 /**
  * Main entry point - runs when DOM is fully loaded
- * Handles device data fetching, processing, and UI rendering
+ * Handles device data fetching, processing, and UI rendering : should work fine now i think using the unified .json
  */
 document.addEventListener('DOMContentLoaded', async () => {
   const grid = document.querySelector('.downloads-grid');
@@ -12,40 +12,25 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Direct data fetching without caching
     try {
-      // Fetch device info from JSON
+      // Fetch unified device info from JSON
       const deviceInfoRes = await fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json');
       console.log('Device Info Response:', deviceInfoRes.status, deviceInfoRes.statusText);
       
       if (!deviceInfoRes.ok) {
         throw new Error(`Failed to fetch device info: ${deviceInfoRes.status} ${deviceInfoRes.statusText}`);
       }
-
-      // Get device images from GitHub
-      const imagesRes = await fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/OTA/device_images.json');
-      console.log('Images API Response:', imagesRes.status, imagesRes.statusText);
-      
-      if (!imagesRes.ok) {
-        throw new Error(`Failed to fetch images: ${imagesRes.status} ${imagesRes.statusText}`);
-      }
       
       // Parse the JSON data
-      const deviceInfo = await deviceInfoRes.json();
-      const images = await imagesRes.json();
+      const deviceData = await deviceInfoRes.json();
       
-      console.log(`Loaded ${deviceInfo.devices.length} devices from dinfo.json`);
-      
-      // Validate images data structure
-      if (!images.devices || !Array.isArray(images.devices)) {
-        console.error('Invalid image data structure:', images);
-        throw new Error('Invalid image data structure');
-      }
+      console.log(`Loaded ${deviceData.devices.length} devices from devices.json`);
       
       // Process device data
-      const processedDevices = processDevices(deviceInfo.devices);
+      const processedDevices = processDevices(deviceData.devices);
       console.log(`Processed ${processedDevices.length} devices`);
       
       console.log('Creating device elements...');
-      const deviceElements = await createDeviceElements(processedDevices, images);
+      const deviceElements = await createDeviceElements(processedDevices);
       console.log(`Created ${deviceElements.length} device elements`);
       
       // Clear the grid before adding elements
@@ -83,23 +68,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 /**
- * Processes device data from dinfo.json
- * @param {Array} devices - Array of devices from dinfo.json
+ * Processes device data from devices.json
+ * @param {Array} devices - Array of devices from devices.json
  * @returns {Array} Processed device list with brand info
  */
 function processDevices(devices) {
   return devices.map(device => {
     // Determine brand from device name
-    const brandName = getDeviceBrand(device.device);
+    const brandName = getDeviceBrand(device.device_name);
     
-    console.log(`Processed device: ${device.codename} (${device.device}) - Brand: ${brandName} - Maintainer: ${device.maintainer}`);
+    console.log(`Processed device: ${device.codename} (${device.device_name}) - Brand: ${brandName} - Maintainer: ${device.maintainer}`);
     
     return {
-      name: device.device,
+      name: device.device_name,
       codename: device.codename,
       brand: brandName,
       maintainer: device.maintainer,
-      support_group: ''  // Default empty support group
+      support_group: device.support_group || '',
+      image_url: device.image_url || 'img/fallback.png'
     };
   });
 }
@@ -107,10 +93,9 @@ function processDevices(devices) {
 /**
  * Creates device card elements with lazy-loaded images
  * @param {Array} devices - Processed device list
- * @param {object} imagesData - Device image URLs
  * @returns {Promise<Array>} Array of device card elements
  */
-function createDeviceElements(devices, imagesData) {
+function createDeviceElements(devices) {
   const usedCodenames = new Set();
 
   return Promise.all(
@@ -134,11 +119,7 @@ function createDeviceElements(devices, imagesData) {
         
         console.log(`Flavor data for ${device.codename}: GMS=${!!gms}, Vanilla=${!!vanilla}`);
 
-        const imageInfo = imagesData.devices.find(d => d.codename === device.codename);
-        if (!imageInfo) {
-          console.warn(`No image found for device: ${device.codename}`);
-        }
-        const imageUrl = imageInfo?.imageUrl || 'img/fallback.png';
+        const imageUrl = device.image_url || 'img/fallback.png';
         console.log(`Image URL for ${device.codename}: ${imageUrl}`);
 
         const flavorHtml = `
