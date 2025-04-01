@@ -76,9 +76,13 @@
   .game-preview-container {
     max-height: 150px !important;
   }
-}
 
-@media (max-width: 600px) {
+  #downloadBtn {
+    padding: 0;
+    background: none;
+    color: white;
+  }
+
   .user_feedbacks {
     justify-content: flex-start;
   }

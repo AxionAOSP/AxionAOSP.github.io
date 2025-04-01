@@ -137,8 +137,7 @@ function createDeviceElements(devices) {
               onerror="this.onerror=null; console.error('Failed to load image for ${device.codename}'); this.src='img/fallback.png';"
             />
             <div class="device-info">
-              <div class="device-name">${device.name}</div>
-              <div class="codename">${device.codename}</div>
+              <div class="device-name">${device.name} (${device.codename})</div>
               <div class="maintainer">by ${device.maintainer}</div>
             </div>
           </div>
@@ -302,11 +301,10 @@ function initSearch() {
     
     deviceCards.forEach(card => {
       const name = card.querySelector('.device-name')?.textContent.toLowerCase() || '';
-      const codename = card.querySelector('.codename')?.textContent.toLowerCase() || '';
       const maintainer = card.querySelector('.maintainer')?.textContent.toLowerCase() || '';
       
       // Show card if it matches search and brand filter (if active)
-      const matchesSearch = query === '' || name.includes(query) || codename.includes(query) || maintainer.includes(query);
+      const matchesSearch = query === '' || name.includes(query) || maintainer.includes(query);
       const matchesFilter = !activeFilter || activeFilter === 'all' || card.dataset.brand === activeFilter;
       
       card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';

@@ -12,7 +12,7 @@
 
 .user_feedback {
     background: var(--md_surface_color_light);
-    color: #ddd;
+    color: var(--text-secondary);
     padding: 20px;
     border-radius: 8px;
     font-family: "Space Grotesk", sans-serif;

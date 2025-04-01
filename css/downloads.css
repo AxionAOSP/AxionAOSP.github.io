@@ -1,15 +1,4 @@
 :root {
-  --primary-green: #a0f7b2;
-  --button-text: #1a472a;
-  --hover-green: #a0f7b2;
-  --active-green: #a0f7b2;
-  --card-bg: #000000;
-  --text-primary: #ffffff;
-  --text-secondary: #a0aec0;
-  --filter-active: #a0f7b2;
-  --card-border: #2d3748;
-  --section-bg: #111111;
-  --error-red: #f87171;
   --card-border-radius: 1rem;
   --transition-speed: 0.3s;
   --spacing-md: 1rem;
@@ -25,7 +14,7 @@
 
 body {
   font-family: 'Google Sans', 'Roboto', sans-serif;
-  background: var(--section-bg);
+  background: var(--md_body_background);
   color: var(--text-primary);
   line-height: 1.5;
 }
@@ -80,12 +69,13 @@ h1 {
 
 .filter-btn:hover {
   transform: translateY(-1px);
-  background: var(--md_accent_dark_color);
+  background: var(--md_accent_color);
+  color: var(--text-primary-inverse);
 }
 
 .filter-btn.active {
-  background: var(--filter-active);
-  color: var(--button-text);
+  background: var(--md_accent_color);
+  color: var(--text-primary-inverse);
   border-color: transparent;
   box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
 }
@@ -150,18 +140,10 @@ h1 {
   text-overflow: ellipsis;
 }
 
-.codename {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .toggle-btn {
   background: none;
   border: none;
-  color: var(--primary-green);
+  color: var(--md_accent_color);
   font-size: 1.2rem;
   width: 32px;
   height: 32px;
@@ -198,8 +180,8 @@ h1 {
 }
 
 .download-btn {
-  background: var(--primary-green);
-  color: var(--button-text);
+  background: var(--md_accent_color);
+  color: var(--text-primary-inverse);
   padding: 0.75rem 1rem;
   border-radius: 0.5rem;
   text-decoration: none;
@@ -213,12 +195,12 @@ h1 {
 
 .download-btn:hover {
   transform: translateY(-1px);
-  background: var(--hover-green);
+  background: var(--md_accent_color);
   box-shadow: 0 2px 8px rgba(201, 253, 211, 0.2);
 }
 
 .download-btn:active {
-  background: var(--active-green);
+  background: var(--md_accent_color);
   transform: translateY(0);
 }
 
@@ -251,7 +233,7 @@ h1 {
 
 .loading-state i {
   font-size: 2rem;
-  color: var(--primary-green);
+  color: var(--md_accent_color);
 }
 
 .error {
@@ -267,7 +249,7 @@ h1 {
 }
 
 .error a {
-  color: var(--primary-green);
+  color: var(--md_accent_color);
   text-decoration: none;
 }
 
@@ -316,10 +298,6 @@ h1 {
 
   .device-name {
     font-size: 1rem;
-  }
-
-  .codename {
-    font-size: 0.85rem;
   }
 }
 
@@ -507,16 +485,34 @@ h1 {
 }
 
 @keyframes fadeIn {
-  from { bottom: 10px; opacity: 0; }
-  to { bottom: 20px; opacity: 1; }
+  from {
+    bottom: 10px;
+    opacity: 0;
+  }
+
+  to {
+    bottom: 20px;
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-  from { bottom: 20px; opacity: 1; }
-  to { bottom: 10px; opacity: 0; }
+  from {
+    bottom: 20px;
+    opacity: 1;
+  }
+
+  to {
+    bottom: 10px;
+    opacity: 0;
+  }
 }
 
 #downloads {
   opacity: 1;
   margin-top: 60px;
+}
+
+.maintainer {
+  color: var(--text-secondary);
 }
