@@ -83,6 +83,10 @@
     color: white;
   }
 
+  #downloadBtn:hover {
+    background: none;
+  }
+
   .user_feedbacks {
     justify-content: flex-start;
   }
