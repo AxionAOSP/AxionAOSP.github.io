@@ -287,6 +287,25 @@ function showSnackbar(message) {
 /**
  * Initializes search functionality
  */
+function doSearch() {
+  const searchInput = document.getElementById('deviceSearch');
+  if (!searchInput) return;
+
+  const query = searchInput.value.toLowerCase().trim();
+  const deviceCards = document.querySelectorAll('.device-card');
+  const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter;
+
+  deviceCards.forEach(card => {
+    const name = card.querySelector('.device-name')?.textContent.toLowerCase() || '';
+    const maintainer = card.querySelector('.maintainer')?.textContent.toLowerCase() || '';
+
+    const matchesSearch = query === '' || name.includes(query) || maintainer.includes(query);
+    const matchesFilter = !activeFilter || activeFilter === 'all' || card.dataset.brand === activeFilter;
+
+    card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
+  });
+}
+
 function initSearch() {
   const searchInput = document.getElementById('deviceSearch');
   if (!searchInput) {
@@ -294,22 +313,22 @@ function initSearch() {
     return;
   }
 
-  searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase().trim();
-    const deviceCards = document.querySelectorAll('.device-card');
-    const activeFilter = document.querySelector('.filter-btn.active')?.dataset.filter;
-    
-    deviceCards.forEach(card => {
-      const name = card.querySelector('.device-name')?.textContent.toLowerCase() || '';
-      const maintainer = card.querySelector('.maintainer')?.textContent.toLowerCase() || '';
-      
-      // Show card if it matches search and brand filter (if active)
-      const matchesSearch = query === '' || name.includes(query) || maintainer.includes(query);
-      const matchesFilter = !activeFilter || activeFilter === 'all' || card.dataset.brand === activeFilter;
-      
-      card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
-    });
-  });
+  searchInput.addEventListener('input', doSearch);
+  searchInput.addEventListener('change', doSearch);
+
+  const storedSearch = localStorage.getItem("deviceSearchText");
+
+  if (storedSearch) {
+    setTimeout(() => {
+      const input = document.getElementById('deviceSearch');
+      if (input) {
+        input.value = storedSearch;
+        localStorage.removeItem("deviceSearchText");
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        doSearch();
+      }
+    }, 100);
+  }
 }
 
 /**
