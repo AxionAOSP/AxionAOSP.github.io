@@ -11,3 +11,18 @@
 @import url('responsive.css');
 @import url('splide.css');
 @import url('theme.css');
+
+#iframeWrapper {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#contentFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}

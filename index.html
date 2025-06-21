@@ -54,55 +54,15 @@
     </div>
   </div>
 
-  <iframe id="contentFrame" src="home.html" frameborder="0"
-    style="width: 100%; height: 100vh; overflow: hidden; display: block;"></iframe>
+  <div id="iframeWrapper">
+    <iframe id="contentFrame" src="home.html"></iframe>
+  </div>
 
   <script src="js/index.js"></script>
   <script src="js/iframe.js"></script>
   <script src="js/nav.js"></script>
   <script src="js/changelog.js"></script>
-  <script>
-    function onUrlChange() {
-        const hash = window.location.hash;
-
-        const downloadsRegex = /^#downloads(?:_(.+))?$/;
-        const match = hash.match(downloadsRegex);
-
-        if (match) {
-            const iframe = document.getElementById("contentFrame");
-            const baseSrc = "download.html#downloads";
-
-            if (match[1]) {
-                const rawSearch = match[1];
-                const searchText = decodeURIComponent(rawSearch.replace(/_/g, " "));
-                localStorage.setItem("deviceSearchText", searchText);
-            }
-
-            if (!iframe.src.endsWith(baseSrc)) {
-                iframe.src = baseSrc;
-            }
-            return;
-        }
-
-        const routeMap = {
-            "#about": "home.html#about",
-            "#features": "home.html#features",
-            "#community": "home.html#community",
-            "#faq": "home.html#faq",
-            "#keybox": "keybox.html#keybox"
-        };
-
-        const targetSrc = routeMap[hash];
-        if (targetSrc) {
-            const iframe = document.getElementById("contentFrame");
-            if (!iframe.src.endsWith(targetSrc)) {
-                iframe.src = targetSrc;
-            }
-        }
-    }
-    document.addEventListener("DOMContentLoaded", onUrlChange);
-    window.addEventListener("hashchange", onUrlChange);
-  </script>
+  <script src="js/index.js"></script>
 </body>
 
 </html>
