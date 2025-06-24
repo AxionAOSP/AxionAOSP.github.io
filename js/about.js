@@ -1,8 +1,10 @@
 const members = [
     { username: 'rmp22', group: 'Core', position: 'Project Founder/Developer' },
     { username: 'Saikrishna1504', group: 'Management', position: 'Project Manager' },
+    { username: 'manidweep', group: 'Management', position: 'Project Administrator' },
     { username: 'zenin1504', group: 'Management', position: 'Project Administrator' },
     { username: 'rmuxnet', group: 'Contributors', position: 'AxionAOSP Channel/Chat Bot' },
+    { username: 'therealmharc', group: 'Contributors', position: 'Source contributor' },
     { username: 'not-ayan', group: 'Designers', position: 'Designer' },
     { username: 'alecxtra', group: 'Designers', position: 'Designer' }
 ];
