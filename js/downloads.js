@@ -171,7 +171,7 @@ function createDeviceElements(devices) {
  */
 async function fetchFlavorData(codename, type) {
   try {
-    const url = `https://raw.githubusercontent.com/AxionAOSP/official_devices/main/OTA/${type}/${codename.toLowerCase()}.json`;
+    const url = `https://raw.githubusercontent.com/AxionAOSP/official_devices/main/OTA/${type}/${codename}.json`;
     console.log(`Fetching ${type} data from: ${url}`);
     
     const res = await fetch(url);
