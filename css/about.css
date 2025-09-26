@@ -58,6 +58,12 @@ h1 {
     font-weight: 500;
 }
 
+.username a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .goal-section {
     max-width: 600px;
     margin-top: 3rem;

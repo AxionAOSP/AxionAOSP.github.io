@@ -2,11 +2,9 @@ const members = [
     { username: 'rmp22', group: 'Core', position: 'Project Founder/Developer' },
     { username: 'Saikrishna1504', group: 'Management', position: 'Project Manager' },
     { username: 'manidweep', group: 'Management', position: 'Project Administrator' },
-    { username: 'zenin1504', group: 'Management', position: 'Project Administrator' },
     { username: 'rmuxnet', group: 'Contributors', position: 'AxionAOSP Channel/Chat Bot' },
-    { username: 'therealmharc', group: 'Contributors', position: 'Source contributor' },
-    { username: 'not-ayan', group: 'Designers', position: 'Designer' },
-    { username: 'alecxtra', group: 'Designers', position: 'Designer' }
+    { username: 'not-ayan', group: 'Contributors', position: 'Designer' },
+    { username: 'alecxtra', group: 'Contributors', position: 'Designer' }
 ];
 
 const teamContainer = document.getElementById('team');
@@ -24,7 +22,9 @@ function createMemberCard(member, avatarUrl) {
     card.classList.add('member-card');
     card.innerHTML = `
 <img src="${avatarUrl}" alt="${member.username}'s avatar" class="avatar" />
-<div class="username">@${member.username}</div>
+<div class="username">
+    <a href="https://github.com/${member.username}" target="_blank" rel="noopener noreferrer">@${member.username}</a>
+</div>
 <div class="position">${member.position}</div>
 `;
     return card;
