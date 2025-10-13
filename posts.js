@@ -93,7 +93,7 @@ window.posts = [
         <li><strong>Volume QS Tile:</strong> Option to change volume levels via QS tile</li>
         <li><strong>Lockscreen QS disable:</strong> Option to disable swiping QS on lockscreen</li>
         <li><strong>Lockscreen Media Art:</strong> Option to display media art on lockscreen</li>
-        <li><strong>Mistouch Preventoin:</strong> Option to add mistouch protection in lockscreen</li>
+        <li><strong>Mistouch Prevention:</strong> Option to add mistouch protection in lockscreen</li>
       </ul>
 
         <h2>Google’s Patch Cadence & The State of AOSP</h2>
