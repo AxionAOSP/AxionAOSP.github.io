@@ -24,7 +24,8 @@ function onUrlChange() {
     "#features": "home.html#features",
     "#community": "home.html#community",
     "#faq": "home.html#faq",
-    "#keybox": "keybox.html#keybox"
+    "#keybox": "keybox.html#keybox",
+    "#blog": "blog.html#blog"
   };
 
   const targetSrc = routeMap[hash];

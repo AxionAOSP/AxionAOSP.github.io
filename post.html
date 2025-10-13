@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AxionOS Blog Post</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/post.css" />
+  <script src="posts.js"></script>
+</head>
+
+<body>
+  <main class="post-container">
+    <article id="post-content"></article>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    const post = window.posts.find(p => p.id === id);
+    const container = document.getElementById('post-content');
+
+    if (!post) {
+      container.innerHTML = '<p>Post not found.</p>';
+    } else {
+      const authorName = post.author?.name || 'Unknown';
+      const authorUser = post.author?.username ? `(${post.author.username})` : '';
+      const date = new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+
+      container.innerHTML = `
+      <header class="post-header">
+        <p class="post-meta">Written on ${date} by ${authorName} ${authorUser}</p>
+        <h1 class="post-title">${post.title}</h1>
+        <p class="post-summary">${post.summary}</p>
+      </header>
+      ${post.banner ? `<img class="post-banner" src="${post.banner}" alt="Banner">` : ''}
+      <div class="post-body">${post.content}</div>
+    `;
+    }
+  </script>
+</body>
+
+</html>

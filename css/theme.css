@@ -9,4 +9,33 @@
     --text-primary-inverse: #000000;
     --text-secondary: #ddd;
     --error-red: #f87171;
-  }
+    --navbar_height: 64px;
+}
+
+body {
+  font-family: "Google Sans", sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.highlight {
+  color: var(--md_accent_color);
+}
+
+a {
+  color: var(--md_accent_color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+strong {
+  color: var(--md_accent_color);
+}
+
+p {
+  font-family: 'Space Grotesk', sans-serif;
+}
+

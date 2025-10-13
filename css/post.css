@@ -1,0 +1,86 @@
+body {
+  background: var(--md_body_background);
+  color: var(--text-primary);
+  margin: 0;
+  margin-top: var(--navbar_height);
+  padding: 0;
+}
+
+.post-container {
+  max-width: 720px;
+  margin: auto;
+  padding: 2rem 1rem;
+}
+
+.post-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.post-meta {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.post-title {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+}
+
+.post-summary {
+  color: #bbb;
+  font-size: 1.1rem;
+}
+
+.post-banner {
+  width: 100%;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.post-body {
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.post-body img {
+  max-width: 100%;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+}
+
+.side-by-side {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.side-by-side img {
+  flex: 1 1 320px;
+  max-width: 320px;
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  object-fit: contain;
+}
+
+.post-meta {
+  color: #999;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.post-meta strong {
+  color: #ddd;
+}
+
+.author-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 0.4rem;
+}

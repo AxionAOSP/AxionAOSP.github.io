@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AxionOS Blog</title>
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/blog.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <script src="posts.js"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="site-title">Blog</h1>
+      <p class="site-subtitle">Changelogs and news from the AxionOS team.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="featured-post" class="featured-post"></section>
+    <section id="older-posts" class="blog-grid"></section>
+  </main>
+
+  <script>
+    const featuredContainer = document.getElementById('featured-post');
+    const olderContainer = document.getElementById('older-posts');
+
+    if (!window.posts || !window.posts.length) {
+      featuredContainer.innerHTML = '<p>No blog posts found.</p>';
+    } else {
+      const sorted = [...window.posts].sort((a, b) => new Date(b.date) - new Date(a.date));
+      const [latest, ...older] = sorted;
+
+      const author = latest.author || {};
+      const date = new Date(latest.date).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      featuredContainer.innerHTML = `
+      <article class="featured-split">
+        <div class="featured-image" style="background-image:url('${latest.banner || 'assets/default-banner.jpg'}')"></div>
+        <div class="featured-text">
+          <p class="featured-date">${date}</p>
+          <h2 class="featured-title"><a href="post.html?id=${latest.id}">${latest.title}</a></h2>
+          <p class="featured-summary">${latest.summary}</p>
+          <div class="featured-author">
+            <span class="material-symbols-outlined">person_outline</span>
+            ${author.name || 'Unknown'} (${author.username || ''})
+          </div>
+          <a href="post.html?id=${latest.id}" class="read-more">Read More →</a>
+        </div>
+      </article>
+    `;
+
+      older.forEach(post => {
+        const article = document.createElement('article');
+        const author = post.author || {};
+        const date = new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+        article.classList.add('blog-card');
+        article.innerHTML = `
+        <div class="card-content">
+          <p class="tagline">${post.tagline || ''}</p>
+          <h3 class="post-title">${post.title}</h3>
+          <p class="post-meta">
+            <span class="material-symbols-outlined">calendar_today</span> ${date}
+            <span class="material-symbols-outlined">person_outline</span> ${author.name || 'Unknown'} (${author.username || ''})
+          </p>
+          <a href="post.html?id=${post.id}" class="read-more">Read More →</a>
+        </div>
+      `;
+        olderContainer.appendChild(article);
+      });
+    }
+  </script>
+
+</body>
+
+</html>
