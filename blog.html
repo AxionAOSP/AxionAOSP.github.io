@@ -57,24 +57,47 @@
       </article>
     `;
 
-      older.forEach(post => {
-        const article = document.createElement('article');
-        const author = post.author || {};
-        const date = new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-        article.classList.add('blog-card');
-        article.innerHTML = `
-        <div class="card-content">
-          <p class="tagline">${post.tagline || ''}</p>
-          <h3 class="post-title">${post.title}</h3>
-          <p class="post-meta">
-            <span class="material-symbols-outlined">calendar_today</span> ${date}
-            <span class="material-symbols-outlined">person_outline</span> ${author.name || 'Unknown'} (${author.username || ''})
-          </p>
-          <a href="post.html?id=${post.id}" class="read-more">Read More →</a>
-        </div>
+    older.forEach(post => {
+      const article = document.createElement('article');
+      const author = post.author || {};
+      const date = new Date(post.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+      article.classList.add('blog-card');
+
+      article.style.backgroundImage = `url('${post.banner || 'assets/default-banner.jpg'}')`;
+      article.style.backgroundSize = 'cover';
+      article.style.backgroundPosition = 'center';
+      article.style.position = 'relative';
+      article.style.color = '#fff';
+      article.style.overflow = 'hidden';
+
+      const overlay = document.createElement('div');
+      overlay.style.position = 'absolute';
+      overlay.style.top = 0;
+      overlay.style.left = 0;
+      overlay.style.width = '100%';
+      overlay.style.height = '100%';
+      overlay.style.background = 'rgba(0, 0, 0, 0.5)';
+      overlay.style.zIndex = 1;
+      article.appendChild(overlay);
+
+      const cardContent = document.createElement('div');
+      cardContent.classList.add('card-content');
+      cardContent.style.position = 'relative';
+      cardContent.style.zIndex = 2;
+      cardContent.innerHTML = `
+        <p class="tagline">${post.tagline || ''}</p>
+        <h3 class="post-title">${post.title}</h3>
+        <p class="post-meta">
+          <span class="material-symbols-outlined">calendar_today</span> ${date}
+          <span class="material-symbols-outlined">person_outline</span> ${author.name || 'Unknown'} (${author.username || ''})
+        </p>
+        <a href="post.html?id=${post.id}" class="read-more">Read More →</a>
       `;
-        olderContainer.appendChild(article);
-      });
+      article.appendChild(cardContent);
+
+      olderContainer.appendChild(article);
+    });
+
     }
   </script>
 

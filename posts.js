@@ -12,135 +12,21 @@ window.posts = [
     "readTime": "10 min read",
     "summary": "After months of refinement across four beta releases, AxionOS 2.1 Stable is finally here — faster, smoother, and more refined than ever.",
     "banner": "blog/res/img/2.0-banner.png",
-    "content": `
-      <p>After months of community feedback and rigorous testing across four Beta releases, we’re proud to announce the <strong>Stable release of AxionOS 2.1</strong> — built on <strong>Android 16</strong>. This version represents the most polished, balanced, and powerful AxionOS experience yet, combining new designs, stability, and OEM-inspired features that strike the perfect balance between creativity and familiarity.</p>
-
-      <h2>Two Sides of the Coin</h2>
-      <p>The entire UI has undergone a thoughtful visual refresh, blending Axion’s unique identity with a NothingOS-inspired design language. Instead of copying, we’ve taken the “what if” approach — reimagining how both <em>Material You</em> and blur-based themes can coexist in harmony. Whether you prefer vibrant colors or minimalist blur effects, you can have both.</p>
-      <ul>
-        <li>Reworked Quick Settings and improved brightness slider visibility controls</li>
-        <li>Updated Settings dashboard</li>
-        <li>Smart Internet tile and redesigned widgets inspired by NothingOS</li>
-      </ul>
-      <div class="side-by-side">
-        <img src="blog/res/img/qs-blur.png" alt="QS Blur" />
-        <img src="blog/res/img/qs-material.png" alt="QS Material" />
-      </div>
-      
-        <h2>Your Home, Refined for You</h2>
-        <p>Whether you prioritize aesthetics or efficiency, AxionOS 2.1 brings thoughtful launcher enhancements designed to adapt to your preferences and workflow.</p>
-        <ul>
-          <li><strong>QuickLook Widget:</strong> At-a-glance information for weather, calendar, and music</li>
-          <li><strong>Nothing Widgets:</strong> Ports of nothingOS widgets to improve accessibility or aesthetics</li>
-          <li><strong>Dynamic Themed Icons:</strong> Seamlessly adapt to your wallpaper and theme for a cohesive look</li>
-          <li><strong>Refreshed Visuals:</strong> Subtle yet meaningful UI refinements across the launcher and recents view</li>
-        </ul>
-        <div class="side-by-side">
-          <img src="blog/res/img/widgets.png" alt="Widgets" />
-          <img src="blog/res/img/recents.png" alt="Recents" />
-        </div>
-
-      <h2><em>In omnia paratus!</em> — Ready for Anything</h2>
-      <p>AxionOS 2.1 builds upon the newly rewritten boost framework introduced in AxionOS 1.0, now optimized for even faster response times and smoother animations across the entire system. Memory usage has been further reduced, resulting in snappier and more efficient multitasking.</p>
-
-      <h3>New Components in the Boost Framework</h3>
-      <ul>
-        <li><strong>Performance Toolkit:</strong> A user-configurable performance management suite</li>
-        <li><strong>Enhanced Low Memory Killer Daemon:</strong> Optimized using OEM-level improvements</li>
-        <li><strong>Advanced Thermal Mitigation:</strong> Automatically terminates unnecessary processes to reduce CPU load and temperature</li>
-        <li><strong>Memory Manager:</strong> Dynamically optimizes memory allocation based on usage patterns</li>
-        <li><strong>ODEX Optimizations:</strong> Improves app performance using AOT speed-profile compilation</li>
-        <li><strong>Dex Prefetcher:</strong> A rewritten, QCOM-inspired engine that accelerates app launch and loading times</li>
-        <li><strong>ScrollOptimizer:</strong> Derived and reengineered from QCOM’s implementation to eliminate scroll jitters while maintaining low CPU usage</li>
-        <li><strong>Service Delay:</strong> An optimization that delays non-critical or non-user requested services</li>
-      </ul>
-
-      <h2>Game On!</h2>
-      <p>The redesigned Game Panel delivers faster access to key features while gaming — no need to switch apps or pull down Quick Settings mid-match.</p>
-      <ul>
-        <li>New Game Panel tiles for quick access</li>
-        <li>In-game brightness slider for instant visibility control</li>
-        <li>Real-time FPS meter</li>
-      </ul>
-      <img src="blog/res/img/game_mode.png" alt="New Game Mode Panel" />
-
-      <h2>Do More, Effortlessly</h2>
-      <p>The reworked Freeform mode takes multitasking on AOSP to a whole new level.</p>
-      <ul>
-        <li>Floating icons for minimized freeform tasks</li>
-        <li>Fully redesigned AOSP freeform UI</li>
-      </ul>
-      <img src="blog/res/img/freeform.png" alt="Freeform" />
-
-      <h2>Feature Highlights</h2>
-      <h3>NothingOS Experience</h3>
-      <ul>
-        <li>NothingOS-style lockscreen clocks and Always-On Display</li>
-        <li>Three-finger swipe gesture with improved screenshot interception</li>
-        <li>Network Speed Indicator and App Locker</li>
-        <li>Partial screenshot support</li>
-      </ul>
-
-      <h3>Other AxionOS Exclusives</h3>
-      <ul>
-        <li><strong>QuickLook:</strong> At-a-glance weather, calendar, and music controls right from your lockscreen</li>
-        <li><strong>Sidebar Reimagined:</strong> Rewritten from the ground up for faster access and minimal resource use</li>
-        <li><strong>Edge Light & Pulse Visualizer:</strong> Cleaner, smoother lighting effects with improved AOD integration</li>
-        <li><strong>HBM (High Brightness Mode) service:</strong> Open-source and battery friendly</li>
-        <li><strong>HDR boost toggle:</strong> Option to disable HDR flashbangs when watching videos</li>
-        <li><strong>HDR intensity:</strong> Option to change HDR brightness intensity</li>
-        <li><strong>Torch intensity:</strong> Option to change Torch brightness intensity</li>
-        <li><strong>Volume QS Tile:</strong> Option to change volume levels via QS tile</li>
-        <li><strong>Lockscreen QS disable:</strong> Option to disable swiping QS on lockscreen</li>
-        <li><strong>Lockscreen Media Art:</strong> Option to display media art on lockscreen</li>
-        <li><strong>Mistouch Prevention:</strong> Option to add mistouch protection in lockscreen</li>
-      </ul>
-
-        <h2>Google’s Patch Cadence & The State of AOSP</h2>
-
-        <h3>The ACSP — Android Closed Source Project</h3>
-        <p>Over the past few months, Google has not released major source code updates addressing critical QPR0 issues — and QPR1 remains unavailable. This slowdown in the Android Open Source Project (AOSP) has made it increasingly challenging for custom ROM developers to maintain stability and compatibility.</p>
-
-        <p>Without direct access to Google’s proprietary tools and resources, many QPR0-related issues required extensive manual fixes and reverse engineering. These “band-aid” solutions extended our beta period, as we prioritized delivering a daily-driver-ready experience over rushing stability.</p>
-
-        <h3>AxionOS Contributions and Fixes</h3>
-        <p>Despite these limitations, we implemented several critical fixes and optimizations to make QPR0 near stable and usable for everyday users.</p>
-
-        <h4>AOSP fixes</h4>
-        <ul>
-          <li>Resolved VPN connection issues</li>
-          <li>Fixed cloned profile bugs</li>
-          <li>Restored scheduled dark mode functionality</li>
-          <li>Patched SystemUI memory leaks</li>
-          <li>Fixed Quick Settings visual glitches (e.g., tiles showing without background)</li>
-          <li>Resolved keyguard element disappearance issues</li>
-          <li>Fixed secondary click actions on the Internet tile</li>
-          <li>Eliminated unlock flickering</li>
-          <li>Fixed animation lag on selected MediaTek devices</li>
-          <li>Fixed split-shade disappearance issues</li>
-          <li>Fixed systemui crashes after applying icon packs</li>
-          <li>Fixed task profiles application</li>
-        </ul>
-        
-        <h4>Custom Rom Feature fixes</h4>
-        <ul>
-          <li>Fixed clock customizations memory leak</li>
-          <li>Reduced system font overrides resources usage</li>
-          <li>Fixed minor ui inconsistencies with volume row icons</li>
-          <li>Biometrics option fixes</li>
-          <li>Fixed mediametadata crashes</li>
-          <li>Fixed HWUI renderer switcher feature implementation</li>
-          <li>Fixed ignore window secure feature</li>
-        </ul>
-
-        <p>TL;DR: AxionOS continues to push AOSP forward, ensuring a stable and refined Android experience even amidst limited upstream updates.</p>
-
-      <h2>Looking Ahead</h2>
-      <p>AxionOS 2.1 Stable marks a major milestone — but it’s only the beginning. With a stronger foundation, we’re looking forward for better quality releases as time goes by.</p>
-
-      <p>We’d like to thank all our testers, contributors, and community members who helped shape AxionOS 2.1 through each beta phase. Your feedback and participation have been invaluable in creating a release that embodies the AxionOS vision of performance and elegance.</p>
-
-      <p><em>— The AxionOS Team</em></p>
-    `
+    "content": "<p>After months of community feedback and rigorous testing across four Beta releases, we're proud to announce the <strong>Stable release of AxionOS 2.1</strong> — built on <strong>Android 16</strong>. This version represents the most polished, balanced, and powerful AxionOS experience yet, combining new designs, stability, and OEM-inspired features that strike the perfect balance between creativity and familiarity.</p>\n\n<h2>Two Sides of the Coin</h2>\n\n<p>The entire UI has undergone a thoughtful visual refresh, blending Axion's unique identity with a NothingOS-inspired design language. Instead of copying, we've taken the \"what if\" approach — reimagining how both <em>Material You</em> and blur-based themes can coexist in harmony. Whether you prefer vibrant colors or minimalist blur effects, you can have both.</p>\n\n<ul>\n<li>Reworked Quick Settings and improved brightness slider visibility controls</li>\n<li>Updated Settings dashboard</li>\n<li>Smart Internet tile and redesigned widgets inspired by NothingOS</li>\n</ul>\n\n<div class=\"side-by-side\">\n  <img src=\"blog/res/img/qs-blur.png\" alt=\"QS Blur\" />\n  <img src=\"blog/res/img/qs-material.png\" alt=\"QS Material\" />\n</div>\n\n<h2>Your Home, Refined for You</h2>\n\n<p>Whether you prioritize aesthetics or efficiency, AxionOS 2.1 brings thoughtful launcher enhancements designed to adapt to your preferences and workflow.</p>\n\n<ul>\n<li><strong>QuickLook Widget:</strong> At-a-glance information for weather, calendar, and music</li>\n<li><strong>Nothing Widgets:</strong> Ports of nothingOS widgets to improve accessibility or aesthetics</li>\n<li><strong>Dynamic Themed Icons:</strong> Seamlessly adapt to your wallpaper and theme for a cohesive look</li>\n<li><strong>Refreshed Visuals:</strong> Subtle yet meaningful UI refinements across the launcher and recents view</li>\n</ul>\n\n<div class=\"side-by-side\">\n  <img src=\"blog/res/img/widgets.png\" alt=\"Widgets\" />\n  <img src=\"blog/res/img/recents.png\" alt=\"Recents\" />\n</div>\n\n<h2><em>In omnia paratus!</em> — Ready for Anything</h2>\n\n<p>AxionOS 2.1 builds upon the newly rewritten boost framework introduced in AxionOS 1.0, now optimized for even faster response times and smoother animations across the entire system. Memory usage has been further reduced, resulting in snappier and more efficient multitasking.</p>\n\n<h3>New Components in the Boost Framework</h3>\n\n<ul>\n<li><strong>Performance Toolkit:</strong> A user-configurable performance management suite</li>\n<li><strong>Enhanced Low Memory Killer Daemon:</strong> Optimized using OEM-level improvements</li>\n<li><strong>Advanced Thermal Mitigation:</strong> Automatically terminates unnecessary processes to reduce CPU load and temperature</li>\n<li><strong>Memory Manager:</strong> Dynamically optimizes memory allocation based on usage patterns</li>\n<li><strong>ODEX Optimizations:</strong> Improves app performance using AOT speed-profile compilation</li>\n<li><strong>Dex Prefetcher:</strong> A rewritten, QCOM-inspired engine that accelerates app launch and loading times</li>\n<li><strong>ScrollOptimizer:</strong> Derived and reengineered from QCOM's implementation to eliminate scroll jitters while maintaining low CPU usage</li>\n<li><strong>Service Delay:</strong> An optimization that delays non-critical or non-user requested services</li>\n</ul>\n\n<h2>Game On!</h2>\n\n<p>The redesigned Game Panel delivers faster access to key features while gaming — no need to switch apps or pull down Quick Settings mid-match.</p>\n\n<ul>\n<li>New Game Panel tiles for quick access</li>\n<li>In-game brightness slider for instant visibility control</li>\n<li>Real-time FPS meter</li>\n</ul>\n\n<p>!<a href=\"blog/res/img/game_mode.png\">New Game Mode Panel</a></p>\n\n<h2>Do More, Effortlessly</h2>\n\n<p>The reworked Freeform mode takes multitasking on AOSP to a whole new level.</p>\n\n<ul>\n<li>Floating icons for minimized freeform tasks</li>\n<li>Fully redesigned AOSP freeform UI</li>\n</ul>\n\n<p>!<a href=\"blog/res/img/freeform.png\">Freeform</a></p>\n\n<h2>Feature Highlights</h2>\n\n<h3>NothingOS Experience</h3>\n\n<ul>\n<li>NothingOS-style lockscreen clocks and Always-On Display</li>\n<li>Three-finger swipe gesture with improved screenshot interception</li>\n<li>Network Speed Indicator and App Locker</li>\n<li>Partial screenshot support</li>\n</ul>\n\n<h3>Other AxionOS Exclusives</h3>\n\n<ul>\n<li><strong>QuickLook:</strong> At-a-glance weather, calendar, and music controls right from your lockscreen</li>\n<li><strong>Sidebar Reimagined:</strong> Rewritten from the ground up for faster access and minimal resource use</li>\n<li><strong>Edge Light & Pulse Visualizer:</strong> Cleaner, smoother lighting effects with improved AOD integration</li>\n<li><strong>HBM (High Brightness Mode) service:</strong> Open-source and battery friendly</li>\n<li><strong>HDR boost toggle:</strong> Option to disable HDR flashbangs when watching videos</li>\n<li><strong>HDR intensity:</strong> Option to change HDR brightness intensity</li>\n<li><strong>Torch intensity:</strong> Option to change Torch brightness intensity</li>\n<li><strong>Volume QS Tile:</strong> Option to change volume levels via QS tile</li>\n<li><strong>Lockscreen QS disable:</strong> Option to disable swiping QS on lockscreen</li>\n<li><strong>Lockscreen Media Art:</strong> Option to display media art on lockscreen</li>\n<li><strong>Mistouch Prevention:</strong> Option to add mistouch protection in lockscreen</li>\n</ul>\n\n<h2>Google's Patch Cadence & The State of AOSP</h2>\n\n<h3>The ACSP — Android Closed Source Project</h3>\n\n<p>Over the past few months, Google has not released major source code updates addressing critical QPR0 issues — and QPR1 remains unavailable. This slowdown in the Android Open Source Project (AOSP) has made it increasingly challenging for custom ROM developers to maintain stability and compatibility.</p>\n\n<p>Without direct access to Google's proprietary tools and resources, many QPR0-related issues required extensive manual fixes and reverse engineering. These \"band-aid\" solutions extended our beta period, as we prioritized delivering a daily-driver-ready experience over rushing stability.</p>\n\n<h3>AxionOS Contributions and Fixes</h3>\n\n<p>Despite these limitations, we implemented several critical fixes and optimizations to make QPR0 near stable and usable for everyday users.</p>\n\n<p>#### AOSP fixes</p>\n\n<ul>\n<li>Resolved VPN connection issues</li>\n<li>Fixed cloned profile bugs</li>\n<li>Restored scheduled dark mode functionality</li>\n<li>Patched SystemUI memory leaks</li>\n<li>Fixed Quick Settings visual glitches (e.g., tiles showing without background)</li>\n<li>Resolved keyguard element disappearance issues</li>\n<li>Fixed secondary click actions on the Internet tile</li>\n<li>Eliminated unlock flickering</li>\n<li>Fixed animation lag on selected MediaTek devices</li>\n<li>Fixed split-shade disappearance issues</li>\n<li>Fixed systemui crashes after applying icon packs</li>\n<li>Fixed task profiles application</li>\n</ul>\n\n<p>#### Custom Rom Feature fixes</p>\n\n<ul>\n<li>Fixed clock customizations memory leak</li>\n<li>Reduced system font overrides resources usage</li>\n<li>Fixed minor ui inconsistencies with volume row icons</li>\n<li>Biometrics option fixes</li>\n<li>Fixed mediametadata crashes</li>\n<li>Fixed HWUI renderer switcher feature implementation</li>\n<li>Fixed ignore window secure feature</li>\n</ul>\n\n<p>TL;DR: AxionOS continues to push AOSP forward, ensuring a stable and refined Android experience even amidst limited upstream updates.</p>\n\n<h2>Looking Ahead</h2>\n\n<p>AxionOS 2.1 Stable marks a major milestone — but it's only the beginning. With a stronger foundation, we're looking forward for better quality releases as time goes by.</p>\n\n<p>We'd like to thank all our testers, contributors, and community members who helped shape AxionOS 2.1 through each beta phase. Your feedback and participation have been invaluable in creating a release that embodies the AxionOS vision of performance and elegance.</p>\n\n<em>— The AxionOS Team</em>"
+  },
+  {
+    "id": "changelog-2",
+    "title": "AxionOS 2.2 — Expressive ain't expressing",
+    "tagline": "Expressive ain't AXpressing",
+    "author": {
+      "name": "rmp",
+      "username": "rmp22",
+      "icon": "blog/res/img/rmp22.png"
+    },
+    "date": "2025-11-08",
+    "readTime": "10 min read",
+    "summary": "Another month without Material You Expressive.",
+    "banner": "blog/res/img/2.2-banner.png",
+    "content": "<p>Another month of manual security patch bumps without Google and Material You. Is the Android Closed Source Project real? Regardless, we bring another update to the table with a fresh set of fixes and improvements that enhance your experience over the last release.</p>\n\n<h2>Clearing the Misunderstanding: The Beauty of Pastels Over Glass and Blurs</h2>\n\n<p>We’re not copying NothingOS—we’re drawing inspiration from it, adopting certain elements of their design language while we develop our own unique identity. Since AxionOS doesn’t yet have a dedicated UI team, I need to establish a recognizable aesthetic while completing the core framework.</p>\n\n<p>To be clear, NothingOS and HelloUI are the only OEM skins that don’t fully follow the iOS route, which is why they serve as references. HelloUI, in particular, still carries some iOS influence. Fun fact: the Rookery font we’re using was originally from Motorola.</p>\n\n<h2>What's the Spice?</h2>\n\n<h3>Clocks</h3>\n\n<ul>\n<li>With NothingOS having a stale 4.0 update, we decided to make some adjustments. Unlike real NothingOS clocks, all of our clocks now support QuickLook</li>\n</ul>\n\n<h3>Partial Theme Engine Implementation: Font Manager</h3>\n\n<ul>\n<li>Users can now import their favorite fonts and use them as long as they're accepted by the Android system</li>\n</ul>\n\n<h3>Power Button Short Press</h3>\n\n<ul>\n<li>Inspired by HyperOS and initiated by Saikrishna1504 — added for accessibility</li>\n</ul>\n\n<h3>Services Are More Persistent and Stable</h3>\n\n<ul>\n<li>Reports like Edge Bar and Axion Widgets stopping are now resolved. Services are now efficient and stable</li>\n</ul>\n\n<h3>Adjustments Here and There Based on Community Feedback</h3>\n\n<ul>\n<li>Adjusted clock heights and added fixes for devices with issues on our doze animation port</li>\n</ul>\n\n<h3>Task Menu Close Now Force-Stops</h3>\n\n<ul>\n<li><a href=\"https://github.com/AxionAOSP/android_packages_apps_Launcher3/commit/a7fcd4e48488a84b8982404a93d232bf2cab9a4d\">View commit on GitHub</a></li>\n</ul>\n\n<h3>New QS Tiles and widget</h3>\n\n<ul>\n<li>Added our own version of ringer slider, volume, and torch tiles</li>\n</ul>\n\n<em>— Visual representation of new QS tiles and widget</em>\n<div class=\"side-by-side\">\n  <img src=\"blog/res/img/new_feat_2_tiles.png\" alt=\"New QS Tiles\" />\n  <img src=\"blog/res/img/new_feat_2_widget.png\" alt=\"New Widgets\" />\n</div>\n\n<h2>Launch Apps Everywhere</h2>\n\n<p>Sidebar is now improved (aside from AOSP Freeform focus issues). With the new long press to trigger pop-up, you can now launch any app in full screen!</p>\n\n<div class=\"side-by-side\">\n  <img src=\"blog/res/img/new_feat_2_sidebar.png\" alt=\"Sidebar\" />\n  <img src=\"blog/res/img/new_feat_2_sidebar_2.png\" alt=\"Sidebar Fullscreen\" />\n</div>\n\n<h2>Changes to Boost Framework</h2>\n\n<ul>\n<li><strong>Memory Manager:</strong> Removed NothingOS usage-based memory management</li>\n<li><strong>Added Userspace Simple LMK (Optional):</strong> System-pressure-based (IO/CPU/memory pressure) simple low memory killer based on kerneltoast's kernel SLMK</li>\n</ul>\n\n<h2>Something’s Coming — Clean, Custom, Yours</h2>\n\n<p>We’re keeping things simple while giving you full control over your device’s look.\nA completely <strong>new Theme Engine</strong> is in active development — built from the ground up to let you customize every visual detail without adding bloat or clutter.</p>\n\n<p>Our vision:\n<ul>\n<li><strong>Clean base with limitless customization</strong> — fully optional for users who prefer a minimal look.</li>\n<li><strong>No preloaded gimmicks</strong> — you set the tone, your device reflects your style.</li>\n<li><strong>Thoughtfully designed API and specs</strong> — currently being drafted to integrate seamlessly with AOSP’s framework.</li>\n</ul></p>\n\n<p>It’s more than a theme system — it’s your personal creative space on Android.</p>\n\n<h2>The Roadmap</h2>\n\n<p>The journey of AxionOS continues — structured but always evolving.</p>\n\n<p>1. <strong>Establish the AxionOS Core Framework</strong>\n   Build a stable foundation for Axion-specific services and performance tuning.</p>\n\n<p>2. <strong>Introduce the Axion SDK</strong>\n   Provide tools for maintainers and contributors to easily extend Axion’s ecosystem.</p>\n\n<p>3. <strong>Core Feature Integrations</strong>\n<ul>\n<li><strong>Theme Engine</strong> — custom from the ground up (in development)</li>\n<li><strong>Boost Framework</strong> — optimize runtime performance</li>\n<li><strong>Ax Scheduling</strong> — adaptive process scheduling, derived from reversed OnePlus code</li>\n</ul></p>\n\n<p>4. <strong>AxionUI Development</strong>\n   A distinct identity: lightweight, expressive, and designed to evolve with user feedback.</p>\n\n<p>5. <strong>Upstream Readiness</strong>\n   Prepare AxionOS for seamless future merges and long-term maintenance.</p>\n\n<h2>Why Are There Too Many Bugs on Stable Release?</h2>\n\n<h3>Coming Back to The ACSP — Android Closed Source Project</h3>\n\n<p>The firmware used for Axion's or LineageOS base is QPR0 — a very early phase of AOSP where many things are still work-in-progress and really not recommended for daily usage. However, due to Google not releasing QPR1 (the stable version Pixel users know), everything here is not polished because it's WIP and in the first stage of firmware development release.</p>\n\n<p>LineageOS has already fixed many of these issues, but unfortunately, not all can be fixed even with the utmost diligence. In response to this, we have added links to the bug fixes as proof.</p>\n\n<h2>Fixed 69 Bugs, Added 178 Bugs</h2>\n\n<p>Kidding aside, we fixed critical issues and improved major custom ROM features that users actually need.</p>\n\n<h3>Improved Spoofing</h3>\n\n<p>Some apps that implement RootBeerNative (like banks) are invasively checking every property, mount point, and partition you have. With the help of PIF and system core patches, we managed to skip some checks that caused apps to crash and Play Integrity to fail. This includes fixing a legacy spoofing patch that wasn't working before:</p>\n\n<ul>\n<li><a href=\"https://github.com/AxionAOSP/android_system_core/commit/b405d22a0c51aa407e031df012b8d6f208ff03ba\">System core spoofing fix #1</a></li>\n<li><a href=\"https://github.com/AxionAOSP/android_system_core/commit/314d1cc5be4ba5a384e652bd22960f382ea306e6\">System core spoofing fix #2</a></li>\n</ul>\n\n<h3>Critical Bug Fixes</h3>\n\n<ul>\n<li><strong>Fixed legacy device random reboots and cgroup failures</strong> — <a href=\"https://github.com/AxionAOSP/android_system_core/commit/927e0d126f912c88b4253f18ab2913b8749ab1d3\">View commit</a></li>\n<li><strong>Fixed biometrics freezing and lockscreen disappearance issue once and for all</strong> — <a href=\"https://github.com/AxionAOSP/android_frameworks_base/commit/285f3b1b510c3f73ce9aa94b2ada460cb7b00f3a\">View commit</a></li>\n<li><strong>Fixed full screen feature</strong> — Say goodbye to those black bars! <a href=\"https://github.com/AxionAOSP/android_frameworks_base/commit/6a946d50e4e42386671013060b16d1613dace8ee\">View commit</a></li>\n<li><strong>Fixed bugged QuickSettings on keyguard</strong> — <a href=\"https://github.com/AxionAOSP/android_frameworks_base/commit/5cc2109530e1629ab15c1809caf00908a8d0b5f0\">View commit</a></li>\n<li><strong>Fixed inconsistent fingerprint icon</strong> — <a href=\"https://github.com/AxionAOSP/android_frameworks_base/commit/fda7ee24ae91b46e2086fdb875868cb08b7479b9\">View commit</a></li>\n<li><strong>Attempted fix for app icon corruption that leads to system not responding</strong> — <a href=\"https://github.com/AxionAOSP/android_frameworks_libs_systemui/commit/b74df732a5881d14a8254c222c9c0d51e603ada6\">View commit</a></li>\n</ul>\n\n<h3>Why Is Development and Fixes So Slow?</h3>\n\n<p>I’m the sole developer behind AxionOS (rmp22). Fortunately, our moderators and maintainers help by contributing missing custom ROM patches (credits to all contributors!) and keeping the community running smoothly.</p>\n\n<p>Most of the time, though, I’m juggling bug fixes and working through the roadmap. Progress can feel slow, but I’m doing my best to stay on schedule and deliver stable, meaningful updates.</p>\n\n<h2>Dear Google, Stop Killing What People Loved About You</h2>\n\n<p>You were loved for being open source and accessible, yet here we are — disappointments from custom ROMs, to sideloading, to Pixels. It's not too late, Google.</p>\n\n<em>— The AxionOS Team</em>"
   }
 ];
