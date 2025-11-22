@@ -1,13 +1,13 @@
 :root {
     --md_accent_color: #c9fdd3;
-    --md_surface_color: #1e1e1e;
-    --md_surface_color_light: #303030;
+    --md_surface_color: #000000;
+    --md_surface_color_light: #0a0a0a;
     --md_accent_dark_color: #55a165b4;
-    --md_body_background: #111;
+    --md_body_background: #000000;
     --card-bg: #000000;
     --text-primary: #ffffff;
     --text-primary-inverse: #000000;
-    --text-secondary: #ddd;
+    --text-secondary: #aaa;
     --error-red: #f87171;
     --navbar_height: 64px;
 }

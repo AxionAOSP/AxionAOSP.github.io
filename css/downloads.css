@@ -71,8 +71,10 @@ h1 {
 .filter-btn {
   padding: 0.75rem 1.5rem;
   border-radius: 2rem;
-  background: var(--md_surface_color);
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
   color: var(--text-primary);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -88,6 +90,7 @@ h1 {
   justify-content: center;
   min-height: 2.5rem;
   vertical-align: middle;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
 }
 
 .filter-btn:hover {
@@ -98,10 +101,12 @@ h1 {
 }
 
 .filter-btn.active {
-  background: var(--md_accent_color);
-  color: var(--text-primary-inverse);
-  border-color: var(--md_accent_color);
-  box-shadow: 0 4px 16px rgba(201, 253, 211, 0.3);
+  background: rgba(201, 253, 211, 0.2);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: var(--md_accent_color);
+  border-color: rgba(201, 253, 211, 0.4);
+  box-shadow: 0 4px 16px rgba(201, 253, 211, 0.3), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
   transform: translate3d(0, -2px, 0);
 }
 
@@ -118,12 +123,14 @@ h1 {
 }
 
 .device-card {
-  background: var(--md_surface_color);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: calc(var(--card-border-radius) + 0.25rem);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
   animation: fadeIn 0.5s ease-out;
   animation-fill-mode: backwards;
   width: 100%;
@@ -150,8 +157,8 @@ h1 {
 
 .device-card:hover {
   transform: translate3d(0, -6px, 0) scale(1.01);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(201, 253, 211, 0.1);
-  border-color: var(--md_accent_color);
+  border-color: rgba(201, 253, 211, 0.3);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(201, 253, 211, 0.15) inset, 0 4px 16px rgba(201, 253, 211, 0.1);
 }
 
 .device-card:hover::before {
@@ -172,9 +179,8 @@ h1 {
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 1.25rem;
-  /* Dark background to blend with white image backgrounds */
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.3));
-  background-color: rgba(0, 0, 0, 0.35);
+  background: #000000;
+  background-color: #000000;
 }
 
 .device-image-blur {
@@ -231,9 +237,9 @@ h1 {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom, 
-    rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.25) 50%,
-    rgba(0, 0, 0, 0.35) 100%);
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.5) 100%);
   pointer-events: none;
   z-index: 8;
   border-radius: 16px;
@@ -256,14 +262,14 @@ h1 {
 /* Fallback for browsers without :has() support - apply class via JS */
 .device-image-wrapper.white-bg::after {
   background: linear-gradient(to bottom, 
-    rgba(0, 0, 0, 0.3) 0%,
-    rgba(0, 0, 0, 0.4) 50%,
-    rgba(0, 0, 0, 0.5) 100%);
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.7) 100%);
   opacity: 1;
 }
 
 .device-image-wrapper.white-bg {
-  background: rgba(0, 0, 0, 0.5);
+  background: #000000;
 }
 
 .device-card:hover .device-thumb {
@@ -966,7 +972,7 @@ h1 {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(4px);
   display: none;
   align-items: center;
@@ -989,9 +995,11 @@ h1 {
 }
 
 .modal-content {
-  background: var(--md_surface_color);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
   border-radius: calc(var(--card-border-radius) + 0.5rem);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   max-width: 750px;
   width: 90%;
   max-height: 90vh;
@@ -999,6 +1007,7 @@ h1 {
   position: relative;
   overflow: hidden;
   display: flex;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
   flex-direction: column;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
@@ -1010,7 +1019,7 @@ h1 {
   position: absolute;
   top: 1.25rem;
   right: 1.25rem;
-  background: rgba(255, 255, 255, 0.08);
+  background: #000000;
   border: 1.5px solid rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   color: var(--text-primary);
@@ -1024,7 +1033,7 @@ h1 {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 10;
   backdrop-filter: blur(10px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .close-btn i {
@@ -1032,11 +1041,11 @@ h1 {
 }
 
 .close-btn:hover {
-  background: rgba(255, 77, 77, 0.15);
-  border-color: rgba(255, 77, 77, 0.4);
+  background: rgba(255, 77, 77, 0.2);
+  border-color: rgba(255, 77, 77, 0.5);
   color: #ff4d4d;
   transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(255, 77, 77, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 77, 77, 0.3);
 }
 
 .close-btn:hover i {
@@ -1094,9 +1103,11 @@ h1 {
 .device-info-card {
   text-align: center;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .device-modal-name {
@@ -1210,8 +1221,10 @@ h1 {
 }
 
 .build-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   padding: 1.5rem;
   transition: all var(--transition-speed) ease;
@@ -1362,10 +1375,12 @@ h1 {
 }
 
 .changelog-section {
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 12px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   margin-top: 1rem;
 }
 
@@ -1385,7 +1400,7 @@ h1 {
 }
 
 .changelog-toggle:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .changelog-toggle i.fa-chevron-down {
@@ -1468,19 +1483,21 @@ h1 {
 .search-wrapper {
   display: flex;
   align-items: center;
-  background: var(--md_surface_color);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 1rem 1.25rem;
   border-radius: 16px;
   width: 100%;
   max-width: 500px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
 }
 
 .search-wrapper:focus-within {
-  border-color: var(--md_accent_color);
-  box-shadow: 0 4px 16px rgba(201, 253, 211, 0.15);
+  border-color: rgba(201, 253, 211, 0.4);
+  box-shadow: 0 6px 20px rgba(201, 253, 211, 0.2), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
   transform: translateY(-2px);
 }
 

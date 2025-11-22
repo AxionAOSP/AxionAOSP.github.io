@@ -103,12 +103,22 @@ section h2::after {
 }
 
 .content-card {
-    background: var(--md_surface_color);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
     margin-bottom: 40px;
     text-align: center;
+    transition: all 0.3s ease;
+}
+
+.content-card:hover {
+    border-color: rgba(201, 253, 211, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(201, 253, 211, 0.2) inset;
+    transform: translateY(-2px);
 }
 
 .header-inner {

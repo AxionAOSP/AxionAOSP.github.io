@@ -47,9 +47,9 @@ h1 {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    border: 3px solid #ccc;
+    border: 3px solid rgba(201, 253, 211, 0.3);
     object-fit: cover;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
 }
 
 .username {

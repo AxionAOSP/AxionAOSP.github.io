@@ -29,11 +29,20 @@ body {
 .featured-split {
   display: grid;
   grid-template-columns: 2.5fr 1fr;
-  background: var(--md_surface_color);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 1.25rem;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
   margin-bottom: 3rem;
+  transition: all 0.3s ease;
+}
+
+.featured-split:hover {
+  border-color: rgba(201, 253, 211, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(201, 253, 211, 0.2) inset;
 }
 
 .featured-image {
@@ -43,7 +52,7 @@ body {
 }
 
 .featured-text {
-  background: var(--md_surface_color);
+  background: transparent;
   color: var(--text-primary);
   padding: 2rem;
   display: flex;
@@ -105,15 +114,20 @@ body {
 }
 
 .blog-card {
-  background: var(--card-bg);
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 0.75rem;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
 }
 
 .blog-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  border-color: rgba(201, 253, 211, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(201, 253, 211, 0.2) inset;
 }
 
 .card-banner {
