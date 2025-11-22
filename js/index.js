@@ -4,6 +4,13 @@ document.querySelector(".logo").addEventListener("click", function (e) {
 });
 
 function onUrlChange() {
+  const pathname = window.location.pathname;
+  if (pathname === '/keybox' || pathname === '/keybox/') {
+    window.history.replaceState(null, '', window.location.origin + window.location.pathname.replace(/\/keybox\/?$/, '') + '#keybox');
+    animateIframe("keybox.html#keybox");
+    return;
+  }
+
   const hash = window.location.hash;
   const downloadsRegex = /^#downloads(?:_(.+))?$/;
   const match = hash.match(downloadsRegex);
