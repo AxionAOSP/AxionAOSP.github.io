@@ -47,6 +47,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 function processDevices(devices) {
   return devices.map(device => {
     const brandName = getDeviceBrand(device.device_name);
+    const originalCodename = device.codename;
+    const lowerCodename = originalCodename.toLowerCase();
+    const localImageUrl = `img/devices/${originalCodename}.png`;
+    const localImageUrlLower = `img/devices/${lowerCodename}.png`;
+    const originalImageUrl = device.image_url || 'img/fallback.png';
     
     return {
       name: device.device_name,
@@ -55,7 +60,9 @@ function processDevices(devices) {
       maintainer: device.maintainer,
       github_username: device.github_username || device.maintainer.split(' ')[0],
       support_group: device.support_group || '',
-      image_url: device.image_url || 'img/fallback.png'
+      image_url: localImageUrl,
+      image_url_lower: localImageUrlLower,
+      original_image_url: originalImageUrl
     };
   });
 }
@@ -81,12 +88,16 @@ function createDeviceElements(devices) {
         ]);
         
         const imageUrl = device.image_url || 'img/fallback.png';
+        const imageUrlLower = device.image_url_lower || 'img/fallback.png';
+        const fallbackImageUrl = device.original_image_url || 'img/fallback.png';
 
         element.dataset.deviceName = device.name;
         element.dataset.codename = device.codename;
         element.dataset.maintainer = device.maintainer;
         element.dataset.githubUsername = device.github_username;
         element.dataset.imageUrl = imageUrl;
+        element.dataset.imageUrlLower = imageUrlLower;
+        element.dataset.fallbackImageUrl = fallbackImageUrl;
         element.dataset.supportGroup = device.support_group || '';
         element.dataset.gmsData = gms ? JSON.stringify(gms) : '';
         element.dataset.vanillaData = vanilla ? JSON.stringify(vanilla) : '';
@@ -106,7 +117,7 @@ function createDeviceElements(devices) {
                 class="device-thumb"
                 alt="${device.name}"
                 loading="lazy"
-                onerror="this.onerror=null; this.src='img/fallback.png';"
+                onerror="handleDeviceImageError(this, '${imageUrlLower}', '${fallbackImageUrl}')"
                 onload="handleWhiteBackground(this)"
               />
               ${latestVersion ? `
@@ -508,6 +519,68 @@ function initFilters() {
   });
 }
 
+function handleDeviceImageError(img, lowerCaseUrl, fallbackUrl) {
+  if (img.src.includes('img/fallback.png')) {
+    return;
+  }
+  
+  const blurDiv = img.closest('.device-image-wrapper')?.querySelector('.device-image-blur');
+  
+  if (img.src.includes('img/devices/')) {
+    if (lowerCaseUrl && lowerCaseUrl !== 'img/fallback.png' && img.src !== lowerCaseUrl) {
+      img.onerror = function() {
+        if (fallbackUrl && fallbackUrl !== 'img/fallback.png') {
+          this.onerror = function() {
+            this.onerror = null;
+            this.src = 'img/fallback.png';
+            if (blurDiv) {
+              blurDiv.style.backgroundImage = "url('img/fallback.png')";
+            }
+          };
+          this.src = fallbackUrl;
+          if (blurDiv) {
+            blurDiv.style.backgroundImage = `url('${fallbackUrl}')`;
+          }
+        } else {
+          this.onerror = null;
+          this.src = 'img/fallback.png';
+          if (blurDiv) {
+            blurDiv.style.backgroundImage = "url('img/fallback.png')";
+          }
+        }
+      };
+      img.src = lowerCaseUrl;
+      if (blurDiv) {
+        blurDiv.style.backgroundImage = `url('${lowerCaseUrl}')`;
+      }
+    } else if (fallbackUrl && fallbackUrl !== 'img/fallback.png') {
+      img.onerror = function() {
+        this.onerror = null;
+        this.src = 'img/fallback.png';
+        if (blurDiv) {
+          blurDiv.style.backgroundImage = "url('img/fallback.png')";
+        }
+      };
+      img.src = fallbackUrl;
+      if (blurDiv) {
+        blurDiv.style.backgroundImage = `url('${fallbackUrl}')`;
+      }
+    } else {
+      img.onerror = null;
+      img.src = 'img/fallback.png';
+      if (blurDiv) {
+        blurDiv.style.backgroundImage = "url('img/fallback.png')";
+      }
+    }
+  } else {
+    img.onerror = null;
+    img.src = 'img/fallback.png';
+    if (blurDiv) {
+      blurDiv.style.backgroundImage = "url('img/fallback.png')";
+    }
+  }
+}
+
 function handleWhiteBackground(img) {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
@@ -542,7 +615,7 @@ function handleWhiteBackground(img) {
     
     if (whitePixelCount >= 3) {
       img.setAttribute('data-white-bg', 'true');
-      img.style.backgroundColor = 'rgba(0, 0, 0, 0.2)';
+      img.style.backgroundColor = 'rgba(20, 20, 30, 0.3)';
       img.style.borderRadius = '8px';
       const wrapper = img.closest('.device-image-wrapper');
       if (wrapper) {
@@ -551,7 +624,7 @@ function handleWhiteBackground(img) {
     }
   } catch (error) {
     img.setAttribute('data-white-bg', 'true');
-    img.style.backgroundColor = 'rgba(0, 0, 0, 0.15)';
+    img.style.backgroundColor = 'rgba(20, 20, 30, 0.35)';
     img.style.borderRadius = '8px';
   }
 }
