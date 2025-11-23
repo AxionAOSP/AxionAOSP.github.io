@@ -943,6 +943,32 @@ h1 {
   }
 }
 
+/* Reduce animations on low-end devices */
+@media (prefers-reduced-motion: reduce) {
+  .device-card,
+  .filter-btn,
+  .build-card {
+    animation: none !important;
+    transition: opacity 0.2s ease !important;
+  }
+  
+  .device-card:hover {
+    transform: none !important;
+  }
+}
+
+/* Optimize for low-end devices */
+@media (max-width: 768px) {
+  .device-image-blur {
+    filter: blur(20px) brightness(1.1) saturate(1.2) !important;
+  }
+  
+  .device-card {
+    backdrop-filter: blur(10px) saturate(150%) !important;
+    -webkit-backdrop-filter: blur(10px) saturate(150%) !important;
+  }
+}
+
 @keyframes slideIn {
   from {
     opacity: 0;

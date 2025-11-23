@@ -30,9 +30,36 @@ function createMemberCard(member, avatarUrl) {
     return card;
 }
 
+// Performance: Cache fetch requests
+const avatarFetchCache = new Map();
+const AVATAR_CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
+
+async function cachedAvatarFetch(username) {
+    const cacheKey = `avatar_api_${username}`;
+    const cached = avatarFetchCache.get(cacheKey);
+    const now = Date.now();
+    
+    if (cached && (now - cached.timestamp) < AVATAR_CACHE_DURATION) {
+        return cached.data;
+    }
+    
+    try {
+        const res = await fetch(`https://api.github.com/users/${username}`, {
+            cache: 'default'
+        });
+        const data = await res.json();
+        avatarFetchCache.set(cacheKey, {
+            data: data,
+            timestamp: now
+        });
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
 function fetchAndCacheAvatar(member, membersRow) {
-    fetch(`https://api.github.com/users/${member.username}`)
-        .then(res => res.json())
+    cachedAvatarFetch(member.username)
         .then(data => {
             let avatarUrl = `https://github.com/${member.username}.png?size=120&default=identicon`;
 
@@ -83,17 +110,34 @@ Object.entries(groupedMembers).forEach(([position, groupMembers]) => {
     teamContainer.appendChild(groupDiv);
 });
 
+// Performance: Cache device maintainers fetch
+const deviceMaintainersCache = new Map();
+const MAINTAINERS_CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
+
 async function fetchDeviceMaintainers() {
     try {
-        const response = await fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json', {
-            cache: 'no-cache'
-        });
+        const cacheKey = 'device_maintainers';
+        const cached = deviceMaintainersCache.get(cacheKey);
+        const now = Date.now();
         
-        if (!response.ok) {
-            throw new Error(`Failed to fetch device info: ${response.status}`);
+        let data;
+        if (cached && (now - cached.timestamp) < MAINTAINERS_CACHE_DURATION) {
+            data = cached.data;
+        } else {
+            const response = await fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json', {
+                cache: 'default'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Failed to fetch device info: ${response.status}`);
+            }
+            
+            data = await response.json();
+            deviceMaintainersCache.set(cacheKey, {
+                data: data,
+                timestamp: now
+            });
         }
-        
-        const data = await response.json();
         const devices = data.devices || [];
         
         const maintainerMap = new Map();
@@ -159,8 +203,7 @@ function createMaintainerCard(maintainer, avatarUrl) {
 }
 
 function fetchAndCacheMaintainerAvatar(maintainer, membersRow) {
-    fetch(`https://api.github.com/users/${maintainer.username}`)
-        .then(res => res.json())
+    cachedAvatarFetch(maintainer.username)
         .then(data => {
             let avatarUrl = `https://github.com/${maintainer.username}.png?size=120&default=identicon`;
 

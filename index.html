@@ -6,13 +6,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AxionAOSP - Make your android better</title>
   <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+  
+  <!-- Cloudflare DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
+  <link rel="dns-prefetch" href="https://api.github.com">
+  
+  <!-- Preconnect for critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="css/main.css" as="style">
+  <link rel="preload" href="css/nav.css" as="style">
+  
+  <!-- Prefetch fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap" as="style">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Space+Grotesk" as="style">
+  
+  <!-- Stylesheets -->
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css?family=Space+Grotesk" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
   <link rel="stylesheet" href="css/main.css" />
+  
+  <!-- Defer non-critical scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js" defer></script>
 </head>
 
 <body>

@@ -5,10 +5,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AxionOS Blog</title>
+  
+  <!-- Cloudflare DNS Prefetch -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  
+  <!-- Preconnect for critical resources -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="css/theme.css" as="style">
+  <link rel="preload" href="css/blog.css" as="style">
+  
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/blog.css" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <script src="posts.js"></script>
+  <script src="posts.js" defer></script>
 </head>
 
 <body>

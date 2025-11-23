@@ -1,12 +1,62 @@
+// Performance optimizations: Cache management and request batching
+const fetchCache = new Map();
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+
+async function cachedFetch(url, options = {}) {
+  const cacheKey = `${url}_${JSON.stringify(options)}`;
+  const cached = fetchCache.get(cacheKey);
+  const now = Date.now();
+  
+  if (cached && (now - cached.timestamp) < CACHE_DURATION) {
+    return cached.response.clone();
+  }
+  
+  const response = await fetch(url, {
+    ...options,
+    cache: options.cache || 'default'
+  });
+  
+  if (response.ok) {
+    fetchCache.set(cacheKey, {
+      response: response.clone(),
+      timestamp: now
+    });
+  }
+  
+  return response;
+}
+
+// Intersection Observer for lazy loading images
+let imageObserver;
+function initImageObserver() {
+  if ('IntersectionObserver' in window) {
+    imageObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+            imageObserver.unobserve(img);
+          }
+        }
+      });
+    }, {
+      rootMargin: '50px'
+    });
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   const grid = document.querySelector('.downloads-grid');
   const loading = document.querySelector('.loading-state');
 
   try {
     loading.style.display = 'flex';
+    initImageObserver();
 
-    const deviceInfoRes = await fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json', {
-      cache: 'no-cache'
+    const deviceInfoRes = await cachedFetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json', {
+      cache: 'default'
     });
     
     if (!deviceInfoRes.ok) {
@@ -15,19 +65,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     const deviceData = await deviceInfoRes.json();
     const processedDevices = processDevices(deviceData.devices);
-    const deviceElements = await createDeviceElements(processedDevices);
     
-    grid.innerHTML = '';
-    const fragment = document.createDocumentFragment();
-    deviceElements.forEach(element => {
-      element.style.display = 'block';
-      fragment.appendChild(element);
-    });
-    grid.appendChild(fragment);
+    // Use requestIdleCallback for non-critical operations on supported browsers
+    const loadDevices = async () => {
+      const deviceElements = await createDeviceElements(processedDevices);
+      
+      grid.innerHTML = '';
+      const fragment = document.createDocumentFragment();
+      deviceElements.forEach(element => {
+        element.style.display = 'block';
+        fragment.appendChild(element);
+      });
+      grid.appendChild(fragment);
 
-    initFilters();
-    initSearch();
-    initModalLogic();
+      initFilters();
+      initSearch();
+      initModalLogic();
+      loading.style.display = 'none';
+    };
+    
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadDevices, { timeout: 2000 });
+    } else {
+      setTimeout(loadDevices, 0);
+    }
   } catch (error) {
     console.error('Error loading devices:', error);
     grid.innerHTML = `
@@ -39,7 +100,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         </p>
       </div>
     `;
-  } finally {
     loading.style.display = 'none';
   }
 });
@@ -117,6 +177,8 @@ function createDeviceElements(devices) {
                 class="device-thumb"
                 alt="${device.name}"
                 loading="lazy"
+                decoding="async"
+                fetchpriority="low"
                 onerror="handleDeviceImageError(this, '${imageUrlLower}', '${fallbackImageUrl}')"
                 onload="handleWhiteBackground(this)"
               />
@@ -160,7 +222,7 @@ function createDeviceElements(devices) {
 async function fetchFlavorData(codename, type) {
   try {
     const url = `https://raw.githubusercontent.com/AxionAOSP/official_devices/main/OTA/${type}/${codename}.json`;
-    const res = await fetch(url, { cache: 'no-cache' });
+    const res = await cachedFetch(url, { cache: 'default' });
     if (!res.ok) {
       return null;
     }
@@ -233,7 +295,7 @@ function renderBuildCard(type, build) {
 async function fetchDeviceChangelog(codename) {
   try {
     const url = `https://raw.githubusercontent.com/AxionAOSP/official_devices/main/OTA/CHANGELOG/${codename}.txt`;
-    const res = await fetch(url);
+    const res = await cachedFetch(url, { cache: 'default' });
     if (!res.ok) return null;
     return await res.text();
   } catch (error) {
