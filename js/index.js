@@ -28,6 +28,7 @@ function onUrlChange() {
 
   const routeMap = {
     "#about": "home.html#about",
+    "#team": "about.html#team",
     "#features": "home.html#features",
     "#community": "home.html#community",
     "#faq": "home.html#faq",

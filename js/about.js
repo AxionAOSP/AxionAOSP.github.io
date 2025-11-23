@@ -1,6 +1,6 @@
 const members = [
     { username: 'rmp22', group: 'Core', position: 'Project Founder/Developer' },
-    { username: 'Saikrishna1504', group: 'Management', position: 'Project Manager' },
+    { username: 'Saikrishna1504', group: 'Management', position: 'Project Manager/Core Member' },
     { username: 'manidweep', group: 'Management', position: 'Project Administrator' },
     { username: 'AlisterGrey666', group: 'Contributors', position: 'Designer' },
     { username: 'not-ayan', group: 'Contributors', position: 'Designer/Chat Bot Maintainer' },
@@ -82,3 +82,143 @@ Object.entries(groupedMembers).forEach(([position, groupMembers]) => {
     groupDiv.appendChild(membersRow);
     teamContainer.appendChild(groupDiv);
 });
+
+async function fetchDeviceMaintainers() {
+    try {
+        const response = await fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json', {
+            cache: 'no-cache'
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch device info: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const devices = data.devices || [];
+        
+        const maintainerMap = new Map();
+        
+        devices.forEach(device => {
+            if (device.github_username && device.maintainer) {
+                const username = device.github_username;
+                if (!maintainerMap.has(username)) {
+                    maintainerMap.set(username, {
+                        username: username,
+                        maintainer: device.maintainer,
+                        devices: []
+                    });
+                }
+                maintainerMap.get(username).devices.push(device.device_name || device.codename);
+            }
+        });
+        
+        const maintainers = Array.from(maintainerMap.values());
+        
+        if (maintainers.length > 0) {
+            const maintainersGroupDiv = document.createElement('div');
+            maintainersGroupDiv.classList.add('team-group');
+
+            const maintainersTitle = document.createElement('div');
+            maintainersTitle.classList.add('team-title');
+            maintainersTitle.textContent = 'Device Maintainers';
+            maintainersGroupDiv.appendChild(maintainersTitle);
+
+            const maintainersRow = document.createElement('div');
+            maintainersRow.classList.add('team-members');
+
+            maintainers.forEach(maintainer => {
+                const cachedAvatar = localStorage.getItem(`avatar_${maintainer.username}`);
+
+                if (cachedAvatar) {
+                    const card = createMaintainerCard(maintainer, cachedAvatar);
+                    maintainersRow.appendChild(card);
+                } else {
+                    fetchAndCacheMaintainerAvatar(maintainer, maintainersRow);
+                }
+            });
+
+            maintainersGroupDiv.appendChild(maintainersRow);
+            teamContainer.appendChild(maintainersGroupDiv);
+        }
+    } catch (error) {
+        console.error('Error fetching device maintainers:', error);
+    }
+}
+
+function createMaintainerCard(maintainer, avatarUrl) {
+    const card = document.createElement('div');
+    card.classList.add('member-card');
+    card.innerHTML = `
+<img src="${avatarUrl}" alt="${maintainer.username}'s avatar" class="avatar" />
+<div class="username">
+    <a href="https://github.com/${maintainer.username}" target="_blank" rel="noopener noreferrer">@${maintainer.username}</a>
+</div>
+<div class="position">${maintainer.maintainer}</div>
+`;
+    return card;
+}
+
+function fetchAndCacheMaintainerAvatar(maintainer, membersRow) {
+    fetch(`https://api.github.com/users/${maintainer.username}`)
+        .then(res => res.json())
+        .then(data => {
+            let avatarUrl = `https://github.com/${maintainer.username}.png?size=120&default=identicon`;
+
+            if (data.avatar_url && typeof data.avatar_url === 'string') {
+                avatarUrl = data.avatar_url;
+            }
+
+            const cached = localStorage.getItem(`avatar_${maintainer.username}`);
+            if (cached !== avatarUrl) {
+                localStorage.setItem(`avatar_${maintainer.username}`, avatarUrl);
+            }
+
+            const card = createMaintainerCard(maintainer, avatarUrl);
+            membersRow.appendChild(card);
+        })
+        .catch(err => {
+            console.warn(`Failed to fetch from API for ${maintainer.username}. Using identicon fallback.`, err);
+            const fallbackUrl = `https://github.com/${maintainer.username}.png?size=120&default=identicon`;
+            const card = createMaintainerCard(maintainer, fallbackUrl);
+            membersRow.appendChild(card);
+        });
+}
+
+fetchDeviceMaintainers();
+
+function scrollToTeam() {
+    if (window.location.hash === '#team') {
+        setTimeout(() => {
+            const teamHeader = document.getElementById('team-header');
+            if (teamHeader) {
+                const offset = 120;
+                const elementPosition = teamHeader.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - offset;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            } else {
+                const teamSection = document.getElementById('team');
+                if (teamSection) {
+                    const offset = 120;
+                    const elementPosition = teamSection.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }, 500);
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scrollToTeam);
+} else {
+    scrollToTeam();
+}
+window.addEventListener('hashchange', scrollToTeam);
