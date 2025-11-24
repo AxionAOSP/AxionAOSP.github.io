@@ -1,4 +1,3 @@
-// Performance optimizations: Cache management and request batching
 const fetchCache = new Map();
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
@@ -26,34 +25,12 @@ async function cachedFetch(url, options = {}) {
   return response;
 }
 
-// Intersection Observer for lazy loading images
-let imageObserver;
-function initImageObserver() {
-  if ('IntersectionObserver' in window) {
-    imageObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          if (img.dataset.src) {
-            img.src = img.dataset.src;
-            img.removeAttribute('data-src');
-            imageObserver.unobserve(img);
-          }
-        }
-      });
-    }, {
-      rootMargin: '50px'
-    });
-  }
-}
-
 document.addEventListener('DOMContentLoaded', async () => {
   const grid = document.querySelector('.downloads-grid');
   const loading = document.querySelector('.loading-state');
 
   try {
     loading.style.display = 'flex';
-    initImageObserver();
 
     const deviceInfoRes = await cachedFetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json', {
       cache: 'default'
@@ -113,6 +90,10 @@ function processDevices(devices) {
     const localImageUrlLower = `img/devices/${lowerCodename}.png`;
     const originalImageUrl = device.image_url || 'img/fallback.png';
     
+    const statusValue = device.status || 'Active';
+    const statusLower = String(statusValue).toLowerCase();
+    const isActive = statusLower === 'active';
+    
     return {
       name: device.device_name,
       codename: device.codename,
@@ -122,7 +103,8 @@ function processDevices(devices) {
       support_group: device.support_group || '',
       image_url: localImageUrl,
       image_url_lower: localImageUrlLower,
-      original_image_url: originalImageUrl
+      original_image_url: originalImageUrl,
+      status: isActive ? 'active' : 'inactive'
     };
   });
 }
@@ -159,8 +141,13 @@ function createDeviceElements(devices) {
         element.dataset.imageUrlLower = imageUrlLower;
         element.dataset.fallbackImageUrl = fallbackImageUrl;
         element.dataset.supportGroup = device.support_group || '';
+        element.dataset.status = device.status || 'active';
         element.dataset.gmsData = gms ? JSON.stringify(gms) : '';
         element.dataset.vanillaData = vanilla ? JSON.stringify(vanilla) : '';
+        
+        if (device.status === 'inactive') {
+          element.classList.add('device-inactive');
+        }
 
         const maintainerUsername = device.github_username;
         const maintainerAvatar = `https://github.com/${maintainerUsername}.png?size=40`;
@@ -189,7 +176,13 @@ function createDeviceElements(devices) {
               ` : ''}
             </div>
             <div class="device-info">
-              <div class="device-name">${device.name}</div>
+              <div class="device-name-wrapper">
+                <div class="device-name">${device.name}</div>
+                <div class="device-status-badge ${device.status === 'inactive' ? 'status-inactive' : 'status-active'}">
+                  <i class="fas ${device.status === 'inactive' ? 'fa-pause-circle' : 'fa-check-circle'}"></i>
+                  <span>${device.status === 'inactive' ? 'Inactive' : 'Active'}</span>
+                </div>
+              </div>
               <div class="device-codename">${device.codename}</div>
               <a href="${maintainerGithub}" target="_blank" rel="noopener noreferrer" class="maintainer-info">
                 <img src="${maintainerAvatar}" alt="${device.maintainer}" class="maintainer-avatar" onerror="this.src='img/fallback.png';" />

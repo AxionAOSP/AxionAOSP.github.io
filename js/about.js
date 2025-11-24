@@ -143,7 +143,11 @@ async function fetchDeviceMaintainers() {
         const maintainerMap = new Map();
         
         devices.forEach(device => {
-            if (device.github_username && device.maintainer) {
+            const statusValue = device.status || 'Active';
+            const statusLower = String(statusValue).toLowerCase();
+            const isActive = statusLower === 'active';
+            
+            if (device.github_username && device.maintainer && isActive) {
                 const username = device.github_username;
                 if (!maintainerMap.has(username)) {
                     maintainerMap.set(username, {
@@ -164,7 +168,7 @@ async function fetchDeviceMaintainers() {
 
             const maintainersTitle = document.createElement('div');
             maintainersTitle.classList.add('team-title');
-            maintainersTitle.textContent = 'Device Maintainers';
+            maintainersTitle.textContent = 'Active Device Maintainers';
             maintainersGroupDiv.appendChild(maintainersTitle);
 
             const maintainersRow = document.createElement('div');
