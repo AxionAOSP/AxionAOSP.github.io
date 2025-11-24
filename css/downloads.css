@@ -35,6 +35,7 @@ body {
 .container {
   max-width: 1200px;
   margin: 0 auto;
+  overflow: visible;
 }
 
 h1 {
@@ -54,14 +55,19 @@ h1 {
   display: flex;
   flex-wrap: nowrap;
   gap: 0.75rem;
-  padding: 0 1rem 8px;
+  padding: 0.5rem 1rem 8px;
+  margin-top: 0;
   margin-bottom: 2rem;
   overflow-x: auto;
+  overflow-y: visible;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   justify-content: center;
   will-change: scroll-position;
   transform: translateZ(0);
+  position: relative;
+  z-index: 2;
+  align-items: flex-start;
 }
 
 .brand-filters::-webkit-scrollbar {
@@ -91,6 +97,8 @@ h1 {
   min-height: 2.5rem;
   vertical-align: middle;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .filter-btn:hover {
@@ -535,6 +543,7 @@ h1 {
 
   .search-container {
     margin: 1rem 0;
+    margin-bottom: 2rem;
   }
 
   .search-wrapper {
@@ -544,7 +553,8 @@ h1 {
 
   .brand-filters {
     gap: 0.5rem;
-    padding: 0 0.5rem 8px;
+    padding: 0.5rem 0.5rem 8px;
+    margin-top: 0;
     margin-bottom: 1.25rem;
     justify-content: flex-start;
   }
@@ -748,7 +758,8 @@ h1 {
 
   .brand-filters {
     gap: 0.6rem;
-    padding: 0 1rem 8px;
+    padding: 0.5rem 1rem 8px;
+    margin-top: 0;
     margin-bottom: 1.75rem;
   }
 
@@ -824,7 +835,8 @@ h1 {
 
   .brand-filters {
     gap: 0.7rem;
-    padding: 0 1.5rem 8px;
+    padding: 0.5rem 1.5rem 8px;
+    margin-top: 0;
     margin-bottom: 2rem;
   }
 
@@ -1054,7 +1066,14 @@ h1 {
 
 @media (max-width: 768px) {
   .modal-overlay.active {
-    padding-top: 20px; /* Less padding on mobile */
+    padding-top: 80px; /* Account for navigation bar on mobile */
+    align-items: flex-start;
+    padding-bottom: 20px;
+  }
+  
+  .modal-content {
+    margin-top: 0;
+    max-height: calc(100vh - 100px);
   }
 }
 
@@ -1540,8 +1559,11 @@ h1 {
 .search-container {
   display: flex;
   justify-content: center;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
+  margin-bottom: 1rem;
   padding: 0 1rem;
+  position: relative;
+  z-index: 1;
 }
 
 .search-wrapper {
@@ -1550,10 +1572,10 @@ h1 {
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1.125rem;
   border-radius: 16px;
   width: 100%;
-  max-width: 500px;
+  max-width: 450px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   transition: all 0.3s ease;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(201, 253, 211, 0.1) inset;
