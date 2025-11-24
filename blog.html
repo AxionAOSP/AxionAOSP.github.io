@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/blog.css" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <script src="posts.js" defer></script>
+  <script src="posts.js"></script>
 </head>
 
 <body>
@@ -39,12 +39,15 @@
   </main>
 
   <script>
-    const featuredContainer = document.getElementById('featured-post');
-    const olderContainer = document.getElementById('older-posts');
+    function renderBlogPosts() {
+      const featuredContainer = document.getElementById('featured-post');
+      const olderContainer = document.getElementById('older-posts');
 
-    if (!window.posts || !window.posts.length) {
-      featuredContainer.innerHTML = '<p>No blog posts found.</p>';
-    } else {
+      if (!window.posts || !window.posts.length) {
+        featuredContainer.innerHTML = '<p>No blog posts found.</p>';
+        return;
+      }
+
       const sorted = [...window.posts].sort((a, b) => new Date(b.date) - new Date(a.date));
       const [latest, ...older] = sorted;
 
@@ -111,7 +114,22 @@
 
       olderContainer.appendChild(article);
     });
+    }
 
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderBlogPosts);
+    } else {
+      if (window.posts) {
+        renderBlogPosts();
+      } else {
+        const checkPosts = setInterval(() => {
+          if (window.posts) {
+            clearInterval(checkPosts);
+            renderBlogPosts();
+          }
+        }, 50);
+        setTimeout(() => clearInterval(checkPosts), 5000);
+      }
     }
   </script>
 

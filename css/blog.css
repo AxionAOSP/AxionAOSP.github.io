@@ -2,7 +2,6 @@ body {
   background: var(--md_body_background);
   color: var(--text-primary);
   margin: 0;
-  margin-top: var(--navbar_height);
   padding: 0;
 }
 
@@ -148,15 +147,11 @@ body {
   margin-bottom: 0.25rem;
 }
 
-.post-title a {
+.post-title {
   color: var(--text-primary);
   font-size: 1.1rem;
   font-weight: 600;
-  text-decoration: none;
-}
-
-.post-title a:hover {
-  text-decoration: underline;
+  margin: 0.5rem 0;
 }
 
 .post-meta {
