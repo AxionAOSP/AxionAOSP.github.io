@@ -15,6 +15,13 @@
     display: block;
   }
 
+  .nav-links.mobile-open {
+    right: 0;
+    left: auto;
+    min-width: 220px;
+    max-width: calc(100vw - 40px);
+  }
+
   .header-inner {
     flex-direction: column;
     text-align: center;
@@ -50,11 +57,6 @@
 
   .header-game img {
     max-width: 100%;
-  }
-
-  .nav-links {
-    background: rgba(49, 49, 49, 1) !important;
-    padding-right: 32px !important;
   }
 
   .brand-filters {
