@@ -30,6 +30,11 @@
 .header h1 {
     font-size: 4rem;
     margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.header h1 .adj_container {
+    color: var(--md_accent_color) !important;
 }
 
 .header p {
@@ -193,11 +198,15 @@ section h2::after {
     vertical-align: bottom;
     width: fit-content;
     white-space: nowrap;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .adj_list {
     display: block;
     animation: roll 16s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .adj_list span {
@@ -205,7 +214,12 @@ section h2::after {
     height: 1.18em;
     line-height: 1.18em;
     text-align: center;
-    color: var(--md_accent_color);
+    color: var(--md_accent_color) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    -webkit-text-fill-color: var(--md_accent_color) !important;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 .header-start {
