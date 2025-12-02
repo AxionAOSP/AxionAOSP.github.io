@@ -86,8 +86,8 @@ function processDevices(devices) {
     const brandName = getDeviceBrand(device.device_name);
     const originalCodename = device.codename;
     const lowerCodename = originalCodename.toLowerCase();
-    const localImageUrl = `img/devices/${originalCodename}.png`;
-    const localImageUrlLower = `img/devices/${lowerCodename}.png`;
+    const localImageUrl = `img/devices/${originalCodename}.webp`;
+    const localImageUrlLower = `img/devices/${lowerCodename}.webp`;
     const originalImageUrl = device.image_url || 'img/fallback.png';
     
     const statusValue = device.status || 'Active';
