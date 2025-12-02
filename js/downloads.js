@@ -693,6 +693,7 @@ function getDeviceBrand(deviceName) {
     xiaomi: /Xiaomi|Redmi|Mi/i,
     tecno: /TECNO/i,
     motorola: /Motorola|Moto/i,
+    nothing: /Nothing|CMF/i,
     oneplus: /Oneplus|OnePlus/i,
   };
 
