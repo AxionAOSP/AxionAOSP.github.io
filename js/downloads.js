@@ -82,12 +82,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 function processDevices(devices) {
+  const GITHUB_IMAGE_BASE = 'https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/OTA/Banners/devices';
+  
   return devices.map(device => {
     const brandName = getDeviceBrand(device.device_name);
     const originalCodename = device.codename;
     const lowerCodename = originalCodename.toLowerCase();
-    const localImageUrl = `img/devices/${originalCodename}.webp`;
-    const localImageUrlLower = `img/devices/${lowerCodename}.webp`;
+    const localImageUrl = `${GITHUB_IMAGE_BASE}/${originalCodename}.webp`;
+    const localImageUrlLower = `${GITHUB_IMAGE_BASE}/${lowerCodename}.webp`;
     const originalImageUrl = device.image_url || 'img/fallback.png';
     
     const statusValue = device.status || 'Active';
@@ -580,8 +582,9 @@ function handleDeviceImageError(img, lowerCaseUrl, fallbackUrl) {
   }
   
   const blurDiv = img.closest('.device-image-wrapper')?.querySelector('.device-image-blur');
+  const githubImageBase = 'https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/OTA/Banners/devices';
   
-  if (img.src.includes('img/devices/')) {
+  if (img.src.includes(githubImageBase) || img.src.includes('img/devices/')) {
     if (lowerCaseUrl && lowerCaseUrl !== 'img/fallback.png' && img.src !== lowerCaseUrl) {
       img.onerror = function() {
         if (fallbackUrl && fallbackUrl !== 'img/fallback.png') {
