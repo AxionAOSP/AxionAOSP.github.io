@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   const changelogList = document.getElementById('changelog-list');
-  const rawUrl = 'https://raw.githubusercontent.com/AxionAOSP/axion_changelogs/refs/heads/lineage-22.1/README.md';
+  const rawUrl = 'https://raw.githubusercontent.com/AxionAOSP/axion_changelogs/refs/heads/lineage-23.1/README.md';
 
   const renderer = new marked.Renderer();
 
