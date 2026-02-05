@@ -698,6 +698,7 @@ function getDeviceBrand(deviceName) {
     motorola: /Motorola|Moto/i,
     nothing: /Nothing|CMF/i,
     oneplus: /Oneplus|OnePlus/i,
+    itel: /Itel|itel/i,
   };
 
   const brand = Object.entries(brands).find(([_, regex]) =>
