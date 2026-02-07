@@ -90,7 +90,7 @@ function processDevices(devices) {
     const lowerCodename = originalCodename.toLowerCase();
     const localImageUrl = `${GITHUB_IMAGE_BASE}/${originalCodename}.webp`;
     const localImageUrlLower = `${GITHUB_IMAGE_BASE}/${lowerCodename}.webp`;
-    const originalImageUrl = device.image_url || 'img/fallback.png';
+    const originalImageUrl = device.image_url || 'img/fallback.webp';
     
     const statusValue = device.status || 'Active';
     const statusLower = String(statusValue).toLowerCase();
@@ -131,9 +131,9 @@ function createDeviceElements(devices) {
           fetchFlavorData(device.codename, 'VANILLA'),
         ]);
         
-        const imageUrl = device.image_url || 'img/fallback.png';
-        const imageUrlLower = device.image_url_lower || 'img/fallback.png';
-        const fallbackImageUrl = device.original_image_url || 'img/fallback.png';
+        const imageUrl = device.image_url || 'img/fallback.webp';
+        const imageUrlLower = device.image_url_lower || 'img/fallback.webp';
+        const fallbackImageUrl = device.original_image_url || 'img/fallback.webp';
 
         element.dataset.deviceName = device.name;
         element.dataset.codename = device.codename;
@@ -187,7 +187,7 @@ function createDeviceElements(devices) {
               </div>
               <div class="device-codename">${device.codename}</div>
               <a href="${maintainerGithub}" target="_blank" rel="noopener noreferrer" class="maintainer-info">
-                <img src="${maintainerAvatar}" alt="${device.maintainer}" class="maintainer-avatar" onerror="this.src='img/fallback.png';" />
+                <img src="${maintainerAvatar}" alt="${device.maintainer}" class="maintainer-avatar" onerror="this.src='img/fallback.webp';" />
                 <div class="maintainer-text">
                   <span class="maintainer-label">Maintained by</span>
                   <span class="maintainer-name">${device.maintainer}</span>
@@ -343,7 +343,7 @@ function initModalLogic() {
           <p class="device-modal-codename">${codename}</p>
           <div class="device-maintainer-card">
             <a href="${maintainerGithub}" target="_blank" rel="noopener noreferrer" class="maintainer-link">
-              <img src="${maintainerAvatar}" alt="${maintainer}" class="maintainer-modal-avatar" onerror="this.src='img/fallback.png';" />
+              <img src="${maintainerAvatar}" alt="${maintainer}" class="maintainer-modal-avatar" onerror="this.src='img/fallback.webp';" />
               <div class="maintainer-modal-info">
                 <p class="maintainer-modal-label">Maintained by</p>
                 <p class="maintainer-modal-name">${maintainer}</p>
@@ -493,9 +493,10 @@ function doSearch() {
   requestAnimationFrame(() => {
     deviceCards.forEach(card => {
       const name = card.querySelector('.device-name')?.textContent.toLowerCase() || '';
+      const codename = card.querySelector('.device-codename')?.textContent.toLowerCase() || card.dataset.codename?.toLowerCase() || '';
       const maintainer = card.querySelector('.maintainer')?.textContent.toLowerCase() || '';
 
-      const matchesSearch = query === '' || name.includes(query) || maintainer.includes(query);
+      const matchesSearch = query === '' || name.includes(query) || codename.includes(query) || maintainer.includes(query);
       const matchesFilter = !activeFilter || activeFilter === 'all' || card.dataset.brand === activeFilter;
 
       card.style.display = (matchesSearch && matchesFilter) ? 'block' : 'none';
@@ -577,7 +578,7 @@ function initFilters() {
 }
 
 function handleDeviceImageError(img, lowerCaseUrl, fallbackUrl) {
-  if (img.src.includes('img/fallback.png')) {
+  if (img.src.includes('img/fallback.webp')) {
     return;
   }
   
@@ -585,14 +586,14 @@ function handleDeviceImageError(img, lowerCaseUrl, fallbackUrl) {
   const githubImageBase = 'https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/OTA/Banners/devices';
   
   if (img.src.includes(githubImageBase) || img.src.includes('img/devices/')) {
-    if (lowerCaseUrl && lowerCaseUrl !== 'img/fallback.png' && img.src !== lowerCaseUrl) {
+    if (lowerCaseUrl && lowerCaseUrl !== 'img/fallback.webp' && img.src !== lowerCaseUrl) {
       img.onerror = function() {
-        if (fallbackUrl && fallbackUrl !== 'img/fallback.png') {
+        if (fallbackUrl && fallbackUrl !== 'img/fallback.webp') {
           this.onerror = function() {
             this.onerror = null;
-            this.src = 'img/fallback.png';
+            this.src = 'img/fallback.webp';
             if (blurDiv) {
-              blurDiv.style.backgroundImage = "url('img/fallback.png')";
+              blurDiv.style.backgroundImage = "url('img/fallback.webp')";
             }
           };
           this.src = fallbackUrl;
@@ -601,9 +602,9 @@ function handleDeviceImageError(img, lowerCaseUrl, fallbackUrl) {
           }
         } else {
           this.onerror = null;
-          this.src = 'img/fallback.png';
+          this.src = 'img/fallback.webp';
           if (blurDiv) {
-            blurDiv.style.backgroundImage = "url('img/fallback.png')";
+            blurDiv.style.backgroundImage = "url('img/fallback.webp')";
           }
         }
       };
@@ -611,12 +612,12 @@ function handleDeviceImageError(img, lowerCaseUrl, fallbackUrl) {
       if (blurDiv) {
         blurDiv.style.backgroundImage = `url('${lowerCaseUrl}')`;
       }
-    } else if (fallbackUrl && fallbackUrl !== 'img/fallback.png') {
+    } else if (fallbackUrl && fallbackUrl !== 'img/fallback.webp') {
       img.onerror = function() {
         this.onerror = null;
-        this.src = 'img/fallback.png';
+        this.src = 'img/fallback.webp';
         if (blurDiv) {
-          blurDiv.style.backgroundImage = "url('img/fallback.png')";
+          blurDiv.style.backgroundImage = "url('img/fallback.webp')";
         }
       };
       img.src = fallbackUrl;
@@ -625,16 +626,16 @@ function handleDeviceImageError(img, lowerCaseUrl, fallbackUrl) {
       }
     } else {
       img.onerror = null;
-      img.src = 'img/fallback.png';
+      img.src = 'img/fallback.webp';
       if (blurDiv) {
-        blurDiv.style.backgroundImage = "url('img/fallback.png')";
+        blurDiv.style.backgroundImage = "url('img/fallback.webp')";
       }
     }
   } else {
     img.onerror = null;
-    img.src = 'img/fallback.png';
+    img.src = 'img/fallback.webp';
     if (blurDiv) {
-      blurDiv.style.backgroundImage = "url('img/fallback.png')";
+      blurDiv.style.backgroundImage = "url('img/fallback.webp')";
     }
   }
 }
