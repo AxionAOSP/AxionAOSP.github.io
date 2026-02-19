@@ -287,6 +287,94 @@ function renderBuildCard(type, build) {
   `;
 }
 
+async function fetchDeviceGuide(codename) {
+  try {
+    const url = `https://raw.githubusercontent.com/AxionAOSP/official_devices/main/Wiki/${codename}.md`;
+    const res = await cachedFetch(url, { cache: 'default' });
+    if (!res.ok) return null;
+    return await res.text();
+  } catch (error) {
+    console.error(`Error fetching flashing guide for ${codename}:`, error);
+    return null;
+  }
+}
+
+function markdownToHtml(markdown) {
+  if (!markdown) return '';
+  
+  // Use marked library if available, otherwise fallback to simple conversion
+  if (typeof marked !== 'undefined') {
+    marked.setOptions({
+      breaks: true,
+      gfm: true
+    });
+    return marked.parse(markdown);
+  }
+  
+  // Simple fallback markdown parser
+  let html = markdown;
+  
+  // Headers
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  
+  // Bold
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  
+  // Italic
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  
+  // Links
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  
+  // Blockquotes (for warnings/notes)
+  html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+  
+  // Lists
+  const lines = html.split('\n');
+  const result = [];
+  let inList = false;
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.match(/^[-*] /)) {
+      if (!inList) {
+        result.push('<ul>');
+        inList = true;
+      }
+      const item = trimmed.substring(2);
+      result.push(`<li>${item}</li>`);
+    } else {
+      if (inList) {
+        result.push('</ul>');
+        inList = false;
+      }
+      result.push(line);
+    }
+  }
+  if (inList) {
+    result.push('</ul>');
+  }
+  
+  html = result.join('\n');
+  
+  // Paragraphs
+  const paragraphs = html.split('\n\n');
+  const processed = [];
+  for (const para of paragraphs) {
+    const trimmed = para.trim();
+    if (!trimmed) continue;
+    if (trimmed.startsWith('<')) {
+      processed.push(trimmed);
+    } else {
+      processed.push(`<p>${trimmed}</p>`);
+    }
+  }
+  
+  return processed.join('\n\n');
+}
+
 async function fetchDeviceChangelog(codename) {
   try {
     const url = `https://raw.githubusercontent.com/AxionAOSP/official_devices/main/OTA/CHANGELOG/${codename}.txt`;
@@ -326,7 +414,10 @@ function initModalLogic() {
       return;
     }
 
-    const changelog = await fetchDeviceChangelog(codename);
+    const [changelog, flashingGuide] = await Promise.all([
+      fetchDeviceChangelog(codename),
+      fetchDeviceGuide(codename)
+    ]);
     const maintainerAvatar = `https://github.com/${githubUsername}.png?size=56`;
     const maintainerGithub = `https://github.com/${githubUsername}`;
 
@@ -390,6 +481,18 @@ function initModalLogic() {
           </div>
         ` : ''}
 
+        ${flashingGuide ? `
+          <div class="changelog-section">
+            <button class="changelog-toggle">
+              <i class="fas fa-book"></i> Flashing Guide
+              <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="changelog-content">
+              <div class="flashing-guide-html">${markdownToHtml(flashingGuide)}</div>
+            </div>
+          </div>
+        ` : ''}
+
         ${supportGroup ? `
           <a href="${supportGroup}" target="_blank" rel="noopener noreferrer" class="support-group-btn">
             <i class="fas fa-users"></i> Support Group
@@ -411,17 +514,21 @@ function initModalLogic() {
       });
     });
 
-    const changelogToggle = modalBody.querySelector('.changelog-toggle');
-    const changelogContent = modalBody.querySelector('.changelog-content');
-    if (changelogToggle && changelogContent) {
-      changelogToggle.addEventListener('click', () => {
-        changelogContent.classList.toggle('active');
-        const chevron = changelogToggle.querySelector('.fa-chevron-down');
-        if (chevron) {
-          chevron.classList.toggle('rotated');
+    // Handle all changelog/flashing guide toggles
+    const allChangelogToggles = modalBody.querySelectorAll('.changelog-toggle');
+    allChangelogToggles.forEach(toggle => {
+      toggle.addEventListener('click', () => {
+        const section = toggle.closest('.changelog-section');
+        const content = section?.querySelector('.changelog-content');
+        if (content) {
+          content.classList.toggle('active');
+          const chevron = toggle.querySelector('.fa-chevron-down');
+          if (chevron) {
+            chevron.classList.toggle('rotated');
+          }
         }
       });
-    }
+    });
 
     modalBody.querySelectorAll('.copy-md5-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
