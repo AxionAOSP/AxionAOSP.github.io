@@ -2,10 +2,9 @@ const members = [
     { username: 'rmp22', group: 'Core', position: 'Project Founder/Developer' },
     { username: 'Saikrishna1504', group: 'Management', position: 'Project Manager/Core Member' },
     { username: 'manidweep', group: 'Management', position: 'Project Administrator' },
-    { username: 'AlisterGrey', group: 'Contributors', position: 'Designer' },
-    { username: 'alecxtra', group: 'Contributors', position: 'Designer' },
+    { username: 'AlisterGrey', group: 'Contributors', position: 'Lead Designer' },
     { username: 'not-ayan', group: 'Contributors', position: 'Axion Bot Maintainer' },
-    { username: 'Rve27', group: 'Contributors', position: 'Code Contributor' }
+    { username: 'Rve27', group: 'Contributors', position: 'Supportive Contributor' }
 ];
 
 const teamContainer = document.getElementById('team');
