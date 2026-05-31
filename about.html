@@ -1,69 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AxionAOSP - About Us</title>
-  
-  <!-- Cloudflare DNS Prefetch -->
-  <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
-  <link rel="dns-prefetch" href="https://api.github.com">
-  <link rel="dns-prefetch" href="https://github.com">
-  
-  <!-- Preconnect for critical resources -->
-  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
-  <link rel="preconnect" href="https://api.github.com" crossorigin>
-  <link rel="preconnect" href="https://github.com" crossorigin>
-  
-  <!-- Preload critical CSS -->
-  <link rel="preload" href="css/main.css" as="style">
-  <link rel="preload" href="css/about.css" as="style">
-  
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="css/about.css" />
+  <meta charset="UTF-8">
+  <title>About Axion OS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="css/new_home.css" />
+  <style>
+    /* Prevent iframe body from pushing content down due to nav space */
+    
+  </style>
 </head>
-
 <body>
-  <div class="header-section">
-    <h1>The idea behind the <span class="highlight">Axion.</span></h1>
+  <div class="fixed inset-0 z-[0] overflow-hidden bg-[#050505] pointer-events-none">
+    <div class="ambient-orb absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[#1e3a8a] opacity-20 blur-[120px] mix-blend-screen"></div>
+    <div class="ambient-orb absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#0891b2] opacity-10 blur-[150px] mix-blend-screen"></div>
+    <div class="ambient-orb absolute top-[30%] left-[40%] w-[35vw] h-[35vw] rounded-full bg-[#4c1d95] opacity-10 blur-[130px] mix-blend-screen"></div>
   </div>
 
-    <div class="goal-section">
-      <p>
-        <i class="highlight">AxionOS</i> is made to deliver a clean, smooth, and reliable Android experience.
-        It is a <i class="highlight">minimalist ROM</i>, not a feature-focused one.
-        We prefer to do fewer things and do them well.
-        Every change has a clear purpose.
-      </p>
-
-      <p>
-        AxionOS exists to challenge the idea that custom ROMs are just a copy of one another.
-        This project is also a personal research effort by <i class="highlight">rmp22</i> to learn more about Android system development.
-        We avoid taking aka cherry-picking major features from other ROMs to challenge ourselves,
-        and to respect the creativity and hard work of the projects that originally made them.
-        Instead, we study how OEMs like Motorola, Pixel, Samsung, and others build their software.
-        We <i class="highlight">reverse-engineer</i> how features behave and re-implement them using our own code.
-        No OEM source code is copied or reused to avoid copyright, and everything is designed to fit cleanly into
-        <i class="highlight">AOSP</i>.
-      </p>
-
-      <p>
-        AxionOS is minimalist by default, but flexible by design.
-        Some parts of the system, such as the <i class="highlight">theme engine</i>, are built in a modular way
-        for users who enjoy customization.
-        At the same time, users who prefer simplicity can use AxionOS as-is, without extra clutter.
-        Our focus is on balance, polish, and long-term stability.
+  <section class="relative z-10 pt-16 pb-32 px-6 md:px-12 max-w-6xl mx-auto min-h-screen">
+    
+    <div class="reveal-fade text-center mb-16">
+      <h1 class="text-5xl md:text-7xl font-nothing text-frost-white mb-6">The idea behind Axion.</h1>
+      <p class="text-xl text-whisper-gray max-w-2xl mx-auto font-sans">
+        A minimalist ROM. Fewer things, done exceptionally well.
       </p>
     </div>
 
-  <div class="section" id="team-header">
-    <h1>Meet the <span class="highlight">Team.</span></h1>
-  </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(280px,_auto)]">
+      
+      <div class="bento-box md:col-span-2 bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 rounded-[32px] p-10 flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-br from-electric-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        <h3 class="font-nothing text-3xl md:text-4xl text-white mb-4 relative z-10">Purpose Built.</h3>
+        <p class="text-white/70 font-sans leading-relaxed text-lg relative z-10 max-w-2xl">
+          AxionOS exists to challenge the idea that custom ROMs are just a copy of one another. We deliberately avoid cherry-picking major features from other projects to respect their original creators, and to push our own personal research and development boundaries.
+        </p>
+      </div>
 
-  <div class="team-section" id="team"></div>
+      <div class="bento-box bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 rounded-[32px] p-10 flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-bl from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center mb-6 relative z-10">
+          <div class="w-2 h-2 bg-white rounded-full"></div>
+        </div>
+        <h3 class="font-nothing text-2xl text-white mb-3 relative z-10">Clean & Smooth.</h3>
+        <p class="text-white/70 font-sans leading-relaxed text-sm md:text-base relative z-10">
+          Not a feature-focused ROM. Every change merged into our source code has a clear, definitive purpose to enhance daily reliability.
+        </p>
+      </div>
+
+      <div class="bento-box bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 rounded-[32px] p-10 flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        <h3 class="font-nothing text-2xl text-white mb-3 relative z-10">Engineered from scratch.</h3>
+        <p class="text-white/70 font-sans leading-relaxed text-sm md:text-base relative z-10">
+          We study how OEMs like Motorola, Pixel, and Samsung build their software, reverse-engineer the logic, and re-implement the features entirely using our own code to fit cleanly into AOSP. No OEM source code is copied.
+        </p>
+      </div>
+
+      <div class="bento-box md:col-span-2 bg-[#0a0a0a]/80 backdrop-blur-md border border-white/10 rounded-[32px] p-10 flex flex-col justify-center relative overflow-hidden group shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-tl from-zinc-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+        <div class="flex flex-col md:flex-row gap-8 md:gap-16 relative z-10 h-full items-start md:items-center">
+          <div class="flex-1">
+            <h3 class="font-nothing text-3xl text-white mb-4">Modular Customization.</h3>
+            <p class="text-white/70 font-sans leading-relaxed text-base">
+              Minimalist by default, but flexible by design. Core components, like the theme engine, are built modularly. Customize deeply if you want to, or use it as-is without any extra clutter.
+            </p>
+          </div>
+          <div class="flex-1 border-l border-white/10 pl-0 md:pl-8 pt-8 md:pt-0 border-t md:border-t-0 mt-8 md:mt-0 w-full">
+            <h3 class="font-nothing text-xl text-white mb-2">The Ultimate Goal</h3>
+            <p class="text-white/50 font-mono text-sm tracking-wide leading-relaxed">
+              Achieve perfect balance.<br>
+              Refine the polish.<br>
+              Guarantee long-term stability.<br>
+              <span class="text-white mt-4 block">Led by @rmp22.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+<footer class="relative z-10 border-t border-faded-steel py-16 px-6 md:px-12 bg-[#050505]">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12 md:gap-0">
+      <div class="flex flex-col items-start">
+        <div class="font-nothing text-2xl mb-2 text-white">AXION OS.</div>
+        <div class="text-white/40 text-sm font-mono uppercase tracking-widest">
+          Modern Android, thoughtfully engineered.
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:flex gap-x-12 gap-y-6 md:gap-12 w-full md:w-auto">
+        <div class="flex flex-col gap-3">
+          <h4 class="text-white/80 font-mono text-xs uppercase tracking-widest mb-1">Project</h4>
+          <a href="about.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'about.html'}})" class="text-frost-white hover:text-whisper-gray transition-colors font-sans">About Us</a>
+          <a href="team.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'team.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Meet the Team</a>
+          <a href="blog.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'blog.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Blog & News</a>
+          <a href="screenshots.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'screenshots.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Screenshots</a>
+
+        </div>
+        <div class="flex flex-col gap-3">
+          <h4 class="text-white/80 font-mono text-xs uppercase tracking-widest mb-1">Resources</h4>
+          <a href="download.html#downloads" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'download.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Downloads</a>
+          <a href="#" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Changelog</a>
+          <a href="#" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/about.js"></script>
 </body>
-<script src="js/about.js"></script>
-
 </html>

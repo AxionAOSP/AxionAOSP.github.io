@@ -1,53 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AxionAOSP - Downloads</title>
     
-    <!-- Cloudflare DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://raw.githubusercontent.com">
-    <link rel="dns-prefetch" href="https://api.github.com">
-    
-    <!-- Preconnect for critical resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin>
-    
-    <!-- Preload critical CSS -->
-    <link rel="preload" href="css/main.css" as="style">
-    <link rel="preload" href="css/downloads.css" as="style">
-    
-    <!-- Stylesheets -->
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Space+Grotesk" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'deep-midnight': '#0c0c0b',
+              'faded-steel': '#1f2228',
+              'frost-white': '#ffffff',
+              'whisper-gray': '#474747',
+            },
+            fontFamily: {
+              'nothing': ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+              'sans': ['"DM Sans"', 'sans-serif'],
+              'mono': ['"Geist Mono"', 'monospace'],
+            }
+          }
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="css/new_home.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/downloads.css" />
+    <style>
+        body { background-color: #0c0c0b; color: white; }
+        h1 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+        .cdn-access-card, .device-card { background: #0a0a0a !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 24px !important; }
+        .highlight { color: #ffffff !important; }
+    </style>
 </head>
 
 <body>
-    <section id="downloads">
-        <div class="container">
-            <h1>
+    <div class="fixed inset-0 z-[0] overflow-hidden bg-[#050505] pointer-events-none">
+      <div class="ambient-orb absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[#1e3a8a] opacity-10 blur-[120px] mix-blend-screen"></div>
+      <div class="ambient-orb absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#4c1d95] opacity-5 blur-[150px] mix-blend-screen"></div>
+    </div>
+
+    <section id="downloads" class="relative z-10 pt-16">
+        <div class="container text-center">
+            <h1 class="text-5xl md:text-8xl mb-8">
                 Experience the 
                 <br>
                 <span class="highlight">Revolution.</span>
             </h1>
 
-            <!-- Direct CDN Access Card -->
-            <div class="cdn-access-card">
+            <div class="cdn-access-card mx-auto max-w-4xl">
                 <div class="cdn-card-content">
                     <div class="cdn-card-left">
                         <i class="fas fa-cloud cdn-cloud-icon"></i>
                         <div class="cdn-card-text">
                             <h2 class="cdn-card-title">Direct CDN Access</h2>
-                            <p class="cdn-card-description">Access ROM files directly from our CDN.</p>
+                            <p class="cdn-card-description text-whisper-gray">Access ROM files directly from our CDN.</p>
                         </div>
                     </div>
                     <a href="https://cdn.axionos.org/" target="_blank" rel="noopener noreferrer" class="cdn-visit-btn">

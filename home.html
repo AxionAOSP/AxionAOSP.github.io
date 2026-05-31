@@ -1,262 +1,501 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AxionAOSP - Home</title>
-    
-    <!-- Cloudflare DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    
-    <!-- Preconnect for critical resources -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    
-    <!-- Preload critical images -->
-    <link rel="preload" href="img/home.webp" as="image" fetchpriority="high">
-    <link rel="preload" href="img/screenshot2.webp" as="image">
-    
-    <!-- Stylesheets -->
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Space+Grotesk" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/main.css" />
-    
-    <!-- Defer non-critical scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js" defer></script>
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axion OS | Pure Power.</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Geist+Mono:wght@400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'deep-midnight': '#0c0c0b',
+            'faded-steel': '#1f2228',
+            'frost-white': '#ffffff',
+            'whisper-gray': '#474747',
+          },
+          fontFamily: {
+            'nothing': ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+            'sans': ['"DM Sans"', 'sans-serif'],
+            'mono': ['"Geist Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
 
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="css/new_home.css" />
+
+  <script>
+    function navTo(e, url) {
+      e.preventDefault();
+      if(window.parent && window.parent.animateIframe) {
+        window.parent.animateIframe(url);
+      } else {
+        window.location.href = url;
+      }
+    }
+  </script>
+
+</head>
 <body>
 
-    <header id="header_intro" class="header">
-        <video autoplay muted loop playsinline class="header-video">
-            <source src="videos/axion_lede.mp4"
-                type="video/mp4" />
-        </video>
-        <div class="header-inner">
-            <div class="header-text" id="introHeader">
-                <h1>
-                    Make your android
-                    <br>
-                    <span class="adj_container">
-                        <span class="adj_list">
-                            <span>better.</span>
-                            <span>faster.</span>
-                            <span>more powerful.</span>
-                            <span>more reliable.</span>
-                            <span>axion.</span>
-                        </span>
-                    </span>
-                </h1>
-                <p>
-                    AxionOS is the alternative to manufacturer android skins
-                    <br>
-                    designed to make your device faster, more powerful and reliable.
-                </p>
-                <a href="download.html#downloads" class="btn-primary">Download AxionOS</a>
-            </div>
-            <div class="header-mockup" id="intro_mockup">
-                <img src="img/home.webp" alt="Mockup" />
-            </div>
+  <div id="loader" class="fixed inset-0 z-[100] bg-deep-midnight flex items-center justify-center transition-opacity duration-1000">
+    
+  </div>
+
+  <div class="fixed inset-0 z-[0] overflow-hidden bg-[#050505] pointer-events-none">
+    <div class="ambient-orb absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[#1e3a8a] opacity-20 blur-[120px] mix-blend-screen"></div>
+    <div class="ambient-orb absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#0891b2] opacity-10 blur-[150px] mix-blend-screen"></div>
+    <div class="ambient-orb absolute top-[30%] left-[40%] w-[35vw] h-[35vw] rounded-full bg-[#4c1d95] opacity-10 blur-[130px] mix-blend-screen"></div>
+  </div>
+
+  <section class="min-h-[90vh] flex flex-col items-center justify-center text-center px-6 relative z-10 pt-20 overflow-hidden">
+    
+    <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-[-1] opacity-60">
+        <source src="videos/axion_lede.mp4" type="video/mp4" />
+    </video>
+    <div class="absolute inset-0 bg-[#0c0c0b]/40 z-[-1]"></div>
+
+    <div class="flex gap-3 mb-6">
+      <span class="badge-neutral border-white/20 text-white/80 bg-black/50 backdrop-blur-sm">Android 16 Based</span>
+      <span class="badge-neutral border-white/20 text-white/80 bg-black/50 backdrop-blur-sm">Performance First</span>
+      <span class="badge-neutral hidden sm:inline-block border-white/20 text-white/80 bg-black/50 backdrop-blur-sm">Stable Daily Driver</span>
+    </div>
+    <h1 class="text-5xl md:text-8xl font-nothing mb-6 max-w-5xl leading-tight text-frost-white drop-shadow-2xl">
+      Make your android
+      <br>
+      <span class="adj_container text-[#60a5fa] drop-shadow-md">
+          <span class="adj_list">
+              <span>better.</span>
+              <span>faster.</span>
+              <span>powerful.</span>
+              <span>reliable.</span>
+              <span>axion.</span>
+          </span>
+      </span>
+    </h1>
+    <p class="max-w-2xl text-white/90 text-lg md:text-xl mb-12 leading-relaxed drop-shadow-lg font-medium">
+      Axion OS rethinks the Android experience with meaningful features, stable performance, and thoughtful customization designed for everyday use.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4">
+      <a href="download.html" onclick="navTo(event, 'download.html')" class="btn-filled text-lg px-8 py-4 shadow-xl hover:scale-105 transition-transform">Download AxionOS</a>
+    </div>
+  </section>
+
+  <section class="relative z-10 py-32 px-6 text-center border-t border-faded-steel bg-[#050505]">
+    <h2 class="text-3xl md:text-5xl font-nothing text-whisper-gray">
+      Every feature inside Axion OS <br/><span class="text-frost-white">exists for a reason.</span>
+    </h2>
+  </section>
+
+  <div id="cinematic-showcase" class="relative w-full bg-black h-screen overflow-hidden">
+    
+    <div class="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#1a1a1a] via-black to-black opacity-40 z-0"></div>
+
+    <div id="card-1" class="axion-card absolute top-0 left-0 w-full h-screen flex items-center justify-center p-[4vw] z-[10]">
+      <div class="relative w-full h-full max-w-[1200px] bg-[#0c0c0b] rounded-[24px] border border-white/[0.05] overflow-hidden shadow-2xl">
+        
+        <div class="absolute top-[12%] md:top-[16%] left-[6%] z-20 max-w-sm pointer-events-none">
+          <h2 class="text-4xl md:text-5xl font-nothing text-white mb-2 tracking-wide">Depth Wallpaper.</h2>
+          <p class="text-base text-white/50 font-sans leading-snug">Subject, meet clock.<br>A new dimension.</p>
         </div>
-    </header>
 
-    <header id="header_green" class="header reverse">
-        <div class="header-inner">
-            <div class="header-text">
-                <h1 class="header-start">Give your old android 
-                    <br>
-                    a <b class="highlight">second life</b>.
-                </h1>
-                <p>
-                    <b class="highlight">AxionOS</b> is <b class="highlight">optimized</b> to run seamlessly on
-                    <b class="highlight">older android devices</b>, helping you extend their lifespan.
-                    <b class="highlight">Save money</b> on upgrades while contributing to a
-                    <b class="highlight">greener</b> planet by <b class="highlight">reducing e-waste</b>.
-                </p>
-            </div>
-            <div class="header-mockup">
-                <img src="img/screenshot2.webp" alt="Mockup" />
-            </div>
+        <div class="absolute inset-0 z-10 perspective-container flex items-center pointer-events-none overflow-hidden">
+           <div id="carousel-track" class="flex gap-8 md:gap-16 items-center w-max pl-[calc(50vw-110px)] md:pl-[calc(50vw-130px)]">
+              
+              <div class="carousel-item w-[220px] md:w-[200px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 shrink-0 bg-[#111]">
+                  <img src="assets/home/depth1.webp" alt="Wallpaper 1" class="w-full h-full object-cover" />
+              </div>
+              <div class="carousel-item w-[220px] md:w-[200px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 shrink-0 bg-[#111]">
+                  <img src="assets/home/depth2.webp" alt="Wallpaper 2" class="w-full h-full object-cover" />
+              </div>
+              <div class="carousel-item w-[220px] md:w-[200px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 shrink-0 bg-[#111]">
+                  <img src="assets/home/depth3.webp" alt="Wallpaper 3" class="w-full h-full object-cover" />
+              </div>
+              <div class="carousel-item w-[220px] md:w-[200px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 shrink-0 bg-[#111]">
+                  <img src="assets/home/depth4.webp" alt="Wallpaper 4" class="w-full h-full object-cover" />
+              </div>
+              <div class="carousel-item w-[220px] md:w-[200px] rounded-2xl overflow-hidden shadow-2xl border border-white/10 shrink-0 bg-[#111]">
+                  <img src="assets/home/depth5.webp" alt="Wallpaper 5" class="w-full h-full object-cover" />
+              </div>
+           </div>
         </div>
-    </header>
-
-    <section id="about">
-        <header class="header">
-            <div class="header-inner">
-                <div class="header-text">
-                    <h1 class="header-start">
-                        Less
-                        <b><i class="fas fa-spinner fa-spin"></i></b> 
-                        <br>
-                        <b class="highlight"><i>More Speed.</i></b>
-                    </h1>
-                    <p>
-                        Your android should work as fast as you do. AxionOS runs lightning quick and doesn't slow down over time. Apps open fast, so you can spend more time being productive.
-                    </p>
-                    <a href="about.html"
-                        class="btn-primary" onclick="loadPage(event)">Learn more about us</a>
-                </div>
-                <div class="header-mockup">
-                    <img src="img/screenshot10.webp" alt="Mockup" />
-                </div>
-            </div>
-        </header>
-    </section>
-
-    <section id="screenshots">
-        <h2>
-            A familiar UI
-            <br />
-            <b class="highlight">
-                you already know
-                <br />
-                how to use
-            </b>.
-        </h2>
-        <section id="image-carousel" class="splide" aria-label="Screenshots">
-            <div class="splide__track">
-                <ul class="splide__list"></ul>
-            </div>
-        </section>
-    </section>
-
-    <section id="features">
-        <header class="header reverse">
-            <div class="header-inner">
-                <div class="header-text">
-                    <h1 class="header-start">Discover Features</h1>
-                    <p>
-                        A collection of thoughtfully curated features designed for everyday use—simple, efficient, and
-                        never
-                        overwhelming. Just what you need, nothing more.
-                    </p>
-                    <a href="https://github.com/AxionAOSP/axion_features/blob/lineage-22.1/README.md" target="_blank"
-                        class="btn-primary">Learn More</a>
-                </div>
-                <div class="header-mockup">
-                    <img src="img/screenshot3.webp" alt="" />
-                </div>
-            </div>
-        </header>
-    </section>
-
-    <header id="header_game" class="header center">
-        <div class="header-inner">
-            <div class="header-text-game">
-                <div class="header-game">
-                    <div class="game-preview-container">
-                        <video autoplay muted loop playsinline id="gameVideo" class="game-preview-video">
-                            <source src="videos/gameplay.webm" type="video/webm" />
-                        </video>
-                        <div class="punch-hole"></div>
-                    </div>
-                </div>
-                <h1>Ready. Set. <span class="highlight">Game!</span></h1>
-                <p>
-                    Experience gaming like never before!
-                    <br />
-                    AxionOS Performance Mode optimizes your device by fine-tuning schedulers and virtual memory,
-                    delivering
-                    smoother gameplay and faster response times.
-                </p>
-            </div>
+        
+        <div class="absolute bottom-[8%] md:bottom-[10%] right-[6%] z-20 max-w-md flex flex-col items-end text-right pointer-events-none">
+          <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Bring your lockscreen to life. AI-driven subject masking automatically layers your clock seamlessly behind the subjects of your favorite photos.</p>
+          <div class="flex gap-4">
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">AI Masking</div>
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Horizontal Flow</div>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
 
-    <section id="community">
-        <h2 class="highlight">Make your android better.</h2>
-        <div id="feedbackContainer" class="content-card">
-            <p>
-                Join everyone who have downloaded AxionOS. Join the performance revolution.
-            </p>
-            <a href="https://t.me/AxionOS_android" target="_blank" class="btn-primary" id="joinTelegram">Join us on
-                Telegram</a>
-            <a href="download.html#downloads" class="btn-primary">Download AxionOS</a>
-            <div class="user_feedbacks">
-                <div class="user_feedback">
-                    Came from XX ROM to Axion ROM. Axion feels faster, less bloated, and to the point, not loaded with
-                    too much
-                    customizing. Big fan of this!
-                    <div class="user_feedback_author">— Gio</div>
-                </div>
-                <div class="user_feedback">
-                    This ROM is so smooth af, I'm restoring, and it's not even lagging like it normally does in other
-                    ROMs.
-                    <div class="user_feedback_author">— Ren</div>
-                </div>
-                <div class="user_feedback">
-                    Battery backup is Good on this rom
-                    <div class="user_feedback_author">— Hecker007</div>
-                </div>
-                <div class="user_feedback">
-                    The rom is too good and stable 🤩.
-                    The smoothness is also really well.
-                    It's giving an unique experience
-                    <div class="user_feedback_author">— Aeoniixx</div>
-                </div>
-            </div>
+    <div id="card-2" class="axion-card absolute top-full left-0 w-full h-screen flex items-center justify-center p-[4vw] z-[20]">
+      <div class="relative w-full h-full max-w-[1200px] bg-[#0c0c0b] rounded-[24px] border border-white/[0.05] overflow-hidden shadow-2xl">
+        <div class="absolute top-[12%] md:top-[16%] left-[6%] z-20 max-w-sm pointer-events-none">
+          <h2 class="text-4xl md:text-5xl font-nothing text-white mb-2 tracking-wide">Dynamic Bar</h2>
+          <p class="text-base text-white/50 font-sans leading-snug">Live interactions, without<br>interrupting your flow.</p>
         </div>
-    </section>
-
-    <section id="faq">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-grid">
-            <div class="faq-item">
-                <h3>Why is AxionAOSP a performance-oriented ROM?</h3>
-                <p>
-                    AxionAOSP incorporates various performance optimizations from
-                    <a href="https://protonaosp.org/performance">ProtonAOSP</a>, along with our own efficiency tweaks.
-                </p>
-            </div>
-            <div class="faq-item">
-                <h3>Can you add Feature XX?</h3>
-                <p>
-                  We do not add features from other projects.
-                  That said, contributors are welcome to submit original features
-                  that align with AxionOS’s goals and design direction.
-                  Feature requests are also welcome when they include a clear explanation
-                  of the idea and its purpose.
-                </p>
-            </div>
-            <div class="faq-item">
-                <h3>Is battery life good on AxionAOSP?</h3>
-                <p>
-                    Battery life depends on factors like kernel, usage, and configuration. AxionAOSP includes efficiency
-                    optimizations.
-                </p>
-            </div>
-            <div class="faq-item">
-                <h3>Does Play Integrity pass?</h3>
-                <p>Yes, after updating pif properties in Settings → Special Features → Spoofing.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Where are the customizations?</h3>
-                <p>AxionAOSP prioritizes performance over heavy customization.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How do I install AxionAOSP?</h3>
-                <p>Follow the detailed installation guide on our documentation page.</p>
-            </div>
+        <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+          <div id="c2-s1" class="mockup-preview absolute w-[50%] max-w-[750px] h-[50%] flex items-center justify-center">
+             <img src="assets/home/dynamicbarcompressed.webp" alt="Dynamic Bar Preview 1" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+          <div id="c2-s2" class="mockup-preview absolute w-[90%] max-w-[900px] h-[60%] flex items-center justify-center">
+             <img src="assets/home/dynamicbar.webp" alt="Dynamic Bar Preview 2" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+          <div id="c2-s3" class="mockup-preview absolute w-[90%] max-w-[900px] h-[60%] flex items-center justify-center">
+             <img src="assets/home/recents.webp" alt="Dynamic Bar Preview 3" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
         </div>
-    </section>
+        <div class="absolute bottom-[8%] md:bottom-[10%] right-[6%] z-20 max-w-md flex flex-col items-end text-right pointer-events-none">
+          <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Dynamic Bar transforms the status area into an adaptive interaction layer that keeps important information accessible, glanceable, and fluid.</p>
+          <div class="flex gap-4">
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Live Activities</div>
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Adaptive Playback</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <footer>
-        <p>&copy; 2025 AxionOS. All Rights Reserved.</p>
-    </footer>
+    <div id="card-3" class="axion-card absolute top-full left-0 w-full h-screen flex items-center justify-center p-[4vw] z-[30]">
+      <div class="relative w-full h-full max-w-[1200px] bg-[#0c0c0b] rounded-[24px] border border-white/[0.05] overflow-hidden shadow-2xl">
+        <div class="absolute top-[12%] md:top-[16%] left-[6%] z-20 max-w-sm pointer-events-none">
+          <h2 class="text-4xl md:text-5xl font-nothing text-white mb-2 tracking-wide">New Clocks</h2>
+          <p class="text-base text-white/50 font-sans leading-snug">Time, meticulously<br>reimagined.</p>
+        </div>
+        <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+          <div id="c3-s1" class="mockup-preview absolute w-[70%] max-w-[750px] h-[60%] flex items-center justify-center">
+             <img src="assets/home/clock1.webp" alt="New Clocks Preview 1" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+          <div id="c3-s2" class="mockup-preview absolute w-[70%] max-w-[750px] h-[60%] flex items-center justify-center">
+             <img src="assets/home/clock2.webp" alt="New Clocks Preview 2" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+          <div id="c3-s3" class="mockup-preview absolute w-[70%] max-w-[750px] h-[60%] flex items-center justify-center">
+             <img src="assets/home/clock3.webp" alt="New Clocks Preview 3" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+          <div id="c3-s4" class="mockup-preview absolute w-[70%] max-w-[750px] h-[50%] flex items-center justify-center">
+             <img src="assets/home/clock4.webp" alt="New Clocks Preview 4" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+          <div id="c3-s5" class="mockup-preview absolute w-[70%] max-w-[750px] h-[40%] flex items-center justify-center">
+             <img src="assets/home/clock5.webp" alt="New Clocks Preview 5" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+        </div>
+        <div class="absolute bottom-[8%] md:bottom-[10%] right-[6%] z-20 max-w-md flex flex-col items-end text-right pointer-events-none">
+          <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Exclusively crafted dot-matrix and analog faces inspired by the Nothing design language. Clean, minimal, and perfectly integrated into your lockscreen environment.</p>
+          <div class="flex gap-4">
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Dot Matrix</div>
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Analog Faces</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <script src="js/faq.js"></script>
-    <script src="js/screenshot.js"></script>
-    <script src="js/features.js"></script>
-    <script src="js/main.js"></script>
+    <div id="card-4" class="axion-card absolute top-full left-0 w-full h-screen flex items-center justify-center p-[4vw] z-[40]">
+      <div class="relative w-full h-full max-w-[1200px] bg-[#0c0c0b] rounded-[24px] border border-white/[0.05] overflow-hidden shadow-2xl">
+        <div class="absolute top-[12%] md:top-[16%] left-[6%] z-20 max-w-sm pointer-events-none">
+          <h2 class="text-4xl md:text-5xl font-nothing text-white mb-2 tracking-wide">Routines</h2>
+          <p class="text-base text-white/50 font-sans leading-snug">Automation that works<br>around you.</p>
+        </div>
+        <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+           <div id="c4-s1" class="mockup-preview absolute w-[70%] max-w-[750px] h-[60%] flex items-center justify-center">
+              <img src="assets/home/routine1.webp" alt="Routines Preview 1" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+           <div id="c4-s2" class="mockup-preview absolute w-[70%] max-w-[750px] h-[60%] flex items-center justify-center">
+              <img src="assets/home/routine2.webp" alt="Routines Preview 2" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+           <div id="c4-s3" class="mockup-preview absolute w-[70%] max-w-[750px] h-[60%] flex items-center justify-center">
+              <img src="assets/home/routine3.webp" alt="Routines Preview 3" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+        </div>
+        <div class="absolute bottom-[8%] md:bottom-[10%] right-[6%] z-20 max-w-md flex flex-col items-end text-right pointer-events-none">
+          <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Create intelligent workflows that adapt your device to your habits, location, schedule, and daily usage patterns automatically.</p>
+          <div class="flex gap-4">
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Context Aware</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="card-5" class="axion-card absolute top-full left-0 w-full h-screen flex items-center justify-center p-[4vw] z-[50]">
+      <div class="relative w-full h-full max-w-[1200px] bg-[#0c0c0b] rounded-[24px] border border-white/[0.05] overflow-hidden shadow-2xl">
+        <div class="absolute top-[12%] md:top-[16%] left-[6%] z-20 max-w-sm pointer-events-none">
+          <h2 class="text-4xl md:text-5xl font-nothing text-white mb-2 tracking-wide">Complete Control.</h2>
+          <p class="text-base text-white/50 font-sans leading-snug">Tune your system.<br>Exactly how you want.</p>
+        </div>
+        <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+           <div id="c5-s1" class="mockup-preview absolute w-[70%] max-w-[620px] h-[60%] flex items-center justify-center">
+              <img src="assets/home/frequency1.webp" alt="Frequency Control" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+           <div id="c5-s2" class="mockup-preview absolute w-[70%] max-w-[620px] h-[60%] flex items-center justify-center">
+            <img src="assets/home/frequency2.webp" alt="Frequency Control" class="w-full h-full object-contain drop-shadow-2xl" />
+          </div>
+           <div id="c5-s3" class="mockup-preview absolute w-[70%] max-w-[620px] h-[60%] flex items-center justify-center opacity-0">
+              <img src="assets/home/package.webp" alt="Package Freezer" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+        </div>
+        <div class="absolute bottom-[8%] md:bottom-[10%] right-[6%] z-20 max-w-md flex flex-col items-end text-right pointer-events-none">
+          <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Take charge of your hardware. Adjust CPU cluster frequencies on the fly and manage aggressive background app freezing to maximize battery life or sustain peak performance.</p>
+          <div class="flex gap-4">
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Kernel Tuning</div>
+            <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Package Freezer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="card-6" class="axion-card absolute top-full left-0 w-full h-screen flex items-center justify-center p-[4vw] z-[60]">
+      <div class="relative w-full h-full max-w-[1200px] bg-[#0c0c0b] rounded-[24px] border border-white/[0.05] overflow-hidden shadow-2xl">
+        
+        <div class="absolute top-[12%] md:top-[16%] left-[6%] z-30 max-w-sm pointer-events-none">
+          <h2 class="text-4xl md:text-5xl font-nothing text-white mb-2 tracking-wide">Wait, there's more.</h2>
+          <p class="text-base text-white/50 font-sans leading-snug">The little things that<br>make a massive difference.</p>
+        </div>
+
+        <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+           <div id="c6-s1" class="mockup-preview absolute w-[70%] max-w-[700px] h-[50%] flex items-center justify-center">
+              <img src="assets/home/gamespace.webp" alt="Game Space" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+           <div id="c6-s2" class="mockup-preview absolute w-[70%] max-w-[700px] h-[50%] flex items-center justify-center opacity-0">
+              <img src="assets/home/trickystore.webp" alt="Security" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+           <div id="c6-s3" class="mockup-preview absolute w-[70%] max-w-[700px] h-[50%] flex items-center justify-center opacity-0">
+              <img src="assets/home/essential.webp" alt="Notifications" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+           <div id="c6-s4" class="mockup-preview absolute w-[70%] max-w-[700px] h-[50%] flex items-center justify-center opacity-0">
+              <img src="assets/home/axpcmode.webp" alt="AxPC Mode" class="w-full h-full object-contain drop-shadow-2xl" />
+           </div>
+        </div>
+
+        <div class="absolute bottom-[8%] md:bottom-[10%] right-[6%] z-30 w-full max-w-md h-[120px] pointer-events-none">
+          
+          <div id="c6-t1" class="absolute bottom-0 right-0 flex flex-col items-end text-right w-full" >
+            <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Unlock max FPS with hardware spoofing and a dedicated game space to manage performance profiles on the fly.</p>
+            <div class="flex gap-4">
+              <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Game Space</div>
+              <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Spoofing</div>
+            </div>
+          </div>
+
+          <div id="c6-t2" class="absolute bottom-0 right-0 flex flex-col items-end text-right w-full opacity-0">
+            <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Built-in Play Integrity Fix, Tricky Store, and HideMyApplist. Pass strict security and banking checks right out of the box.</p>
+            <div class="flex gap-4">
+              <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Tricky Store</div>
+              <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">HMA OSS</div>
+            </div>
+          </div>
+
+          <div id="c6-t3" class="absolute bottom-0 right-0 flex flex-col items-end text-right w-full opacity-0">
+            <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">A reimagined, essential notification shade prioritizing what actually matters, stripping away unnecessary visual clutter.</p>
+            <div class="flex gap-4">
+              <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Essential UI</div>
+            </div>
+          </div>
+
+          <div id="c6-t4" class="absolute bottom-0 right-0 flex flex-col items-end text-right w-full opacity-0">
+            <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">Transform your device into a desktop workstation. AxPC mode brings true windowed multitasking to your external displays.</p>
+            <div class="flex gap-4">
+              <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">AxPC Desktop</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <section id="gaming-section" class="w-full min-h-screen bg-black flex items-center justify-center p-[4vw] relative z-10">
+    <div class="relative w-full h-[90vh] max-w-[1200px] bg-[#0c0c0b] rounded-[24px] border border-white/[0.05] overflow-hidden shadow-2xl">
+      <div class="absolute top-[12%] md:top-[16%] left-[6%] z-20 max-w-sm pointer-events-none">
+        <h2 class="text-4xl md:text-5xl font-nothing text-white mb-2 tracking-wide">Built to keep up.</h2>
+        <p class="text-base text-white/50 font-sans leading-snug">Smooth, consistent,<br>uncompromising.</p>
+      </div>
+      <div class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+        <div class="gaming-video-container w-[80%] max-w-[900px] h-[60%] rounded-[16px] overflow-hidden border border-white/10 shadow-2xl relative flex items-center justify-center bg-black/50">
+           <video src="videos/gameplay.webm" autoplay loop muted playsinline class="w-full h-full object-cover opacity-80"></video>
+           <span class="absolute text-white/20 font-mono text-sm"></span>
+        </div>
+      </div>
+      <div class="absolute bottom-[8%] md:bottom-[10%] right-[6%] z-20 max-w-md flex flex-col items-end text-right pointer-events-none">
+        <p class="text-white/50 text-sm md:text-base leading-relaxed mb-4 w-5/6 font-sans">From responsive touch latency to stable frame delivery, Axion OS is tuned to keep demanding experiences smooth and consistent.</p>
+        <div class="flex gap-4">
+          <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Touch Latency</div>
+          <div class="px-4 py-2 border border-white/20 bg-transparent text-xs text-white/70 font-sans">Stable Frames</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative z-10 py-32 px-6 lg:px-24 bg-deep-midnight border-t border-faded-steel text-center">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-5xl font-nothing mb-8 text-frost-white">Smoothness is a feature.</h2>
+      <p class="text-xl text-whisper-gray mb-16 leading-relaxed font-sans">
+        Axion OS prioritizes long-term performance, responsive interactions, and stable daily usability instead of chasing unnecessary feature counts.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+        <div class="bg-[#050505] border border-faded-steel p-8 rounded-none shadow-xl">
+           <h4 class="font-nothing text-lg mb-2 text-frost-white">Optimized Resource Usage</h4>
+           <p class="text-whisper-gray text-sm font-sans">Strict background limits ensure your memory and battery are preserved for foreground tasks.</p>
+        </div>
+        <div class="bg-[#050505] border border-faded-steel p-8 rounded-none shadow-xl">
+           <h4 class="font-nothing text-lg mb-2 text-frost-white">Lightweight System Design</h4>
+           <p class="text-whisper-gray text-sm font-sans">Stripped of bloatware. The system footprint is minimal by design.</p>
+        </div>
+        <div class="bg-[#050505] border border-faded-steel p-8 rounded-none shadow-xl">
+           <h4 class="font-nothing text-lg mb-2 text-frost-white">Stable Daily Performance</h4>
+           <p class="text-whisper-gray text-sm font-sans">Tested thoroughly for stability. No random reboots or critical memory leaks.</p>
+        </div>
+        <div class="bg-[#050505] border border-faded-steel p-8 rounded-none shadow-xl">
+           <h4 class="font-nothing text-lg mb-2 text-frost-white">Performance-Oriented Tuning</h4>
+           <p class="text-whisper-gray text-sm font-sans">Kernel-level CPU frequency adjustments for snappy app launches.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative z-10 py-32 px-6 md:px-12 max-w-3xl mx-auto"> 
+    <h2 class="text-4xl md:text-6xl font-nothing text-frost-white mb-12 text-center reveal-element">FAQ.</h2>
+    <div class="faq-container w-full border-t border-white/10 mt-8">
+      
+      <div class="faq-item border-b border-white/10 overflow-hidden reveal-element group">
+        <button class="faq-trigger w-full flex justify-between items-center py-8 text-left cursor-pointer">
+          <span class="font-sans text-xl md:text-2xl text-white/70 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">Why is AxionAOSP a performance-oriented ROM?</span>
+          <div class="w-8 h-8 relative flex items-center justify-center">
+            <div class="w-4 h-[2px] bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+            <div class="faq-icon-vertical w-[2px] h-4 bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+          </div>
+        </button>
+        <div class="faq-content h-0 overflow-hidden opacity-0">
+          <p class="pb-8 text-white/40 font-sans leading-relaxed text-base md:text-lg">
+            AxionAOSP incorporates various performance optimizations from ProtonAOSP, along with our own efficiency tweaks.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-white/10 overflow-hidden reveal-element group">
+        <button class="faq-trigger w-full flex justify-between items-center py-8 text-left cursor-pointer">
+          <span class="font-sans text-xl md:text-2xl text-white/70 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">Can you add Feature XX?</span>
+          <div class="w-8 h-8 relative flex items-center justify-center">
+            <div class="w-4 h-[2px] bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+            <div class="faq-icon-vertical w-[2px] h-4 bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+          </div>
+        </button>
+        <div class="faq-content h-0 overflow-hidden opacity-0">
+          <p class="pb-8 text-white/40 font-sans leading-relaxed text-base md:text-lg">
+            We do not add features from other projects. That said, contributors are welcome to submit original features that align with AxionOS's goals and design direction. Feature requests are also welcome when they include a clear explanation of the idea and its purpose.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-white/10 overflow-hidden reveal-element group">
+        <button class="faq-trigger w-full flex justify-between items-center py-8 text-left cursor-pointer">
+          <span class="font-sans text-xl md:text-2xl text-white/70 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">Is battery life good on AxionAOSP?</span>
+          <div class="w-8 h-8 relative flex items-center justify-center">
+            <div class="w-4 h-[2px] bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+            <div class="faq-icon-vertical w-[2px] h-4 bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+          </div>
+        </button>
+        <div class="faq-content h-0 overflow-hidden opacity-0">
+          <p class="pb-8 text-white/40 font-sans leading-relaxed text-base md:text-lg">
+            Battery life depends on factors like kernel, usage, and configuration. AxionAOSP includes efficiency optimizations.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-white/10 overflow-hidden reveal-element group">
+        <button class="faq-trigger w-full flex justify-between items-center py-8 text-left cursor-pointer">
+          <span class="font-sans text-xl md:text-2xl text-white/70 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">Does Play Integrity pass?</span>
+          <div class="w-8 h-8 relative flex items-center justify-center">
+            <div class="w-4 h-[2px] bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+            <div class="faq-icon-vertical w-[2px] h-4 bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+          </div>
+        </button>
+        <div class="faq-content h-0 overflow-hidden opacity-0">
+          <p class="pb-8 text-white/40 font-sans leading-relaxed text-base md:text-lg">
+            Yes, after updating pif properties in Settings &rarr; Special Features &rarr; Spoofing.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-white/10 overflow-hidden reveal-element group">
+        <button class="faq-trigger w-full flex justify-between items-center py-8 text-left cursor-pointer">
+          <span class="font-sans text-xl md:text-2xl text-white/70 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">Where are the customizations?</span>
+          <div class="w-8 h-8 relative flex items-center justify-center">
+            <div class="w-4 h-[2px] bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+            <div class="faq-icon-vertical w-[2px] h-4 bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+          </div>
+        </button>
+        <div class="faq-content h-0 overflow-hidden opacity-0">
+          <p class="pb-8 text-white/40 font-sans leading-relaxed text-base md:text-lg">
+            AxionAOSP prioritizes performance over heavy customization.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item border-b border-white/10 overflow-hidden reveal-element group">
+        <button class="faq-trigger w-full flex justify-between items-center py-8 text-left cursor-pointer">
+          <span class="font-sans text-xl md:text-2xl text-white/70 group-hover:text-white group-hover:translate-x-2 transition-all duration-300">How do I install AxionAOSP?</span>
+          <div class="w-8 h-8 relative flex items-center justify-center">
+            <div class="w-4 h-[2px] bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+            <div class="faq-icon-vertical w-[2px] h-4 bg-white/50 group-hover:bg-white transition-colors absolute"></div>
+          </div>
+        </button>
+        <div class="faq-content h-0 overflow-hidden opacity-0">
+          <p class="pb-8 text-white/40 font-sans leading-relaxed text-base md:text-lg">
+            Follow the detailed installation guide on our documentation page.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="relative z-10 py-32 px-6 text-center bg-[#050505] border-t border-faded-steel">
+    <h2 class="text-4xl md:text-6xl font-nothing mb-6 text-frost-white">Find your device.</h2>
+    <p class="text-whisper-gray text-lg mb-12 max-w-xl mx-auto font-sans">
+      Browse officially supported devices and download the latest Axion OS builds.
+    </p>
+    <a href="download.html" onclick="navTo(event, 'download.html')" class="btn-filled text-lg px-8 py-4">Download AxionOS</a>
+  </section>
+
+  <footer class="relative z-10 border-t border-faded-steel py-16 px-6 md:px-12 bg-[#050505]">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12 md:gap-0">
+      <div class="flex flex-col items-start">
+        <div class="font-nothing text-2xl mb-2 text-white">AXION OS.</div>
+        <div class="text-white/40 text-sm font-mono uppercase tracking-widest">
+          Modern Android, thoughtfully engineered.
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:flex gap-x-12 gap-y-6 md:gap-12 w-full md:w-auto">
+        <div class="flex flex-col gap-3">
+          <h4 class="text-white/80 font-mono text-xs uppercase tracking-widest mb-1">Project</h4>
+          <a href="about.html" onclick="navTo(event, 'about.html')" class="text-white/40 hover:text-white transition-colors text-sm font-sans">About Us</a>
+          <a href="team.html" onclick="navTo(event, 'team.html')" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Meet the Team</a>
+          <a href="blog.html" onclick="navTo(event, 'blog.html')" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Blog & News</a>
+          <a href="screenshots.html" onclick="navTo(event, 'screenshots.html')" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Screenshots</a>
+        </div>
+        <div class="flex flex-col gap-3">
+          <h4 class="text-white/80 font-mono text-xs uppercase tracking-widest mb-1">Resources</h4>
+          <a href="download.html" onclick="navTo(event, 'download.html')" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Downloads</a>
+          <a href="https://github.com/AxionAOSP/axion_changelogs" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Changelog</a>
+          <a href="https://github.com/AxionAOSP/android" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/features.js"></script>
+  <script src="js/faq.js"></script>
 </body>
-
 </html>

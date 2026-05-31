@@ -1,40 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AxionOS Blog</title>
   
-  <!-- Cloudflare DNS Prefetch -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  
-  <!-- Preconnect for critical resources -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- Preload critical CSS -->
-  <link rel="preload" href="css/theme.css" as="style">
-  <link rel="preload" href="css/blog.css" as="style">
-  
-  <!-- Stylesheets -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'deep-midnight': '#0c0c0b',
+            'faded-steel': '#1f2228',
+            'frost-white': '#ffffff',
+            'whisper-gray': '#474747',
+          },
+          fontFamily: {
+            'nothing': ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+            'sans': ['"DM Sans"', 'sans-serif'],
+            'mono': ['"Geist Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/new_home.css" />
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/blog.css" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <script src="posts.js"></script>
+  <style>
+    body { background-color: #0c0c0b; color: white; font-family: 'DM Sans', sans-serif; }
+    .site-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .featured-post, .blog-card { background: #0a0a0a !important; border: 1px solid rgba(255,255,255,0.05) !important; border-radius: 24px !important; }
+    .post-title { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+  </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <h1 class="site-title">Blog</h1>
-      <p class="site-subtitle">Changelogs and news from the AxionOS team.</p>
+  <div class="fixed inset-0 z-[0] overflow-hidden bg-[#050505] pointer-events-none">
+    <div class="ambient-orb absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[#1e3a8a] opacity-10 blur-[120px] mix-blend-screen"></div>
+    <div class="ambient-orb absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#4c1d95] opacity-5 blur-[150px] mix-blend-screen"></div>
+  </div>
+
+  <header class="site-header relative z-10 pt-16">
+    <div class="container header-inner text-center">
+      <h1 class="site-title text-5xl md:text-7xl mb-4">Blog.</h1>
+      <p class="site-subtitle text-whisper-gray text-xl">Changelogs and news from the team.</p>
     </div>
   </header>
 
-  <main class="container">
-    <section id="featured-post" class="featured-post"></section>
+  <main class="container relative z-10">
+    <section id="featured-post" class="featured-post mb-12"></section>
     <section id="older-posts" class="blog-grid"></section>
   </main>
 
