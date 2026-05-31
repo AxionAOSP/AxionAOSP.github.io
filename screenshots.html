@@ -59,6 +59,15 @@
       -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
       mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
     }
+    /* Bulletproof Image Scaling - Prevents flexbox cropping */
+    .gallery-img {
+      width: 100% !important;
+      height: auto !important;
+      max-height: none !important;
+      display: block !important;
+      object-fit: contain !important;
+      aspect-ratio: auto !important;
+    }
   </style>
 </head>
 <body>
@@ -78,86 +87,94 @@
       </p>
     </div>
 
-    <div class="relative w-full max-w-3xl h-[80vh] flex gap-4 md:gap-8 overflow-hidden rounded-3xl p-2 md:p-4 mask-gallery">
+    <div class="relative w-full max-w-3xl h-[85vh] flex gap-4 md:gap-6 overflow-hidden rounded-3xl p-2 mask-gallery mx-auto">
       
-      <div class="w-1/2 h-full overflow-hidden relative">
+      <div class="flex-1 h-full overflow-hidden relative">
         <div class="scroll-wrapper flex flex-col gap-4 md:gap-8 animate-scroll-down w-full">
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot1.jpg" alt="Screenshot 1" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot1.jpg" alt="Screenshot 1" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot2.jpg" alt="Screenshot 2" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot2.jpg" alt="Screenshot 2" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot3.jpg" alt="Screenshot 3" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot3.jpg" alt="Screenshot 3" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot4.jpg" alt="Screenshot 4" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot4.jpg" alt="Screenshot 4" loading="lazy" class="gallery-img" />
+          </div>
+          
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot1.jpg" alt="Screenshot 1" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot5.jpg" alt="Screenshot 5" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot2.jpg" alt="Screenshot 2" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot6.jpg" alt="Screenshot 6" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot3.jpg" alt="Screenshot 3" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot1.jpg" alt="Screenshot 1" loading="lazy" class="w-full h-full object-cover" />
-          </div>
-          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot2.jpg" alt="Screenshot 2" loading="lazy" class="w-full h-full object-cover" />
-          </div>
-          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot3.jpg" alt="Screenshot 3" loading="lazy" class="w-full h-full object-cover" />
-          </div>
-          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot4.jpg" alt="Screenshot 4" loading="lazy" class="w-full h-full object-cover" />
-          </div>
-          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot5.jpg" alt="Screenshot 5" loading="lazy" class="w-full h-full object-cover" />
-          </div>
-          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot6.jpg" alt="Screenshot 6" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot4.jpg" alt="Screenshot 4" loading="lazy" class="gallery-img" />
           </div>
         </div>
       </div>
 
-      <div class="w-1/2 h-full overflow-hidden relative">
+      <div class="flex-1 h-full overflow-hidden relative">
         <div class="scroll-wrapper flex flex-col gap-4 md:gap-8 animate-scroll-up w-full">
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot7.jpg" alt="Screenshot 7" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot5.jpg" alt="Screenshot 5" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot8.jpg" alt="Screenshot 8" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot6.jpg" alt="Screenshot 6" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot9.jpg" alt="Screenshot 9" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot7.jpg" alt="Screenshot 7" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot10.jpg" alt="Screenshot 10" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot8.jpg" alt="Screenshot 8" loading="lazy" class="gallery-img" />
+          </div>
+          
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot5.jpg" alt="Screenshot 5" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot11.jpg" alt="Screenshot 11" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot6.jpg" alt="Screenshot 6" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot12.jpg" alt="Screenshot 12" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot7.jpg" alt="Screenshot 7" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot7.jpg" alt="Screenshot 7" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot8.jpg" alt="Screenshot 8" loading="lazy" class="gallery-img" />
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 h-full overflow-hidden relative hidden md:block">
+        <div class="scroll-wrapper flex flex-col gap-4 md:gap-8 animate-scroll-down w-full">
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot9.jpg" alt="Screenshot 9" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot8.jpg" alt="Screenshot 8" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot10.jpg" alt="Screenshot 10" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot9.jpg" alt="Screenshot 9" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot11.jpg" alt="Screenshot 11" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot10.jpg" alt="Screenshot 10" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot12.jpg" alt="Screenshot 12" loading="lazy" class="gallery-img" />
+          </div>
+          
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot9.jpg" alt="Screenshot 9" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot11.jpg" alt="Screenshot 11" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot10.jpg" alt="Screenshot 10" loading="lazy" class="gallery-img" />
           </div>
           <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
-            <img src="assets/screenshots/screenshot12.jpg" alt="Screenshot 12" loading="lazy" class="w-full h-full object-cover" />
+            <img src="assets/screenshots/screenshot11.jpg" alt="Screenshot 11" loading="lazy" class="gallery-img" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot12.jpg" alt="Screenshot 12" loading="lazy" class="gallery-img" />
           </div>
         </div>
       </div>
