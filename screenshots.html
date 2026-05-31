@@ -4,6 +4,237 @@
   <meta charset="UTF-8">
   <title>Gallery | Axion OS</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'deep-midnight': '#0c0c0b',
+            'faded-steel': '#1f2228',
+            'frost-white': '#ffffff',
+            'whisper-gray': '#474747',
+            'electric-blue': '#2563eb',
+          },
+          fontFamily: {
+            'nothing': ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+            'sans': ['"DM Sans"', 'sans-serif'],
+            'mono': ['"Geist Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Geist+Mono:wght@400&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="css/new_home.css" />
+  <style>
+    /* Infinite Scrolling Animation Logic */
+    .scroll-wrapper {
+      height: max-content;
+      will-change: transform;
+    }
+    @keyframes scroll-up {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+    @keyframes scroll-down {
+      0% { transform: translateY(-50%); }
+      100% { transform: translateY(0); }
+    }
+    .animate-scroll-up {
+      animation: scroll-up 150s linear infinite;
+    }
+    .animate-scroll-down {
+      animation: scroll-down 150s linear infinite;
+    }
+    .animate-scroll-up:hover, .animate-scroll-down:hover {
+      animation-play-state: paused;
+    }
+    .mask-gallery {
+      -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+      mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fixed inset-0 z-[0] overflow-hidden bg-[#050505] pointer-events-none">
+    <div class="ambient-orb absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-[#1e3a8a] opacity-20 blur-[120px] mix-blend-screen"></div>
+    <div class="ambient-orb absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#0891b2] opacity-10 blur-[150px] mix-blend-screen"></div>
+    <div class="ambient-orb absolute top-[30%] left-[40%] w-[35vw] h-[35vw] rounded-full bg-[#4c1d95] opacity-10 blur-[130px] mix-blend-screen"></div>
+  </div>
+
+  <section class="relative z-10 pt-8 pb-20 px-6 overflow-hidden flex flex-col items-center">
+    
+    <div class="text-center mb-16 reveal-fade max-w-2xl mx-auto">
+      <h1 class="text-5xl md:text-7xl font-nothing text-frost-white mb-6">Gallery.</h1>
+      <p class="text-lg md:text-xl text-whisper-gray font-sans leading-relaxed">
+        Every pixel, meticulously placed. Explore the visual language of Axion OS. Clean lines, deep contrast, and a user interface designed to get out of your way.
+      </p>
+    </div>
+
+    <div class="relative w-full max-w-3xl h-[80vh] flex gap-4 md:gap-8 overflow-hidden rounded-3xl p-2 md:p-4 mask-gallery">
+      
+      <div class="w-1/2 h-full overflow-hidden relative">
+        <div class="scroll-wrapper flex flex-col gap-4 md:gap-8 animate-scroll-down w-full">
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot1.jpg" alt="Screenshot 1" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot2.jpg" alt="Screenshot 2" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot3.jpg" alt="Screenshot 3" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot4.jpg" alt="Screenshot 4" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot5.jpg" alt="Screenshot 5" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot6.jpg" alt="Screenshot 6" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot1.jpg" alt="Screenshot 1" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot2.jpg" alt="Screenshot 2" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot3.jpg" alt="Screenshot 3" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot4.jpg" alt="Screenshot 4" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot5.jpg" alt="Screenshot 5" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot6.jpg" alt="Screenshot 6" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+
+      <div class="w-1/2 h-full overflow-hidden relative">
+        <div class="scroll-wrapper flex flex-col gap-4 md:gap-8 animate-scroll-up w-full">
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot7.jpg" alt="Screenshot 7" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot8.jpg" alt="Screenshot 8" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot9.jpg" alt="Screenshot 9" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot10.jpg" alt="Screenshot 10" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot11.jpg" alt="Screenshot 11" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot12.jpg" alt="Screenshot 12" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot7.jpg" alt="Screenshot 7" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot8.jpg" alt="Screenshot 8" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot9.jpg" alt="Screenshot 9" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot10.jpg" alt="Screenshot 10" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot11.jpg" alt="Screenshot 11" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-[#111] rounded-[24px] md:rounded-[32px] border border-white/10 shadow-2xl overflow-hidden aspect-[1080/2400]">
+            <img src="assets/screenshots/screenshot12.jpg" alt="Screenshot 12" loading="lazy" class="w-full h-full object-cover" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="relative z-10 py-32 px-6 md:px-12 max-w-6xl mx-auto border-t border-faded-steel">
+    
+    <div class="text-center mb-20 reveal-fade">
+      <h2 class="text-4xl md:text-6xl font-nothing text-frost-white mb-6">Design in the details.</h2>
+      <p class="text-lg md:text-xl text-whisper-gray font-sans max-w-2xl mx-auto">
+        We believe a beautiful operating system is one that doesn't scream for your attention.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+      
+      <div class="reveal-fade flex flex-col items-start bg-[#0a0a0a]/50 border border-white/5 p-8 rounded-3xl hover:bg-[#0a0a0a] transition-colors duration-500">
+        <div class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mb-6">
+          <div class="w-2 h-2 bg-white rounded-full"></div>
+        </div>
+        <h4 class="font-nothing text-2xl mb-4 text-frost-white">Essential UI</h4>
+        <p class="text-white/50 font-sans leading-relaxed text-sm md:text-base">
+          We stripped away unnecessary visual noise. What remains is a perfectly balanced interface that prioritizes your content over our design elements.
+        </p>
+      </div>
+      
+      <div class="reveal-fade flex flex-col items-start bg-[#0a0a0a]/50 border border-white/5 p-8 rounded-3xl hover:bg-[#0a0a0a] transition-colors duration-500">
+        <div class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mb-6">
+          <div class="w-2 h-2 bg-white rounded-full"></div>
+        </div>
+        <h4 class="font-nothing text-2xl mb-4 text-frost-white">Deep Contrast</h4>
+        <p class="text-white/50 font-sans leading-relaxed text-sm md:text-base">
+          Built around true blacks and subtle transparent overlays. This creates a striking, premium aesthetic while significantly reducing battery consumption on OLED displays.
+        </p>
+      </div>
+
+      <div class="reveal-fade flex flex-col items-start bg-[#0a0a0a]/50 border border-white/5 p-8 rounded-3xl hover:bg-[#0a0a0a] transition-colors duration-500">
+        <div class="w-12 h-12 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mb-6">
+          <div class="w-2 h-2 bg-white rounded-full"></div>
+        </div>
+        <h4 class="font-nothing text-2xl mb-4 text-frost-white">Fluid Motion</h4>
+        <p class="text-white/50 font-sans leading-relaxed text-sm md:text-base">
+          Static screens are dead. Every interaction, transition, and gesture in Axion OS is bound by physics-based animations that feel heavy, tactile, and highly responsive.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="relative z-10 border-t border-faded-steel py-16 px-6 md:px-12 bg-[#050505]">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12 md:gap-0">
+      <div class="flex flex-col items-start">
+        <div class="font-nothing text-2xl mb-2 text-white">AXION OS.</div>
+        <div class="text-white/40 text-sm font-mono uppercase tracking-widest">
+          Modern Android, thoughtfully engineered.
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:flex gap-x-12 gap-y-6 md:gap-12 w-full md:w-auto">
+        <div class="flex flex-col gap-3">
+          <h4 class="text-white/80 font-mono text-xs uppercase tracking-widest mb-1">Project</h4>
+          <a href="about.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'about.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">About Us</a>
+          <a href="team.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'team.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Meet the Team</a>
+          <a href="blog.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'blog.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Blog & News</a>
+          <a href="screenshots.html" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'screenshots.html'}})" class="text-white transition-colors text-sm font-sans">Screenshots</a>
+        </div>
+        <div class="flex flex-col gap-3">
+          <h4 class="text-white/80 font-mono text-xs uppercase tracking-widest mb-1">Resources</h4>
+          <a href="download.html#downloads" onclick="parent.loadPage({preventDefault:()=>{},currentTarget:{href:'download.html'}})" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Downloads</a>
+          <a href="https://github.com/AxionAOSP/axion_changelogs" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Changelog</a>
+          <a href="https://github.com/AxionAOSP/android" class="text-white/40 hover:text-white transition-colors text-sm font-sans">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
   <script src="js/main.js"></script>
 </body>
 </html>

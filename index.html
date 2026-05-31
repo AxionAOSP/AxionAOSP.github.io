@@ -61,7 +61,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 48px;
+      padding: 0 5%;
       box-sizing: border-box;
     }
     #iframeWrapper {
@@ -81,6 +81,43 @@
     }
   </style>
 
+  <script>
+    let isMenuOpen = false;
+    
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const links = menu.querySelectorAll('a');
+      
+      if (!isMenuOpen) {
+        // Open Menu
+        menu.classList.remove('hidden');
+        menu.classList.add('flex');
+        gsap.fromTo(menu, 
+          { y: -20, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 0.4, ease: "power3.out" }
+        );
+        gsap.fromTo(links, 
+          { y: 10, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 0.3, stagger: 0.05, delay: 0.1, ease: "power2.out" }
+        );
+        isMenuOpen = true;
+      } else {
+        // Close Menu
+        gsap.to(menu, { 
+          y: -10, 
+          opacity: 0, 
+          duration: 0.3, 
+          ease: "power2.in",
+          onComplete: () => {
+            menu.classList.add('hidden');
+            menu.classList.remove('flex');
+          }
+        });
+        isMenuOpen = false;
+      }
+    }
+  </script>
+
 </head>
 
 <body>
@@ -88,14 +125,33 @@
   <nav>
     <a href="home.html#header_intro" onclick="loadPage(event)" class="font-nothing text-xl text-white hover:text-white">AXION OS.</a>
     
-    <div class="hidden md:flex gap-8 uppercase text-sm font-bold tracking-wider">
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex gap-8 uppercase text-sm font-bold tracking-wider items-center">
       <a href="about.html" class="nav-link" onclick="loadPage(event)">About</a>
       <a href="blog.html#blog" class="nav-link" onclick="loadPage(event)">Blog</a>
       <a href="team.html" class="nav-link" onclick="loadPage(event)">Team</a>
       <a href="screenshots.html" class="nav-link" onclick="loadPage(event)">Screenshots</a>
     </div>
     
-    <a href="download.html#downloads" onclick="loadPage(event)" class="btn-filled text-sm">Download Axion</a>
+    <div class="flex items-center gap-4">
+      <a href="download.html#downloads" onclick="loadPage(event)" class="btn-filled text-sm hidden sm:inline-flex">Download Axion</a>
+      
+      <!-- Mobile Menu Toggle Button -->
+      <button onclick="toggleMobileMenu()" class="md:hidden text-white focus:outline-none p-2 ml-2 hover:bg-white/10 rounded-full transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown Menu -->
+    <div id="mobile-menu" class="hidden absolute top-[80px] left-0 w-full bg-[#0c0c0b]/95 backdrop-blur-2xl border-b border-faded-steel flex-col md:hidden items-center py-6 gap-6 uppercase text-sm font-bold tracking-wider shadow-2xl z-50">
+      <a href="about.html" class="nav-link w-full text-center" onclick="loadPage(event); toggleMobileMenu();">About</a>
+      <a href="blog.html#blog" class="nav-link w-full text-center" onclick="loadPage(event); toggleMobileMenu();">Blog</a>
+      <a href="team.html" class="nav-link w-full text-center" onclick="loadPage(event); toggleMobileMenu();">Team</a>
+      <a href="screenshots.html" class="nav-link w-full text-center" onclick="loadPage(event); toggleMobileMenu();">Screenshots</a>
+      <a href="download.html#downloads" onclick="loadPage(event); toggleMobileMenu();" class="btn-filled text-sm sm:hidden mt-2 w-3/4 mx-auto text-center">Download Axion</a>
+    </div>
   </nav>
 
   <div id="iframeWrapper">
