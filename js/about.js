@@ -120,43 +120,58 @@ async function fetchDeviceMaintainers() {
         const cached = deviceMaintainersCache.get(cacheKey);
         const now = Date.now();
         
-        let data;
+        let deviceData, maintainerData;
         if (cached && (now - cached.timestamp) < MAINTAINERS_CACHE_DURATION) {
-            data = cached.data;
+            deviceData = cached.deviceData;
+            maintainerData = cached.maintainerData;
         } else {
-            const response = await fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/dinfo.json', {
-                cache: 'default'
-            });
+            const [downloadsRes, maintainersRes] = await Promise.all([
+                fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/api/downloads.json', {
+                    cache: 'default'
+                }),
+                fetch('https://raw.githubusercontent.com/AxionAOSP/official_devices/refs/heads/main/api/maintainers.json', {
+                    cache: 'default'
+                })
+            ]);
             
-            if (!response.ok) {
-                throw new Error(`Failed to fetch device info: ${response.status}`);
+            if (!downloadsRes.ok || !maintainersRes.ok) {
+                throw new Error(`Failed to fetch device data`);
             }
             
-            data = await response.json();
+            deviceData = await downloadsRes.json();
+            maintainerData = await maintainersRes.json();
+            
             deviceMaintainersCache.set(cacheKey, {
-                data: data,
+                deviceData: deviceData,
+                maintainerData: maintainerData,
                 timestamp: now
             });
         }
-        const devices = data.devices || [];
         
+        const maintainerIndex = new Map((maintainerData.maintainers || []).map(m => [m.id, m]));
+        const devices = deviceData.devices || [];
         const maintainerMap = new Map();
         
         devices.forEach(device => {
-            const statusValue = device.status || 'Active';
+            const statusValue = device.status || 'active';
             const statusLower = String(statusValue).toLowerCase();
             const isActive = statusLower === 'active';
             
-            if (device.github_username && device.maintainer && isActive) {
-                const username = device.github_username;
-                if (!maintainerMap.has(username)) {
-                    maintainerMap.set(username, {
-                        username: username,
-                        maintainer: device.maintainer,
-                        devices: []
-                    });
-                }
-                maintainerMap.get(username).devices.push(device.device_name || device.codename);
+            if (isActive && device.maintainer_ids) {
+                device.maintainer_ids.forEach(maintainerId => {
+                    const maintainer = maintainerIndex.get(maintainerId);
+                    if (maintainer && maintainer.github_username) {
+                        const username = maintainer.github_username;
+                        if (!maintainerMap.has(username)) {
+                            maintainerMap.set(username, {
+                                username: username,
+                                maintainer: maintainer.name || username,
+                                devices: []
+                            });
+                        }
+                        maintainerMap.get(username).devices.push(device.name || device.codename);
+                    }
+                });
             }
         });
         
