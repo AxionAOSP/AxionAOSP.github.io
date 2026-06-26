@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof ScrollTrigger !== 'undefined') {
       lenis.on('scroll', ScrollTrigger.update);
       gsap.ticker.add((time) => { lenis.raf(time * 1000) });
-      gsap.ticker.lagSmoothing(0);
+      gsap.ticker.lagSmoothing(1000, 16); // Gentle lag smoothing for high refresh rates
       ScrollTrigger.config({ ignoreMobileResize: true });
     }
   }
@@ -34,12 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
         repeat: -1,
         yoyo: true,
         ease: "sine.inOut",
+        force3D: true,
         onRepeat: function() {
           gsap.to(orb, {
             x: gsap.utils.random(-150, 150),
             y: gsap.utils.random(-150, 150),
             duration: gsap.utils.random(10, 20),
-            ease: "sine.inOut"
+            ease: "sine.inOut",
+            force3D: true
           });
         }
       });
