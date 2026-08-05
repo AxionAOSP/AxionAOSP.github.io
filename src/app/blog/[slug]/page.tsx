@@ -26,8 +26,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   let content = post.content;
   if (process.env.NODE_ENV === "production") {
-    content = content.replaceAll('="/blog/', '="/axion/blog/');
-    content = content.replaceAll('(/blog/', '(/axion/blog/');
+    content = content.replaceAll('="/blog/', '="/blog/');
+    content = content.replaceAll('(/blog/', '(/blog/');
   }
 
   return (

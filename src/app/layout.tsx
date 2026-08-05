@@ -33,15 +33,17 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <body className="overflow-x-hidden">
-        <ParticleBackground />
-        <Navbar />
-        <SmoothScrolling>
-          {children}
-          <Footer />
-        </SmoothScrolling>
+      <body>
+        <div className="relative w-full overflow-x-clip min-h-screen flex flex-col">
+          <ParticleBackground />
+          <Navbar />
+          <SmoothScrolling>
+            {children}
+            <Footer />
+          </SmoothScrolling>
+        </div>
       </body>
     </html>
   );

@@ -9,7 +9,7 @@ const ResearchShowcase = dynamic(() => import("@/components/ResearchShowcase"));
 export default function Home() {
 
   return (
-    <main className="block w-full min-h-screen overflow-x-hidden relative">
+    <main className="block w-full min-h-screen overflow-x-clip relative">
 
       <div className="hidden md:block">
         <HeroScene />

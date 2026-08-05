@@ -62,7 +62,7 @@ export default function DeviceHeaderClient({
             className="overflow-hidden w-full bg-[#0a0706]/90 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
           >
             <div className="p-4 sm:p-6 md:p-8 max-h-[600px] overflow-y-auto scrollbar-thin select-text" data-lenis-prevent>
-              <article className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-a:text-[var(--color-axion-accent)] hover:prose-a:text-[var(--color-axion-accent-hover)] hover:prose-a:underline prose-strong:text-white prose-p:text-zinc-200 prose-p:leading-relaxed prose-li:text-zinc-200 prose-li:leading-relaxed prose-code:text-white prose-code:bg-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-black/60 prose-pre:border prose-pre:border-white/5 prose-pre:max-w-full prose-pre:overflow-x-auto">
+              <article className="prose prose-invert max-w-none break-words prose-headings:text-white prose-headings:font-bold prose-a:text-[var(--color-axion-accent)] hover:prose-a:text-[var(--color-axion-accent-hover)] hover:prose-a:underline prose-strong:text-white prose-p:text-zinc-200 prose-p:leading-relaxed prose-li:text-zinc-200 prose-li:leading-relaxed prose-code:text-white prose-code:bg-white/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-pre:bg-black/60 prose-pre:border prose-pre:border-white/5 prose-pre:max-w-full prose-pre:overflow-x-auto">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
                   {guideText}
                 </ReactMarkdown>

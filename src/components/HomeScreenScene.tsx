@@ -7,7 +7,7 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const basePath = process.env.NODE_ENV === 'production' ? '/axion' : '';
+const basePath = '';
 
 
 
@@ -94,13 +94,13 @@ export default function HomeScreenScene() {
       </div>
 
       {/* Asymmetrical Staggered Layout */}
-      <div ref={gridRef} className="max-w-6xl mx-auto flex flex-row overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none gap-6 md:gap-8 lg:gap-16 relative z-10 items-start hide-scrollbar px-6 md:px-0 -mx-6 md:mx-auto pb-12 md:pb-0 pt-4 md:pt-0">
+      <div ref={gridRef} className="max-w-6xl mx-auto flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-16 relative z-10 items-stretch md:items-start px-6 md:px-0 pb-12 md:pb-0 pt-4 md:pt-0">
         
         {/* Column 1 - Shifted Up Slightly */}
-        <div className="flex-none md:flex-1 flex flex-col gap-6 md:gap-8 lg:gap-16 w-[85vw] shrink-0 snap-center md:w-full md:shrink md:snap-align-none md:-translate-y-16">
+        <div className="contents md:flex md:flex-1 md:flex-col md:gap-8 lg:gap-16 md:-translate-y-16">
           
           {/* Card 1: Launcher Tuning (Large Image Focus) */}
-          <div className="showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group">
+          <div className="hidden md:block showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group w-full">
             <div className="aspect-[4/5] relative w-full overflow-hidden">
               <Image 
                 src={`${basePath}/assets/launcher_tuning_4.webp`}
@@ -128,7 +128,7 @@ export default function HomeScreenScene() {
           </div>
 
           {/* Card 3: Workspace */}
-          <div className="showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group">
+          <div className="order-3 md:order-none showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group w-full">
             <div className="p-8 md:p-12 pb-0">
               <span className="text-[10px] uppercase tracking-[0.2em] text-emerald-400 font-bold mb-3 block">
                 Workspace
@@ -168,10 +168,10 @@ export default function HomeScreenScene() {
         </div>
 
         {/* Column 2 - Shifted Down Slightly */}
-        <div className="flex-none md:flex-1 flex flex-col gap-6 md:gap-8 lg:gap-16 w-[85vw] shrink-0 snap-center md:w-full md:shrink md:snap-align-none md:translate-y-16">
+        <div className="contents md:flex md:flex-1 md:flex-col md:gap-8 lg:gap-16 md:translate-y-16">
           
           {/* Card 2: Interactive Dark/Light Slider */}
-          <div className="showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group">
+          <div className="order-1 md:order-none showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group w-full">
             <div className="p-8 md:p-12">
               <span className="text-[10px] uppercase tracking-[0.2em] text-white font-bold mb-3 block">
                 Live Adaptation
@@ -191,7 +191,7 @@ export default function HomeScreenScene() {
                 onMouseLeave={() => { isDragging.current = false; }}
                 onMouseMove={handleMouseMove}
                 onTouchMove={handleTouchMove}
-                className="@container relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 cursor-ew-resize select-none group/slider"
+                className="@container relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 cursor-ew-resize select-none touch-pan-y group/slider"
               >
                 {/* Background: Light Theme */}
                 <div className="absolute inset-0 w-full h-full bg-white">
@@ -245,7 +245,7 @@ export default function HomeScreenScene() {
           </div>
 
           {/* Card 4: App Drawer */}
-          <div className="showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group">
+          <div className="order-2 md:order-none showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group w-full">
             <div className="aspect-[4/3] relative w-full overflow-hidden">
               {appDrawerImages.map((src, i) => (
                 <Image 
@@ -274,7 +274,7 @@ export default function HomeScreenScene() {
           </div>
 
           {/* Card 5: Widgets (New Card) */}
-          <div className="showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group">
+          <div className="hidden md:block showcase-card relative rounded-[2rem] bg-white/[0.02] border border-white/10 overflow-hidden group w-full">
             <div className="aspect-[4/5] relative w-full overflow-hidden">
               <Image 
                 src={`${basePath}/assets/widgets_panel.webp`}

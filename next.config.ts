@@ -4,7 +4,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig: NextConfig = {
   output: 'export',
-  basePath: isProd ? '/axion' : '',
+  // basePath no longer needed for root domain deployment
   images: {
     unoptimized: true,
   },

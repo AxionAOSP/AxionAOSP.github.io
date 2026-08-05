@@ -28,36 +28,29 @@ export default function Navbar() {
 
   const isHome = pathname === "/";
 
+
   let navContainerClasses = "fixed top-0 inset-x-0 z-50 transition-all duration-300 px-6 ";
-  if (isHome) {
-    if (scrolled) {
-      navContainerClasses += "py-4 -translate-y-full opacity-0 pointer-events-none";
-    } else {
-      navContainerClasses += "py-6 translate-y-0 opacity-100";
-    }
+  if (isHome && scrolled) {
+    navContainerClasses += "-translate-y-full opacity-0 pointer-events-none";
+  } else if (scrolled) {
+    navContainerClasses += "py-4 translate-y-0 opacity-100";
   } else {
-    if (scrolled) {
-      navContainerClasses += "py-4 translate-y-0 opacity-100";
-    } else {
-      navContainerClasses += "py-6 translate-y-0 opacity-100";
-    }
+    navContainerClasses += "py-6 translate-y-0 opacity-100";
   }
 
   return (
     <header className={navContainerClasses}>
       {/* Background layer to animate opacity instead of backdrop-filter to prevent browser rendering glitches */}
-      {!isHome && (
-        <div 
-          className={`absolute inset-0 bg-[#0a0706]/80 backdrop-blur-xl border-b border-white/10 transition-opacity duration-300 -z-10 ${
-            scrolled ? "opacity-100" : "opacity-0"
-          }`} 
-        />
-      )}
+      <div 
+        className={`absolute inset-0 bg-[#0a0706]/80 backdrop-blur-xl border-b border-white/10 transition-opacity duration-300 -z-10 ${
+          scrolled && !isHome ? "opacity-100" : "opacity-0"
+        }`} 
+      />
       
       <div className="max-w-7xl mx-auto w-full flex items-center justify-between h-full">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <img src={`${process.env.NODE_ENV === 'production' ? '/axion' : ''}/logo.svg`} alt="Axion OS Logo" className="w-8 h-8" />
+          <img src="/logo.svg" alt="Axion OS Logo" className="w-8 h-8" />
           <span className="text-white font-bold text-xl tracking-tight">Axion OS</span>
         </Link>
 
