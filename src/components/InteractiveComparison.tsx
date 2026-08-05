@@ -61,7 +61,7 @@ export default function InteractiveComparison() {
 
         <div
           ref={containerRef}
-          className="relative w-full max-w-2xl mx-auto aspect-[9/19] rounded-[2rem] overflow-hidden cursor-ew-resize border-2 border-white/10"
+          className="relative w-full max-w-2xl mx-auto aspect-[9/19] rounded-[2rem] overflow-hidden cursor-ew-resize border-2 border-white/10 touch-pan-y"
           style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.5)" }}
           onMouseDown={(e) => { handleMouseDown(); handleMove(e.clientX); }}
           onTouchStart={(e) => { isDragging.current = true; handleMove(e.touches[0].clientX); }}

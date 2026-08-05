@@ -7,7 +7,7 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const basePath = process.env.NODE_ENV === 'production' ? '/axion' : '';
+const basePath = '';
 
 const clockStyles = [
   { src: `${basePath}/assets/clock1.webp`, name: "Analog", desc: "Minimalist precision tick marks" },
@@ -74,27 +74,29 @@ export default function HeroScene() {
   const extraPhone5Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Initial setup
-    gsap.set(lockscreenTextRef.current, { opacity: 0, y: 40 });
-    gsap.set(depthTextRef.current, { opacity: 0, y: 40 });
-    gsap.set(clocksRef.current, { opacity: 0, scale: 0.9 });
-    gsap.set(clockTextsRef.current, { opacity: 0, y: 20 });
-    gsap.set(depthWallpaperRef.current, { opacity: 0 });
-    gsap.set(floatingClocksRef.current, { opacity: 0, scale: 0.2, x: 0, y: "-10vh" });
-    gsap.set(burstTextRef.current, { opacity: 0, scale: 0.9, y: 10 });
-    
-    // Ensure phones container starts at default y: 0 (which is bottom-[-15vh])
-    gsap.set(phonesContainerRef.current, { y: 0, scale: 1 });
+    const mm = gsap.matchMedia();
 
-    gsap.set([extraPhone1Ref.current, extraPhone2Ref.current, extraPhone4Ref.current, extraPhone5Ref.current], { 
-      opacity: 0, 
-      x: 0,
-      scale: 0.9
-    });
-    
-    gsap.set(blurOverlayRef.current, { opacity: 0 });
+    mm.add("(min-width: 768px)", () => {
+      // Initial setup
+      gsap.set(lockscreenTextRef.current, { opacity: 0, y: 40 });
+      gsap.set(depthTextRef.current, { opacity: 0, y: 40 });
+      gsap.set(clocksRef.current, { opacity: 0, scale: 0.9 });
+      gsap.set(clockTextsRef.current, { opacity: 0, y: 20 });
+      gsap.set(depthWallpaperRef.current, { opacity: 0 });
+      gsap.set(floatingClocksRef.current, { opacity: 0, scale: 0.2, x: 0, y: "-10vh" });
+      gsap.set(burstTextRef.current, { opacity: 0, scale: 0.9, y: 10 });
+      
+      // Ensure phones container starts at default y: 0 (which is bottom-[-15vh])
+      gsap.set(phonesContainerRef.current, { y: 0, scale: 1 });
 
-    const ctx = gsap.context(() => {
+      gsap.set([extraPhone1Ref.current, extraPhone2Ref.current, extraPhone4Ref.current, extraPhone5Ref.current], { 
+        opacity: 0, 
+        x: 0,
+        scale: 0.9
+      });
+      
+      gsap.set(blurOverlayRef.current, { opacity: 0 });
+
       // 1. Decoupled Entry animations
       gsap.fromTo(heroTextEntryRef.current, 
         { opacity: 0, y: 40, filter: "blur(10px)" },
@@ -110,19 +112,19 @@ export default function HeroScene() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=900%", // Very long scroll for slow, cinematic transitions
+          end: "+=900%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
-          invalidateOnRefresh: true, // Recalculate vw/vh values correctly on resize to prevent glitchy behavior
+          invalidateOnRefresh: true,
         },
       });
 
       // ---- STAGE 1: Zoom to Lockscreen ----
       tl.to(heroTextContainerRef.current, { opacity: 0, y: -80, filter: "blur(20px)", duration: 1 }, 0)
         .to(phonesContainerRef.current, {
-          y: "-18vh", // Pulls it perfectly into view without cutting off the top
-          scale: 1.35, // Reduced zoom so the phone fits on screen comfortably even on small laptops
+          y: "-18vh",
+          scale: 1.35,
           duration: 1.5,
           ease: "power2.inOut",
         }, 0)
@@ -138,78 +140,95 @@ export default function HeroScene() {
           opacity: 1,
           y: 0,
           duration: 0.8,
-        }, 1)
-        // Fade out the main lockscreen text to make room for clock descriptions
+          ease: "power2.out",
+        }, 0.8)
+        // Fade out the main lockscreen text before clock descriptions appear
         .to(lockscreenTextRef.current, {
           opacity: 0,
           y: -20,
           duration: 0.6,
-        }, 2);
+        }, 1.8);
 
-      // ---- STAGE 2: Sequential Clock Application (Only first 2) ----
-      let currentTime = 2.6; // Start after zoom and lockscreen text fade
-      const clockDuration = 0.5;
-      const clockHold = 0.4;
+      let currentTime = 2.4;
 
-      const clocksToApply = clockStyles.slice(0, 2);
+      // ---- STAGE 2: Handcrafted Clock Styles Showcase ----
+      const firstClock = clocksRef.current[0];
+      const firstClockText = clockTextsRef.current[0];
 
-      clocksToApply.forEach((clock, i) => {
-        // Fade in Clock UI and Text
-        tl.to(clocksRef.current[i], { opacity: 1, scale: 1, duration: clockDuration }, currentTime);
-        tl.to(clockTextsRef.current[i], { opacity: 1, y: 0, duration: clockDuration }, currentTime);
+      tl.to(firstClock, { opacity: 1, scale: 1, duration: 0.8 }, currentTime)
+        .to(firstClockText, { opacity: 1, y: 0, duration: 0.8 }, currentTime);
+
+      currentTime += 1.2;
+
+      for (let i = 1; i < clockStyles.slice(0, 2).length; i++) {
+        const prevClock = clocksRef.current[i - 1];
+        const prevText = clockTextsRef.current[i - 1];
+        const currClock = clocksRef.current[i];
+        const currText = clockTextsRef.current[i];
+
+        tl.to([prevClock, prevText], { opacity: 0, duration: 0.6 }, currentTime)
+          .to(currClock, { opacity: 1, scale: 1, duration: 0.8 }, currentTime + 0.3)
+          .to(currText, { opacity: 1, y: 0, duration: 0.8 }, currentTime + 0.3);
+
+        currentTime += 1.5;
+      }
+
+      // Fade out last clock description
+      const lastClockText = clockTextsRef.current[1];
+      tl.to(lastClockText, { opacity: 0, duration: 0.6 }, currentTime);
+
+      // ---- STAGE 3: Massive Clock Burst / Grid ----
+      tl.addLabel("burstStage", currentTime);
+
+      tl.to(lockscreenTextRef.current, { opacity: 0, y: -40, duration: 0.8 }, "burstStage")
+        .to(clocksRef.current[1], { opacity: 0, scale: 0.9, duration: 0.8 }, "burstStage")
+        .to(phonesContainerRef.current, {
+          scale: 1.0,
+          y: "0vh",
+          duration: 1.5,
+          ease: "power2.inOut"
+        }, "burstStage");
+
+      floatingClockStyles.forEach((_, i) => {
+        const pos = floatingPositions[i];
+        const el = floatingClocksRef.current[i];
         
-        currentTime += clockDuration + clockHold;
-        
-        // Fade out Clock UI and Text
-        tl.to(clocksRef.current[i], { opacity: 0, scale: 1.05, duration: clockDuration }, currentTime);
-        tl.to(clockTextsRef.current[i], { opacity: 0, y: -20, duration: clockDuration }, currentTime);
-        
-        currentTime += clockDuration;
-      });
-
-      // ---- STAGE 2.5: Spawn Floating Clocks ----
-      tl.addLabel("spawnClocks", currentTime);
-      
-      // Bring up the central text on the phone
-      tl.to(burstTextRef.current, { opacity: 1, scale: 1, y: 0, duration: 1.2, ease: "power2.out" }, "spawnClocks");
-
-      floatingClocksRef.current.forEach((el, i) => {
         tl.to(el, {
           opacity: 1,
-          scale: 1,
-          x: floatingPositions[i].x,
-          y: floatingPositions[i].y,
-          rotation: floatingPositions[i].rotation,
+          scale: 1.0,
+          x: pos.x,
+          y: pos.y,
+          rotation: pos.rotation,
           duration: 1.2,
-          ease: "back.out(1.2)"
-        }, "spawnClocks");
+          ease: "power3.out"
+        }, `burstStage+=${i * 0.08}`);
       });
 
-      currentTime += 1.8; // Hold the floating clocks for a bit
+      tl.to(burstTextRef.current, {
+        opacity: 1,
+        scale: 1,
+        y: 0,
+        duration: 1.0,
+        ease: "power2.out"
+      }, "burstStage+=0.5");
 
-      // ---- STAGE 3: Zoom Out Before Splitting ----
+      currentTime += 2.5;
+
+      // ---- Transition out of STAGE 3 ----
       tl.addLabel("zoomOut", currentTime);
-      
-      // Fade out the central phone text
-      tl.to(burstTextRef.current, { opacity: 0, scale: 0.9, y: -10, duration: 1.0 }, "zoomOut");
-      
-      // Float them away or fade out
-      floatingClocksRef.current.forEach((el, i) => {
+
+      tl.to(burstTextRef.current, { opacity: 0, y: -20, duration: 0.8 }, "zoomOut");
+
+      floatingClockStyles.forEach((_, i) => {
+        const el = floatingClocksRef.current[i];
         tl.to(el, {
           opacity: 0,
           scale: 0.8,
-          x: i % 2 === 0 ? "-=10vw" : "+=10vw", // Drift away slightly
+          x: i % 2 === 0 ? "-=10vw" : "+=10vw",
           duration: 1.0,
           ease: "power2.inOut"
         }, "zoomOut");
       });
-
-      tl.to(phonesContainerRef.current, {
-        scale: 1.1, // Reset scale slightly above 1 for good presence
-        y: "-5vh",  // Rest it comfortably near the bottom
-        duration: 1.5,
-        ease: "power3.inOut"
-      }, "zoomOut");
       
       currentTime += 1.5;
 
@@ -217,26 +236,21 @@ export default function HeroScene() {
       tl.addLabel("stage4", currentTime);
 
       tl.to(depthTextRef.current, { opacity: 1, y: 0, duration: 0.8 }, "stage4")
-        // Main phone changes wallpaper
         .to(depthWallpaperRef.current, { opacity: 1, duration: 1 }, "stage4")
-        
-        // Phones fan out in an elegant, responsive arc!
         .to(extraPhone1Ref.current, { opacity: 1, x: "-22vw", y: "30px", scale: 0.88, rotation: -6, duration: 1.5, ease: "power3.out" }, "stage4")
         .to(extraPhone2Ref.current, { opacity: 1, x: "-11vw", y: "15px", scale: 0.94, rotation: -3, duration: 1.5, ease: "power3.out" }, "stage4")
         .to(extraPhone4Ref.current, { opacity: 1, x: "11vw", y: "15px", scale: 0.94, rotation: 3, duration: 1.5, ease: "power3.out" }, "stage4")
         .to(extraPhone5Ref.current, { opacity: 1, x: "22vw", y: "30px", scale: 0.88, rotation: 6, duration: 1.5, ease: "power3.out" }, "stage4");
         
-      // Add a buffer at the end so it doesn't instantly unpin
       tl.to({}, { duration: 1.5 });
+    });
 
-    }, containerRef);
-
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   // Helper for extra phones (Depth Wallpapers)
   const DepthPhone = ({ wp, innerRef, className = "" }: { wp: any, innerRef: React.Ref<HTMLDivElement>, className?: string }) => (
-    <div ref={innerRef} className={`absolute bottom-0 w-[280px] md:w-[320px] aspect-[9/20.5] rounded-[2.2rem] border-[3px] border-white/10 overflow-hidden shadow-2xl bg-black will-change-transform ${className}`}>
+    <div ref={innerRef} className={`absolute bottom-0 w-[220px] md:w-[260px] lg:w-[320px] aspect-[9/20.5] rounded-[2.2rem] border-[3px] border-white/10 overflow-hidden shadow-2xl bg-black will-change-transform ${className}`}>
       <Image src={wp.src} alt={wp.title} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover object-top" />
       <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/90 to-transparent z-10 flex flex-col justify-end p-4">
         <span className="text-[10px] uppercase tracking-widest text-[var(--color-axion-accent)] font-semibold truncate">{wp.tag}</span>
@@ -253,8 +267,8 @@ export default function HeroScene() {
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150vw] h-[150vw] md:w-[900px] md:h-[900px] bg-[var(--color-axion-accent)] opacity-[0.08] blur-[160px] rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120vw] h-[80vw] md:w-[600px] md:h-[400px] bg-[var(--color-axion-accent-secondary)] opacity-[0.06] blur-[130px] rounded-full pointer-events-none" />
 
-      {/* Main Titles - Pushed down to top-[24vh] */}
-      <div className="absolute top-[24vh] inset-x-0 z-40 flex flex-col items-center justify-center pointer-events-none">
+      {/* Main Titles */}
+      <div className="absolute top-[20vh] lg:top-[24vh] inset-x-0 z-40 flex flex-col items-center justify-center pointer-events-none">
         
         {/* Stage 0 Text (Decoupled refs to fix scroll reverse bug) */}
         <div ref={heroTextContainerRef} className="absolute flex flex-col items-center text-center">
@@ -269,7 +283,7 @@ export default function HeroScene() {
         </div>
 
         {/* Stage 1 Text */}
-        <div ref={lockscreenTextRef} className="absolute flex flex-col items-center text-center mt-[15vh]">
+        <div ref={lockscreenTextRef} className="absolute flex flex-col items-center text-center mt-[12vh] lg:mt-[15vh]">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 whitespace-nowrap">
             LOCKSCREEN CUSTOMIZATION
           </h2>
@@ -286,7 +300,7 @@ export default function HeroScene() {
       </div>
 
       {/* Dynamic Clock Descriptions - Adjusted to bottom-[15vh] */}
-      <div className="absolute bottom-[15vh] inset-x-0 z-40 flex justify-center pointer-events-none">
+      <div className="absolute bottom-[10vh] lg:bottom-[15vh] inset-x-0 z-40 flex justify-center pointer-events-none">
         {clockStyles.slice(0, 2).map((clock, i) => (
           <div key={i} ref={(el) => { clockTextsRef.current[i] = el; }} className="absolute flex flex-col items-center text-center">
             <h3 className="text-3xl font-bold text-[var(--color-axion-accent)] mb-2 tracking-wide">{clock.name}</h3>
@@ -320,7 +334,7 @@ export default function HeroScene() {
         <DepthPhone wp={depthWallpapers[4]} innerRef={extraPhone5Ref} className="opacity-0" />
 
         {/* Main Phone */}
-        <div ref={phoneEntryRef} className="relative w-[280px] md:w-[320px] aspect-[9/20.5] rounded-[2.2rem] border-[4px] border-[#1a1a1a] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.8)] bg-black z-20 will-change-transform">
+        <div ref={phoneEntryRef} className="relative w-[220px] md:w-[260px] lg:w-[320px] aspect-[9/20.5] rounded-[2.2rem] border-[4px] border-[#1a1a1a] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.8)] bg-black z-20 will-change-transform">
           
           {/* Default Clean Wallpaper */}
           <Image

@@ -38,7 +38,7 @@ const CORE_MEMBERS: CoreMember[] = [
     role: "Project Manager / Core Member",
     speed: 1.2,
     sizeClass: "w-[140px] h-[140px] md:w-[240px] md:h-[240px]",
-    posClass: "top-[38%] left-[24%] md:left-[22%]",
+    posClass: "top-[32%] left-[25%] md:top-[38%] md:left-[22%]",
     cardSide: "left",
     zClass: "z-40",
   },
@@ -49,7 +49,7 @@ const CORE_MEMBERS: CoreMember[] = [
     role: "Project Administrator",
     speed: 1.1,
     sizeClass: "w-[140px] h-[140px] md:w-[240px] md:h-[240px]",
-    posClass: "top-[38%] left-[76%] md:left-[78%]",
+    posClass: "top-[44%] left-[75%] md:top-[38%] md:left-[78%]",
     cardSide: "right",
     zClass: "z-30",
   },
@@ -60,7 +60,7 @@ const CORE_MEMBERS: CoreMember[] = [
     role: "Lead Designer",
     speed: 0.8,
     sizeClass: "w-[120px] h-[120px] md:w-[200px] md:h-[200px]",
-    posClass: "top-[68%] left-[10%] md:left-[8%]",
+    posClass: "top-[56%] left-[20%] md:top-[68%] md:left-[8%]",
     cardSide: "right",
     zClass: "z-20",
   },
@@ -71,8 +71,8 @@ const CORE_MEMBERS: CoreMember[] = [
     role: "Supportive Contributor",
     speed: 0.95,
     sizeClass: "w-[110px] h-[110px] md:w-[180px] md:h-[180px]",
-    posClass: "top-[68%] left-[38%] md:left-[36%]",
-    cardSide: "right",
+    posClass: "top-[68%] left-[80%] md:top-[68%] md:left-[36%]",
+    cardSide: "left",
     zClass: "z-20",
   },
   {
@@ -82,8 +82,8 @@ const CORE_MEMBERS: CoreMember[] = [
     role: "Axion Bot Maintainer",
     speed: 1.3,
     sizeClass: "w-[120px] h-[120px] md:w-[200px] md:h-[200px]",
-    posClass: "top-[68%] left-[62%] md:left-[64%]",
-    cardSide: "left",
+    posClass: "top-[80%] left-[25%] md:top-[68%] md:left-[64%]",
+    cardSide: "right",
     zClass: "z-40",
   },
   {
@@ -93,7 +93,7 @@ const CORE_MEMBERS: CoreMember[] = [
     role: "Supportive Contributor",
     speed: 0.9,
     sizeClass: "w-[110px] h-[110px] md:w-[180px] md:h-[180px]",
-    posClass: "top-[68%] left-[90%] md:left-[92%]",
+    posClass: "top-[92%] left-[75%] md:top-[68%] md:left-[92%]",
     cardSide: "left",
     zClass: "z-20",
   },
@@ -139,7 +139,7 @@ export default function TeamConstellation() {
     <section
       ref={containerRef}
       id="team-constellation"
-      className="relative w-full min-h-[130vh] md:min-h-[150vh] mt-12 mb-20"
+      className="relative w-full min-h-[170vh] md:min-h-[150vh] mt-12 mb-20"
     >
 
 

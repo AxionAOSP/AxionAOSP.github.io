@@ -7,7 +7,7 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const basePath = process.env.NODE_ENV === 'production' ? '/axion' : '';
+const basePath = '';
 const ss = (name: string) => `${basePath}/assets/${name}`;
 
 /* ───────────────────────────── FEATURE GROUPS ───────────────────────────── */
@@ -122,11 +122,11 @@ const featureGroups = [
     description: "Built-in hardware diagnostics and system-wide component testing. Displays real-time overview, app status, CPU/GPU/battery/thermal stats, and storage state.",
     accent: "rgba(0, 180, 255, 0.3)",
     screens: [
-      { src: ss("ax_diagnostic_1.webp"), caption: "Diagnostics Dashboard" },
-      { src: ss("ax_diagnostic_2.webp"), caption: "Battery Analytics" },
-      { src: ss("ax_diagnostic_3.webp"), caption: "Sensor Auditing" },
-      { src: ss("ax_diagnostic_4.webp"), caption: "Component Testing" },
-      { src: ss("ax_diagnostic_5.webp"), caption: "Hardware Logs" },
+      { src: ss("ax_diagnostic_1.webp"), caption: "System Overview" },
+      { src: ss("ax_diagnostic_2.webp"), caption: "CPU Analytics" },
+      { src: ss("ax_diagnostic_3.webp"), caption: "Battery Analytics" },
+      { src: ss("ax_diagnostic_4.webp"), caption: "Thermal Diagnostics" },
+      { src: ss("ax_diagnostic_5.webp"), caption: "App Tracking" },
     ],
   },
   {
@@ -150,7 +150,7 @@ const featureGroups = [
 function PhoneFrame({ src, caption, className = "", style = {} }: { src: string; caption: string; className?: string; style?: React.CSSProperties }) {
   return (
     <div className={`relative flex-shrink-0 snap-center ${className}`} style={style}>
-      <div className="relative w-[180px] md:w-[220px] aspect-[9/20.5] rounded-[1.5rem] border-[3px] border-white/10 overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] bg-black group transition-transform duration-500 hover:scale-[1.03]">
+      <div className="relative w-[180px] md:w-[220px] aspect-[9/20.5] rounded-[1.5rem] border-[3px] border-white/10 overflow-hidden bg-black group transition-transform duration-500 hover:scale-[1.03]">
         <Image src={src} alt={caption} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top" />
         {/* Notch */}
         <div className="absolute top-2 left-1/2 -translate-x-1/2 w-3 h-3 bg-black rounded-full z-10" />
@@ -168,7 +168,7 @@ function PhoneFrame({ src, caption, className = "", style = {} }: { src: string;
 function WideFrame({ src, caption, className = "" }: { src: string; caption: string; className?: string }) {
   return (
     <div className={`relative flex-shrink-0 snap-center ${className}`}>
-      <div className="relative w-[340px] md:w-[440px] aspect-[16/9] rounded-[1.2rem] border-[3px] border-white/10 overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.6)] bg-black group transition-transform duration-500 hover:scale-[1.03]">
+      <div className="relative w-[340px] md:w-[440px] aspect-[16/9] rounded-[1.2rem] border-[3px] border-white/10 overflow-hidden bg-black group transition-transform duration-500 hover:scale-[1.03]">
         <Image src={src} alt={caption} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-cover object-top" />
         <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/80 to-transparent z-10 flex items-end justify-center pb-2">
           <span className="text-[10px] font-semibold uppercase tracking-widest text-white/80">{caption}</span>
@@ -235,7 +235,7 @@ function FeatureRow({ group, index }: { group: typeof featureGroups[0]; index: n
       </div>
 
       {/* Screens Block */}
-      <div ref={screensRef} className={`flex-1 w-full md:w-auto relative z-10 flex items-center md:items-end ${group.screens.length === 1 ? "justify-center" : "justify-start"} md:justify-center gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none hide-scrollbar pb-8 md:pb-0 pt-6 md:pt-0 px-6 md:px-0 -mx-6 md:mx-0`}>
+      <div ref={screensRef} className={`flex-1 w-full md:w-auto relative z-10 flex items-center md:items-end ${group.screens.length === 1 ? "justify-center" : "justify-start"} md:justify-center gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-8 md:pb-0 pt-6 md:pt-0 px-6 md:px-0 -mx-6 md:mx-0`}>
         {group.screens.map((screen, i) => {
           // Stagger vertical offset for visual interest
           const yOffset = i % 2 === 0 ? 0 : 24;
@@ -249,7 +249,7 @@ function FeatureRow({ group, index }: { group: typeof featureGroups[0]; index: n
               key={i}
               src={screen.src}
               caption={screen.caption}
-              style={{ transform: `translateY(${yOffset}px)` }}
+              className={i % 2 === 0 ? "" : "md:mt-6"}
             />
           );
         })}

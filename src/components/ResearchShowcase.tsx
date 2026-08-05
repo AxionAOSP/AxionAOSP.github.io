@@ -216,13 +216,6 @@ export default function ResearchShowcase() {
 
       </div>
       
-      {/* Custom Animation Keyframes */}
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes slide {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(300%); }
-        }
-      `}} />
     </section>
   );
 }

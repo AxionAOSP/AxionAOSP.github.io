@@ -1,5 +1,5 @@
 export function getAssetUrl(path: string) {
-  const basePath = process.env.NODE_ENV === 'production' ? '/axion' : '';
+  const basePath = '';
   
   if (path.startsWith('http://') || path.startsWith('https://')) {
     return path;

@@ -7,7 +7,7 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const basePath = process.env.NODE_ENV === 'production' ? '/axion' : '';
+const basePath = '';
 
 export default function CustomizationScene() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -127,7 +127,7 @@ export default function CustomizationScene() {
             onMouseLeave={() => { isDragging.current = false; }}
             onMouseMove={handleMouseMove}
             onTouchMove={handleTouchMove}
-            className="relative w-full h-[200px] md:h-[230px] rounded-2xl overflow-hidden border border-white/15 cursor-ew-resize select-none shadow-inner"
+            className="relative w-full h-[200px] md:h-[230px] rounded-2xl overflow-hidden border border-white/15 cursor-ew-resize select-none touch-pan-y shadow-inner"
           >
             {/* Background: Light Theme Image */}
             <div className="absolute inset-0 w-full h-full bg-white">

@@ -178,7 +178,7 @@ export default async function DevicePage({
 
         {/* Device Header */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-12 mb-16 relative">
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 w-full space-y-4">
             <span className="text-[var(--color-axion-accent)] text-sm font-bold uppercase tracking-[0.2em] mb-1 block">
               {device.brand}
             </span>

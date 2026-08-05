@@ -7,7 +7,7 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const basePath = process.env.NODE_ENV === 'production' ? '/axion' : '';
+const basePath = '';
 
 const clockStyles = [
   { src: `${basePath}/assets/clock1.webp`, name: "Analog", desc: "Minimalist precision tick marks" },
@@ -29,7 +29,9 @@ export default function HeroSceneMobile() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(max-width: 767px)", () => {
       // Fade in hero text
       gsap.fromTo(".mobile-hero-text", 
         { opacity: 0, y: 30 },
@@ -46,18 +48,18 @@ export default function HeroSceneMobile() {
             scrollTrigger: {
               trigger: el,
               start: "top 85%",
-              toggleActions: "play none none reverse"
+              toggleActions: "play none none none"
             }
           }
         );
       });
+    });
 
-    }, containerRef);
-    return () => ctx.revert();
+    return () => mm.revert();
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full bg-[#0a0706] text-white overflow-hidden">
+    <div ref={containerRef} className="w-full bg-[var(--color-axion-bg)] text-white overflow-hidden">
       {/* 1. Hero Entry */}
       <section className="relative min-h-[90svh] w-full flex flex-col items-center justify-between pt-[15vh] px-6">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[150vw] h-[150vw] bg-[var(--color-axion-accent)]/10 blur-[120px] rounded-full pointer-events-none" />
@@ -72,7 +74,7 @@ export default function HeroSceneMobile() {
         </div>
 
         {/* Hero Phone */}
-        <div className="mobile-hero-text relative w-[260px] sm:w-[280px] aspect-[9/20.5] rounded-[2rem] border-[4px] border-[#1a1a1a] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] bg-black shrink-0 translate-y-12">
+        <div className="mobile-hero-text relative w-[260px] sm:w-[280px] aspect-[9/20.5] rounded-[2rem] border-[4px] border-[#1a1a1a] overflow-hidden bg-black shrink-0 translate-y-12">
           <Image
             src={`${basePath}/assets/hero_main.webp`}
             alt="Axion OS Lockscreen"
@@ -93,10 +95,10 @@ export default function HeroSceneMobile() {
         </div>
 
         {/* Horizontal scroll of clocks on phones */}
-        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 hide-scrollbar fade-up relative z-20">
+        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] fade-up relative z-20">
           {clockStyles.map((clock, i) => (
             <div key={i} className="snap-center shrink-0 flex flex-col items-center gap-6">
-              <div className="relative w-[240px] sm:w-[260px] aspect-[9/20.5] rounded-[2rem] border-[3px] border-[#1a1a1a] overflow-hidden shadow-2xl bg-black">
+              <div className="relative w-[240px] sm:w-[260px] aspect-[9/20.5] rounded-[2rem] border-[3px] border-[#1a1a1a] overflow-hidden bg-black">
                 <Image src={`${basePath}/assets/lockscreen_blank.webp`} alt="bg" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top brightness-[0.6]" />
                 <div className="absolute inset-x-0 top-[8%] h-[28%] flex items-center justify-center z-10 px-8">
                   <Image src={clock.src} alt={clock.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain drop-shadow-xl" />
@@ -123,9 +125,9 @@ export default function HeroSceneMobile() {
         </div>
 
         {/* Horizontal scroll of depth wallpapers */}
-        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 hide-scrollbar fade-up relative z-20">
+        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] fade-up relative z-20">
           {depthWallpapers.map((wp, i) => (
-            <div key={i} className="snap-center shrink-0 relative w-[240px] sm:w-[260px] aspect-[9/20.5] rounded-[2rem] border-[3px] border-white/10 overflow-hidden shadow-2xl bg-black">
+            <div key={i} className="snap-center shrink-0 relative w-[240px] sm:w-[260px] aspect-[9/20.5] rounded-[2rem] border-[3px] border-white/10 overflow-hidden bg-black">
               <Image src={wp.src} alt={wp.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top" />
               <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/90 to-transparent z-10 flex flex-col justify-end p-4">
                 <span className="text-[10px] uppercase tracking-widest text-[var(--color-axion-accent)] font-semibold truncate">{wp.tag}</span>
@@ -138,15 +140,6 @@ export default function HeroSceneMobile() {
         </div>
       </section>
 
-      <style jsx global>{`
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </div>
   );
 }

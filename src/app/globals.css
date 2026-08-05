@@ -141,3 +141,18 @@ html.lenis, html.lenis body {
 .prose ol > li::marker, .prose ul > li::marker {
   color: var(--color-axion-text) !important;
 }
+
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes slide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(300%); }
+}
