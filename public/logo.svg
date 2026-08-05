@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="axionGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6D00" />
+      <stop offset="100%" stop-color="#FFA000" />
+    </linearGradient>
+    <mask id="cutout">
+      <rect x="-60" y="-60" width="120" height="120" fill="white" />
+      <circle cx="35.35" cy="-35.35" r="12" fill="black" />
+      <circle cx="-35.35" cy="35.35" r="12" fill="black" />
+    </mask>
+  </defs>
+  <g transform="translate(60,60)">
+    <ellipse rx="22" ry="50" transform="rotate(-45)" fill="none" stroke="url(#axionGrad)" stroke-width="8" />
+    <ellipse rx="22" ry="50" transform="rotate(45)" fill="none" stroke="url(#axionGrad)" stroke-width="8" mask="url(#cutout)" />
+    
+    <circle cx="35.35" cy="-35.35" r="6" fill="transparent" stroke="#FFF" stroke-width="4" />
+    <circle cx="-35.35" cy="35.35" r="6" fill="transparent" stroke="#FFF" stroke-width="4" />
+  </g>
+</svg>

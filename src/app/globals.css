@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-axion-bg: #100B09;
+  --color-axion-card: rgba(50,28,18,0.55);
+  --color-axion-accent: #E8B08B;
+  --color-axion-accent-hover: #FFCFA8;
+  --color-axion-accent-secondary: #A66C48;
+  --color-axion-highlight: #FFE3D1;
+  --color-axion-text: #FFFFFF;
+  --color-axion-text-secondary: rgba(255, 255, 255, 0.65);
+  --color-axion-border: rgba(255, 255, 255, 0.08);
+
+  --font-sans: var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+}
+
+body {
+  background-color: var(--color-axion-bg);
+  color: var(--color-axion-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Lenis Recommended Styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Utilities for Glassmorphism */
+@layer utilities {
+  .glass-panel {
+    background: var(--color-axion-card);
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border: 1px solid var(--color-axion-border);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, backdrop-filter;
+  }
+
+  .glass-panel-heavy {
+    background: rgba(30, 15, 10, 0.6);
+    backdrop-filter: blur(60px);
+    -webkit-backdrop-filter: blur(60px);
+    border: 1px solid var(--color-axion-border);
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    will-change: transform, backdrop-filter;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-axion-text) 0%, var(--color-axion-accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Blog Markdown Utilities & Prose Overrides */
+.prose .side-by-side {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 1.5rem 0;
+}
+
+.prose .side-by-side img {
+  flex: 1 1 320px;
+  max-width: 320px !important;
+  width: 100% !important;
+  border-radius: 0.75rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  object-fit: contain !important;
+  margin: 0 !important;
+  display: inline-block !important;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-axion-border);
+  margin: 1.5rem auto !important;
+}
+
+.prose p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.85;
+  font-weight: 300;
+  font-size: 1.05rem;
+}
+
+.prose strong {
+  color: var(--color-axion-accent);
+  font-weight: 600;
+}
+
+.prose li {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 300;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  color: var(--color-axion-text) !important;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.prose blockquote {
+  color: rgba(255, 255, 255, 0.75) !important;
+  border-left-color: var(--color-axion-accent) !important;
+  font-style: italic;
+}
+
+.prose code {
+  color: var(--color-axion-text) !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  padding: 0.2rem 0.4rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.9em !important;
+}
+
+.prose ol > li::marker, .prose ul > li::marker {
+  color: var(--color-axion-text) !important;
+}
