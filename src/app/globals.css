@@ -19,7 +19,7 @@
 body {
   background-color: var(--color-axion-bg);
   color: var(--color-axion-text);
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

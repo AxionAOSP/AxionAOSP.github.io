@@ -36,7 +36,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body>
-        <div className="relative w-full overflow-x-hidden min-h-screen flex flex-col">
+        <div className="relative w-full overflow-x-clip min-h-screen flex flex-col">
           <ParticleBackground />
           <Navbar />
           <SmoothScrolling>

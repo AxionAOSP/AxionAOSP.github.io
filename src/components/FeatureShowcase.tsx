@@ -235,7 +235,7 @@ function FeatureRow({ group, index }: { group: typeof featureGroups[0]; index: n
       </div>
 
       {/* Screens Block */}
-      <div ref={screensRef} className={`flex-1 w-full md:w-auto relative z-10 flex items-center md:items-end ${group.screens.length === 1 ? "justify-center" : "justify-start"} md:justify-center gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-8 md:pb-0 pt-6 md:pt-0 px-6 md:px-0 -mx-6 md:mx-0`}>
+      <div ref={screensRef} className={`flex-1 w-full md:w-auto relative z-10 flex items-center md:items-end ${group.screens.length === 1 ? "justify-center" : "justify-start"} md:justify-center gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory md:snap-none [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-8 md:pb-0 pt-6 md:pt-0 px-6 md:px-0 -mx-6 md:mx-0 touch-pan-x touch-pan-y`} data-lenis-prevent>
         {group.screens.map((screen, i) => {
           // Stagger vertical offset for visual interest
           const yOffset = i % 2 === 0 ? 0 : 24;
@@ -278,7 +278,7 @@ export default function FeatureShowcase() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full py-32 md:py-48 px-6 overflow-hidden">
+    <section ref={sectionRef} className="relative w-full py-32 md:py-48 px-6 overflow-x-clip">
       {/* Section Header */}
       <div ref={headerRef} className="max-w-5xl mx-auto mb-10 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-axion-accent)] font-medium mb-4">Exclusive Features</p>

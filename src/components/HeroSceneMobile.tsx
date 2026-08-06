@@ -59,7 +59,7 @@ export default function HeroSceneMobile() {
   }, []);
 
   return (
-    <div ref={containerRef} className="w-full bg-[var(--color-axion-bg)] text-white overflow-hidden">
+    <div ref={containerRef} className="w-full bg-[var(--color-axion-bg)] text-white overflow-x-clip">
       {/* 1. Hero Entry */}
       <section className="relative min-h-[90svh] w-full flex flex-col items-center justify-between pt-[15vh] px-6">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[150vw] h-[150vw] bg-[var(--color-axion-accent)]/10 blur-[120px] rounded-full pointer-events-none" />
@@ -95,7 +95,7 @@ export default function HeroSceneMobile() {
         </div>
 
         {/* Horizontal scroll of clocks on phones */}
-        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] fade-up relative z-20">
+        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] fade-up relative z-20 touch-pan-x touch-pan-y" data-lenis-prevent>
           {clockStyles.map((clock, i) => (
             <div key={i} className="snap-center shrink-0 flex flex-col items-center gap-6">
               <div className="relative w-[240px] sm:w-[260px] aspect-[9/20.5] rounded-[2rem] border-[3px] border-[#1a1a1a] overflow-hidden bg-black">
@@ -125,7 +125,7 @@ export default function HeroSceneMobile() {
         </div>
 
         {/* Horizontal scroll of depth wallpapers */}
-        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] fade-up relative z-20">
+        <div className="w-full overflow-x-auto pb-8 snap-x snap-mandatory flex gap-6 px-6 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] fade-up relative z-20 touch-pan-x touch-pan-y" data-lenis-prevent>
           {depthWallpapers.map((wp, i) => (
             <div key={i} className="snap-center shrink-0 relative w-[240px] sm:w-[260px] aspect-[9/20.5] rounded-[2rem] border-[3px] border-white/10 overflow-hidden bg-black">
               <Image src={wp.src} alt={wp.title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top" />
