@@ -185,10 +185,10 @@ export default async function DevicePage({
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-black text-white tracking-tighter">
               {device.name}
             </h1>
-            <div className="flex flex-wrap items-center gap-3 text-white/50 mt-4">
-              <span className="font-mono text-lg">{device.codename}</span>
-              <span className="w-1 h-1 rounded-full bg-white/30" />
-              <span className={`uppercase tracking-widest text-xs font-bold ${
+            <div className="flex flex-wrap items-center gap-3 text-white/50 mt-4 leading-none">
+              <span className="font-mono text-lg font-medium text-white/80 leading-none">{device.codename}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0" />
+              <span className={`text-lg font-black uppercase tracking-wider leading-none ${
                 device.status?.toLowerCase() === 'active'
                   ? 'text-green-400'
                   : 'text-red-400'
@@ -197,8 +197,8 @@ export default async function DevicePage({
               </span>
               {latestVersion && (
                 <>
-                  <span className="w-1 h-1 rounded-full bg-white/30" />
-                  <span className="text-xs font-bold uppercase tracking-widest font-mono text-[var(--color-axion-accent)] animate-fade-in">
+                  <span className="w-1.5 h-1.5 rounded-full bg-white/40 shrink-0" />
+                  <span className="text-base font-bold uppercase tracking-widest font-mono text-[var(--color-axion-accent)] animate-fade-in leading-none">
                     v{latestVersion}
                   </span>
                 </>
