@@ -2,7 +2,7 @@
 
 import { Search } from "lucide-react";
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 export type Device = {
   codename: string;
@@ -30,9 +30,8 @@ export type Maintainer = {
 };
 
 export default function DevicesClient({
-  devices,
-  maintainers,
-  deviceImages,
+  devices: initialDevices,
+  maintainers: initialMaintainers,
 }: {
   devices: Device[];
   maintainers: Record<string, Maintainer>;
@@ -40,6 +39,55 @@ export default function DevicesClient({
 }) {
   const [search, setSearch] = useState("");
   const [selectedBrand, setSelectedBrand] = useState<string>("All");
+
+  const [devices, setDevices] = useState<Device[]>(initialDevices);
+  const [maintainers, setMaintainers] = useState<Record<string, Maintainer>>(initialMaintainers);
+
+  useEffect(() => {
+    let active = true;
+
+    async function fetchLatestData() {
+      try {
+        const devicesRes = await fetch(
+          "https://raw.githubusercontent.com/AxionAOSP/official_devices/main/api/downloads.json"
+        );
+        if (!devicesRes.ok) return;
+        const devicesData = await devicesRes.json();
+        if (!devicesData || !devicesData.devices) return;
+        const rawDevices = devicesData.devices as Device[];
+
+        const maintainersRes = await fetch(
+          "https://raw.githubusercontent.com/AxionAOSP/official_devices/main/api/maintainers.json"
+        );
+        let latestMaintainers = initialMaintainers;
+        if (maintainersRes.ok) {
+          const maintainersData = await maintainersRes.json();
+          const maintainersMap: Record<string, Maintainer> = {};
+          maintainersData.maintainers.forEach((m: Maintainer) => {
+            maintainersMap[m.id.toLowerCase()] = m;
+          });
+          latestMaintainers = maintainersMap;
+        }
+
+        if (!active) return;
+
+        setDevices((prevDevices) =>
+          rawDevices.map((d) => {
+            const matchingOld = prevDevices.find((old) => old.codename === d.codename);
+            return { ...d, version: matchingOld?.version || null };
+          })
+        );
+        setMaintainers(latestMaintainers);
+      } catch (err) {
+        console.error("Failed to fetch latest devices data on client side:", err);
+      }
+    }
+
+    fetchLatestData();
+    return () => {
+      active = false;
+    };
+  }, [initialMaintainers]);
 
   const resolveBrand = (device: Device) => {
     return device.brand?.toLowerCase() || "";

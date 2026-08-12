@@ -2,6 +2,11 @@ import DevicesClient, { Device, Maintainer } from "./DevicesClient";
 
 export const revalidate = 3600;
 
+type Build = {
+  datetime: number;
+  version: string;
+};
+
 async function getDevices() {
   const res = await fetch(
     "https://raw.githubusercontent.com/AxionAOSP/official_devices/main/api/downloads.json"
@@ -48,7 +53,7 @@ async function fetchLatestVersion(otaUrl: string): Promise<string | null> {
     const data = await res.json();
     const builds = data.response || [];
     if (builds.length === 0) return null;
-    const latestBuild = builds.sort((a: any, b: any) => b.datetime - a.datetime)[0];
+    const latestBuild = builds.sort((a: Build, b: Build) => b.datetime - a.datetime)[0];
     return latestBuild?.version || null;
   } catch {
     return null;
