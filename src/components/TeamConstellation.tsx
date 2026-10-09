@@ -54,9 +54,9 @@ const CORE_MEMBERS: CoreMember[] = [
     zClass: "z-30",
   },
   {
-    name: "AlisterGrey",
-    displayName: "AlisterGrey",
-    github: "AlisterGrey",
+    name: "reze",
+    displayName: "reze",
+    github: "myreze",
     role: "Lead Designer",
     speed: 0.8,
     sizeClass: "w-[120px] h-[120px] md:w-[200px] md:h-[200px]",
@@ -85,17 +85,6 @@ const CORE_MEMBERS: CoreMember[] = [
     posClass: "top-[80%] left-[25%] md:top-[68%] md:left-[64%]",
     cardSide: "right",
     zClass: "z-40",
-  },
-  {
-    name: "Rve27",
-    displayName: "Rve27",
-    github: "Rve27",
-    role: "Supportive Contributor",
-    speed: 0.9,
-    sizeClass: "w-[110px] h-[110px] md:w-[180px] md:h-[180px]",
-    posClass: "top-[92%] left-[75%] md:top-[68%] md:left-[92%]",
-    cardSide: "left",
-    zClass: "z-20",
   },
 ];
 
