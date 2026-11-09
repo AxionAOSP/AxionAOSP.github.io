@@ -272,7 +272,7 @@ export default function HeroScene() {
         
         {/* Stage 0 Text (Decoupled refs to fix scroll reverse bug) */}
         <div ref={heroTextContainerRef} className="absolute flex flex-col items-center text-center">
-          <div ref={heroTextEntryRef} className="flex flex-col items-center text-center">
+          <div ref={heroTextEntryRef} className="flex flex-col items-center text-center opacity-0">
             <h1 className="text-6xl md:text-7xl lg:text-[8rem] font-bold tracking-[-0.02em] leading-[0.85] mb-4 md:mb-6 text-white whitespace-nowrap">
               AXION <span className="text-gradient">OS</span>
             </h1>
@@ -283,7 +283,7 @@ export default function HeroScene() {
         </div>
 
         {/* Stage 1 Text */}
-        <div ref={lockscreenTextRef} className="absolute flex flex-col items-center text-center mt-[12vh] lg:mt-[15vh]">
+        <div ref={lockscreenTextRef} className="absolute flex flex-col items-center text-center mt-[12vh] lg:mt-[15vh] opacity-0">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 whitespace-nowrap">
             LOCKSCREEN CUSTOMIZATION
           </h2>
@@ -291,7 +291,7 @@ export default function HeroScene() {
         </div>
 
         {/* Stage 4 Text */}
-        <div ref={depthTextRef} className="absolute flex flex-col items-center text-center">
+        <div ref={depthTextRef} className="absolute flex flex-col items-center text-center opacity-0">
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-4 whitespace-nowrap text-gradient">
             DEPTH EFFECT
           </h2>
@@ -302,7 +302,7 @@ export default function HeroScene() {
       {/* Dynamic Clock Descriptions - Adjusted to bottom-[15vh] */}
       <div className="absolute bottom-[10vh] lg:bottom-[15vh] inset-x-0 z-40 flex justify-center pointer-events-none">
         {clockStyles.slice(0, 2).map((clock, i) => (
-          <div key={i} ref={(el) => { clockTextsRef.current[i] = el; }} className="absolute flex flex-col items-center text-center">
+          <div key={i} ref={(el) => { clockTextsRef.current[i] = el; }} className="absolute flex flex-col items-center text-center opacity-0">
             <h3 className="text-3xl font-bold text-[var(--color-axion-accent)] mb-2 tracking-wide">{clock.name}</h3>
             <p className="text-lg text-white/80">{clock.desc}</p>
           </div>
@@ -315,7 +315,7 @@ export default function HeroScene() {
           <div 
             key={i} 
             ref={(el) => { floatingClocksRef.current[i] = el; }}
-            className="absolute w-28 h-32 md:w-36 md:h-44 bg-black/40 backdrop-blur-2xl rounded-2xl border border-white/15 flex flex-col items-center justify-between p-3 shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-colors duration-300"
+            className="absolute w-28 h-32 md:w-36 md:h-44 bg-black/40 backdrop-blur-2xl rounded-2xl border border-white/15 flex flex-col items-center justify-between p-3 shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-colors duration-300 opacity-0"
           >
              <div className="relative w-full h-full my-1">
                 <Image src={clock.src} alt={clock.name} fill sizes="(max-width: 768px) 50vw, 20vw" className="object-contain drop-shadow-lg" />
@@ -334,7 +334,7 @@ export default function HeroScene() {
         <DepthPhone wp={depthWallpapers[4]} innerRef={extraPhone5Ref} className="opacity-0" />
 
         {/* Main Phone */}
-        <div ref={phoneEntryRef} className="relative w-[220px] md:w-[260px] lg:w-[320px] aspect-[9/20.5] rounded-[2.2rem] border-[4px] border-[#1a1a1a] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.8)] bg-black z-20 will-change-transform">
+        <div ref={phoneEntryRef} className="relative w-[220px] md:w-[260px] lg:w-[320px] aspect-[9/20.5] rounded-[2.2rem] border-[4px] border-[#1a1a1a] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.8)] bg-black z-20 will-change-transform opacity-0">
           
           {/* Default Clean Wallpaper */}
           <Image
@@ -365,7 +365,7 @@ export default function HeroScene() {
               <div 
                 key={i} 
                 ref={(el) => { clocksRef.current[i] = el; }}
-                className="absolute inset-0 flex items-center justify-center px-10"
+                className="absolute inset-0 flex items-center justify-center px-10 opacity-0"
               >
                 <Image src={clock.src} alt={clock.name} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-contain drop-shadow-2xl" />
               </div>
@@ -373,7 +373,7 @@ export default function HeroScene() {
           </div>
 
           {/* Burst Out Central Text - Fills the phone when clocks fan out */}
-          <div ref={burstTextRef} className="absolute inset-x-0 top-[20%] flex flex-col items-center justify-center z-20 pointer-events-none px-6">
+          <div ref={burstTextRef} className="absolute inset-x-0 top-[20%] flex flex-col items-center justify-center z-20 pointer-events-none px-6 opacity-0">
             <h3 className="text-[2.5rem] font-bold text-white text-center leading-[1.1] tracking-tight">
               Match <br /> Your Vibe.
             </h3>

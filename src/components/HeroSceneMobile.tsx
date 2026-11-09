@@ -65,16 +65,16 @@ export default function HeroSceneMobile() {
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[150vw] h-[150vw] bg-[var(--color-axion-accent)]/10 blur-[120px] rounded-full pointer-events-none" />
         
         <div className="flex flex-col items-center text-center relative z-20 mb-12">
-          <h1 className="mobile-hero-text text-6xl sm:text-7xl font-bold tracking-tighter leading-[0.85] mb-4 text-white">
+          <h1 className="mobile-hero-text opacity-0 text-6xl sm:text-7xl font-bold tracking-tighter leading-[0.85] mb-4 text-white">
             AXION <span className="text-gradient">OS</span>
           </h1>
-          <p className="mobile-hero-text text-lg text-[var(--color-axion-text-secondary)] font-medium">
+          <p className="mobile-hero-text opacity-0 text-lg text-[var(--color-axion-text-secondary)] font-medium">
             The Next Evolution.
           </p>
         </div>
 
         {/* Hero Phone */}
-        <div className="mobile-hero-text relative w-[260px] sm:w-[280px] aspect-[9/20.5] rounded-[2rem] border-[4px] border-[#1a1a1a] overflow-hidden bg-black shrink-0 translate-y-12">
+        <div className="mobile-hero-text opacity-0 relative w-[260px] sm:w-[280px] aspect-[9/20.5] rounded-[2rem] border-[4px] border-[#1a1a1a] overflow-hidden bg-black shrink-0 translate-y-12">
           <Image
             src={`${basePath}/assets/hero_main.webp`}
             alt="Axion OS Lockscreen"
